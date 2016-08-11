@@ -1,0 +1,62 @@
+﻿{
+   "took": 16,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 49813,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "failure_causes": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 1226,
+         "buckets": [
+            {
+               "key": "NL",
+               "doc_count": 2300
+            },
+            {
+               "key": "UN",
+               "doc_count": 662
+            },
+            {
+               "key": "NK",
+               "doc_count": 608
+            },
+            {
+               "key": "EF",
+               "doc_count": 481
+            },
+            {
+               "key": "FA",
+               "doc_count": 426
+            },
+            {
+               "key": "OE",
+               "doc_count": 318
+            },
+            {
+               "key": "DET",
+               "doc_count": 313
+            },
+            {
+               "key": "BLW",
+               "doc_count": 173
+            },
+            {
+               "key": "AWI",
+               "doc_count": 142
+            },
+            {
+               "key": "WC",
+               "doc_count": 141
+            }
+         ]
+      }
+   }
+}

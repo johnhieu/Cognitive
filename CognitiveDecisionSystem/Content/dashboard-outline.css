@@ -1,0 +1,90 @@
+﻿        @media (min-width: 1000px) {
+             #create-widget-session{
+                 height: 1500px;
+            }
+        }
+        #body {
+            background-color: #eee;
+
+        }
+
+        #main-content {
+            width: auto;
+            height: auto;
+        }
+
+        #content-menu {
+            height: 700px;
+            padding: 0px;
+           
+            
+        }
+
+        .list-group-item {
+            background-color: #eee;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+            .list-group-item:hover {
+                background-color: #337ab7;
+                color: white;
+            }
+
+        #content-menu p {
+            font-size: 16px;
+        }
+
+        #content-menu .glyphicon {
+            font-size: 40px;
+        }
+
+        #content-menu:hover {
+            cursor: pointer;
+        }
+
+        img#user-image {
+            border-radius: 50%;
+        }
+
+        #content-dashboard {
+            background-color: white;
+        }
+
+        #summary-dashboard {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        #widgets-container {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        #pagination-container {
+            position: relative;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #create-widget-icon {
+            cursor: pointer;
+            transition: 0.4s;
+            opacity: 0.5;
+        }
+
+            #create-widget-icon:hover {
+                opacity: 1;
+            }
+
+        .badge {
+            background-color: #F5B041;
+        }
+
+        #title {
+            font-family: "Arial Black", Gadget, sans-serif;
+        }

@@ -1,0 +1,45 @@
+﻿@model CognitiveDecisionSystem.Models.Login
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+@Styles.Render("~/bundles/login")
+<div id="login-section" >
+    <div id="container" class="table-responsive">
+        <div class="panel panel-info" id="panel">
+            <div class="panel-heading">
+                <p style="font-size: 16px;"><span class="glyphicon glyphicon-user"></span> User Log-In </p>
+            </div>
+            <div class="panel-body">
+                <p>@ViewBag.Error</p>
+                <form action="/RegularUser/Login" name="loginForm" role="form" method="post">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Username)
+                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Username)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                    <input class="btn btn-info" type="submit" value="Log-in">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="container" class="table-responsive">
+        <div class="panel panel-default" id="regPanel">
+            <div class="panel-body">
+                <p>New to us? @Html.ActionLink("Register an account now", "Register", "RegularUser")</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

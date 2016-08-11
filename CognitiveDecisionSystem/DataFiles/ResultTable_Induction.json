@@ -1,0 +1,418 @@
+﻿[  
+   [  
+      {  
+         "stockCode":"0000123",
+         "itemName":"AIRCRAFT ENGINE",
+         "actionCodes":"1",
+         "computedPriority":"High",
+         "demandPriority":"1",
+         "criticality":113
+      },
+      {  
+         "stockCode":"0000655",
+         "itemName":"AIRCRAFT TOWING TRACTOR",
+         "actionCodes":"1",
+         "computedPriority":"High",
+         "demandPriority":"1",
+         "criticality":104
+      },
+      {  
+         "stockCode":"0000678",
+         "itemName":"MAINTENANCE PLATFORM, AIRCRAFT",
+         "actionCodes":"1",
+         "computedPriority":"High",
+         "demandPriority":"1",
+         "criticality":89
+      },
+      {  
+         "stockCode":"0000693",
+         "itemName":"TOOL KIT, CONNECTOR",
+         "actionCodes":"1",
+         "computedPriority":"High",
+         "demandPriority":"1",
+         "criticality":78
+      },
+      {  
+         "stockCode":"0000823",
+         "itemName":"TACHOMETER, MECHANICAL, HAND HELD",
+         "actionCodes":"1",
+         "computedPriority":"High",
+         "demandPriority":"1",
+         "criticality":77
+      }
+   ],
+   [  
+      {  
+         "0000123":[  
+            [  
+               {  
+                  "category":"Class",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"Inv Segment Code",
+                  "details":"GH"
+               },
+               {  
+                  "category":"Item Summary",
+                  "details":"Aircraft Engine"
+               },
+               {  
+                  "category":"MILIS Item Name",
+                  "details":"Aircraft Engine"
+               },
+               {  
+                  "category":"PSU",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"RIMC",
+                  "details":"C000"
+               },
+               {  
+                  "category":"Stock Type",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"Team Division",
+                  "details":"AS"
+               },
+               {  
+                  "category":"Team ID",
+                  "details":"TF0032"
+               },
+               {  
+                  "category":"Team Position",
+                  "details":"MP85"
+               },
+               {  
+                  "category":"Team SPO",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"User Code",
+                  "details":"R1"
+               }
+            ],
+            [  
+               "0000123_1",
+               "0000123_2"
+            ],
+            [  
+               {  
+                  "Str_ToBuy":"65%",
+                  "Str_ToRepair":"35%",
+                  "Str_ToTransfer":"0%",
+                  "Str_Criticality":"100%",
+                  "Str_NearestLocationID":"1234/NOWRA",
+                  "Str_PurchasingCost":"$2,200,000.00",
+                  "Str_RepairCost":"$1,000,000.00",
+                  "Str_TransferCost":"$50,000.00",
+                  "Str_PurchasingLTime":"15",
+                  "Str_RepairLTime":"60",
+                  "Str_Budget":"$18,000,000.00",
+                  "Str_TransferLTime":"90",
+                  "Str_CatchupRate":"100%      ",
+                  "Str_BestDec":"B"
+               }
+            ]
+         ],
+         "0000655":[  
+            [  
+               {  
+                  "category":"Class",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"Inv Segment Code",
+                  "details":"GH"
+               },
+               {  
+                  "category":"Item Summary",
+                  "details":"Tractor, Wheeled, Aircraft Towing"
+               },
+               {  
+                  "category":"MILIS Item Name",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"PSU",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"RIMC",
+                  "details":"C014"
+               },
+               {  
+                  "category":"Stock Type",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"Team Division",
+                  "details":"AS"
+               },
+               {  
+                  "category":"Team ID",
+                  "details":"AABNPT"
+               },
+               {  
+                  "category":"Team Position",
+                  "details":"MP99"
+               },
+               {  
+                  "category":"Team SPO",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"User Code",
+                  "details":"R15"
+               }
+            ],
+            [  
+               "0000655",
+               "0000655_2"
+            ],
+            [  
+               {  
+                  "Str_ToBuy":"20%",
+                  "Str_ToRepair":"5%",
+                  "Str_ToTransfer":"75%",
+                  "Str_Criticality":"10%",
+                  "Str_NearestLocationID":"5555/MOOREBANK",
+                  "Str_PurchasingCost":"$34,800.00",
+                  "Str_RepairCost":"$40,000.00",
+                  "Str_TransferCost":"$2,000.00",
+                  "Str_PurchasingLTime":"10",
+                  "Str_RepairLTime":"30",
+                  "Str_Budget":"$5,650,000.00",
+                  "Str_TransferLTime":"18",
+                  "Str_CatchupRate":"100%      ",
+                  "Str_BestDec":"T"
+               }
+            ]
+         ],
+         "0000678":[  
+            [  
+               {  
+                  "category":"Class",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"Inv Segment Code",
+                  "details":"GH"
+               },
+               {  
+                  "category":"Item Summary",
+                  "details":"Maintainance Platform, Aircraft"
+               },
+               {  
+                  "category":"MILIS Item Name",
+                  "details":"Maintainance Platform, Aircraft"
+               },
+               {  
+                  "category":"PSU",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"RIMC",
+                  "details":"C001"
+               },
+               {  
+                  "category":"Stock Type",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"Team Division",
+                  "details":"AP"
+               },
+               {  
+                  "category":"Team ID",
+                  "details":"AERIM"
+               },
+               {  
+                  "category":"Team Position",
+                  "details":"MP86"
+               },
+               {  
+                  "category":"Team SPO",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"User Code",
+                  "details":"R2"
+               }
+            ],
+            [  
+               "0000678_1",
+               "0000678_2"
+            ],
+            [  
+               {  
+                  "Str_ToBuy":"10%",
+                  "Str_ToRepair":"70%",
+                  "Str_ToTransfer":"20%",
+                  "Str_Criticality":"10%",
+                  "Str_NearestLocationID":"5645/AMBERLEY",
+                  "Str_PurchasingCost":"$33,600.00",
+                  "Str_RepairCost":"$15,000.00",
+                  "Str_TransferCost":"$20,000.00",
+                  "Str_PurchasingLTime":"5",
+                  "Str_RepairLTime":"20",
+                  "Str_Budget":"$23,034,432.00",
+                  "Str_TransferLTime":"15",
+                  "Str_CatchupRate":"100%      ",
+                  "Str_BestDec":"R"
+               }
+            ]
+         ],
+         "0000693":[  
+            [  
+               {  
+                  "category":"Class",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"Inv Segment Code",
+                  "details":"GH"
+               },
+               {  
+                  "category":"Item Summary",
+                  "details":"Tool Kit, Connector"
+               },
+               {  
+                  "category":"MILIS Item Name",
+                  "details":"Tool Kit, Connector"
+               },
+               {  
+                  "category":"PSU",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"RIMC",
+                  "details":"C005"
+               },
+               {  
+                  "category":"Stock Type",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"Team Division",
+                  "details":"AP"
+               },
+               {  
+                  "category":"Team ID",
+                  "details":"AABDAABD01"
+               },
+               {  
+                  "category":"Team Position",
+                  "details":"MP67"
+               },
+               {  
+                  "category":"Team SPO",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"User Code",
+                  "details":"R5"
+               }
+            ],
+            [  
+               "0000693_1",
+               "0000693_2"
+            ],
+            [  
+               {  
+                  "Str_ToBuy":"100%",
+                  "Str_ToRepair":"0%",
+                  "Str_ToTransfer":"0%",
+                  "Str_Criticality":"100%",
+                  "Str_NearestLocationID":"4564/CANBERRA",
+                  "Str_PurchasingCost":"$34,800.00",
+                  "Str_RepairCost":"$20,000.00",
+                  "Str_TransferCost":"$5,000.00",
+                  "Str_PurchasingLTime":"10",
+                  "Str_RepairLTime":"15",
+                  "Str_Budget":"$1,233,021.00",
+                  "Str_TransferLTime":"10",
+                  "Str_CatchupRate":"100%      ",
+                  "Str_BestDec":"B"
+               }
+            ]
+         ],
+         "0000823":[  
+            [  
+               {  
+                  "category":"Class",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"Inv Segment Code",
+                  "details":"GH"
+               },
+               {  
+                  "category":"Item Summary",
+                  "details":"Tachometer, Mechanical, Hand Held"
+               },
+               {  
+                  "category":"MILIS Item Name",
+                  "details":"Tachometer, Mechanical, Hand Held"
+               },
+               {  
+                  "category":"PSU",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"RIMC",
+                  "details":"C003"
+               },
+               {  
+                  "category":"Stock Type",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"Team Division",
+                  "details":"AP"
+               },
+               {  
+                  "category":"Team ID",
+                  "details":"AABDAABD01"
+               },
+               {  
+                  "category":"Team Position",
+                  "details":"MP88"
+               },
+               {  
+                  "category":"Team SPO",
+                  "details":"Data Unavailable."
+               },
+               {  
+                  "category":"User Code",
+                  "details":"R4"
+               }
+            ],
+            [  
+               "0000823_1",
+               "0000823_2"
+            ],
+            [  
+               {  
+                  "Str_ToBuy":"10%",
+                  "Str_ToRepair":"25%",
+                  "Str_ToTransfer":"65%",
+                  "Str_Criticality":"5%",
+                  "Str_NearestLocationID":"6789/TOWNSVILLE",
+                  "Str_PurchasingCost":"$308.00",
+                  "Str_RepairCost":"$500.00",
+                  "Str_TransferCost":"$0.00",
+                  "Str_PurchasingLTime":"2",
+                  "Str_RepairLTime":"1",
+                  "Str_Budget":"$980,322.00",
+                  "Str_TransferLTime":"1",
+                  "Str_CatchupRate":"100%      ",
+                  "Str_BestDec":"T"
+               }
+            ]
+         ]
+      }
+   ]
+]

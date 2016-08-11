@@ -1,0 +1,13 @@
+﻿#leadtime,#cost {
+    text-align:center;
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.center {
+     float: none;
+     margin-left: auto;
+     margin-right: auto;
+}

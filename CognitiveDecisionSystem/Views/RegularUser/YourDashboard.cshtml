@@ -1,0 +1,120 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.js"></script>
+    @Styles.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap-jquery")
+    @Styles.Render("~/bundles/homepage")
+    @Styles.Render("~/bundles/dashboard")
+   
+    <title>Your Dashboard</title>
+</head>
+<body>
+    <nav class="navbar navbar-default" style="background-color:#779ECB;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Action("Index", "System")">Logo </a>
+            </div>
+            <ul class="nav navbar-nav" id="nav">
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("Login", "User")">Home </a></li>
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("About", "System")">About us</a></li>
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("Contact", "System")">Contact us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="body">
+        <!--if((System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)-->
+
+        <div class="container-fluid " style="margin-top: -21px;">
+            <div class="row" id="main-content">
+                <div class="col-sm-2" id="content-menu">
+                    <ul class="list-group">
+                        <li id="user" class="list-group-item">
+                            <h3>Welcome back,</h3>
+                            <img id="user-image" src="~/Images/default_user_img.png" alt="Profile image" width="60" height="60" /><br /><br />
+                            <p>Chau Hoang Hieu LAM</p>
+                        </li>
+                        <li class="list-group-item" id="profile">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <p>Profile</p>
+                        </li>
+                        <li class="list-group-item" id="summary-dashboard" style="background-color: #337ab7; color: white;">
+                            <span class="glyphicon glyphicon-dashboard"></span>
+                            <p>Dashboard</p>
+                        </li>
+                        <li class="list-group-item" id="create-widget" onclick=" location.href='/RegularUser/CreateWidget'">
+                            <span class="glyphicon glyphicon-duplicate"></span>
+                            <p>Create Widget</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-10" id="content-dashboard">
+                    <div id="title-dashboard">
+
+                        <p style="color: #5DADE2; font-size: 40px; " id="title"><img src="~/Images/Dashborad icon.png" style="width: 15%; height: 15%;" /> Your dashboard</p>
+                        <div id="summary-dashboard">
+                            <p>Number of dashboards <span class="badge">0</span></p>
+                            <p>Newly created dashborad <span class="badge">Waiting</span> </p>
+                            <p>Total widgets on dashboards <span class="badge">0</span> </p>
+                            <p>Newly created widget <span class="badge">Waiting</span>  </p>
+                        </div>
+
+                        <div id="widgets-container" class="well well-sm" style="background-color: white;">
+                            <a href="#" data-toggle="modal" data-target="#modal-dashboard" data-placement="auto" title="Add new dashboard"><img src="~/Images/widgetized.svg" class="modal-content" id="create-widget-icon" height="100" width="150"></a>
+                            <!--Add new dashborad to this div element with id dashboard-placement -->
+                            <div id="dashboard-placement"></div>
+                            <div id="modal-dashboard" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2>Add new dashborad</h2>
+                                        </div>
+                                        <div class="modal-body" style="height: 230px;">
+                                            <div class="form-dashborad">
+                                                <form role="form" action="#">
+                                                    <div class="form-group">
+                                                        <label for="dashboard-name">Enter a name </label>
+                                                        <input type="text" class="form-control" id="dashboard-name" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="dashboard-description">Description for this dashboard</label>
+                                                        <input type="text" class="form-control" id="dashboard-description" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-lg btn-info" style="float: right;">Create</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div id="pagination-container">
+                    <ul class="pagination">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer>
+        <div class="content-wrapper" id="footer">
+            <div id="bottomMid">
+                <a class="bottomNav" href="@Url.Action("About", "System")">About us</a> |
+                <a class="bottomNav" href="@Url.Action("Contact", "System")">Contact us</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

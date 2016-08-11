@@ -1,0 +1,95 @@
+﻿{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 49813,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "repairs_per_year": {
+         "buckets": [
+            {
+               "key_as_string": "2001-01-01T00:00:00.000Z",
+               "key": 978307200000,
+               "doc_count": 2
+            },
+            {
+               "key_as_string": "2002-01-01T00:00:00.000Z",
+               "key": 1009843200000,
+               "doc_count": 4
+            },
+            {
+               "key_as_string": "2003-01-01T00:00:00.000Z",
+               "key": 1041379200000,
+               "doc_count": 1
+            },
+            {
+               "key_as_string": "2004-01-01T00:00:00.000Z",
+               "key": 1072915200000,
+               "doc_count": 2
+            },
+            {
+               "key_as_string": "2005-01-01T00:00:00.000Z",
+               "key": 1104537600000,
+               "doc_count": 424
+            },
+            {
+               "key_as_string": "2006-01-01T00:00:00.000Z",
+               "key": 1136073600000,
+               "doc_count": 1131
+            },
+            {
+               "key_as_string": "2007-01-01T00:00:00.000Z",
+               "key": 1167609600000,
+               "doc_count": 3900
+            },
+            {
+               "key_as_string": "2008-01-01T00:00:00.000Z",
+               "key": 1199145600000,
+               "doc_count": 4891
+            },
+            {
+               "key_as_string": "2009-01-01T00:00:00.000Z",
+               "key": 1230768000000,
+               "doc_count": 5801
+            },
+            {
+               "key_as_string": "2010-01-01T00:00:00.000Z",
+               "key": 1262304000000,
+               "doc_count": 5960
+            },
+            {
+               "key_as_string": "2011-01-01T00:00:00.000Z",
+               "key": 1293840000000,
+               "doc_count": 6083
+            },
+            {
+               "key_as_string": "2012-01-01T00:00:00.000Z",
+               "key": 1325376000000,
+               "doc_count": 6625
+            },
+            {
+               "key_as_string": "2013-01-01T00:00:00.000Z",
+               "key": 1356998400000,
+               "doc_count": 6863
+            },
+            {
+               "key_as_string": "2014-01-01T00:00:00.000Z",
+               "key": 1388534400000,
+               "doc_count": 6937
+            },
+            {
+               "key_as_string": "2015-01-01T00:00:00.000Z",
+               "key": 1420070400000,
+               "doc_count": 1189
+            }
+         ]
+      }
+   }
+}

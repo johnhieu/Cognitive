@@ -1,0 +1,317 @@
+﻿{"0000123":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 2718,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "failure_causes": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 61,
+         "buckets": [
+            {
+               "key": "NL",
+               "doc_count": 119
+            },
+            {
+               "key": "NK",
+               "doc_count": 47
+            },
+            {
+               "key": "OE",
+               "doc_count": 27
+            },
+            {
+               "key": "EF",
+               "doc_count": 20
+            },
+            {
+               "key": "UN",
+               "doc_count": 20
+            },
+            {
+               "key": "AWI",
+               "doc_count": 15
+            },
+            {
+               "key": "FA",
+               "doc_count": 15
+            },
+            {
+               "key": "CRK",
+               "doc_count": 14
+            },
+            {
+               "key": "DET",
+               "doc_count": 14
+            },
+            {
+               "key": "LF",
+               "doc_count": 11
+            }
+         ]
+      }
+   }
+}
+,
+"0000655":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 544,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "failure_causes": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 13,
+         "buckets": [
+            {
+               "key": "NL",
+               "doc_count": 42
+            },
+            {
+               "key": "NK",
+               "doc_count": 19
+            },
+            {
+               "key": "EF",
+               "doc_count": 9
+            },
+            {
+               "key": "UN",
+               "doc_count": 7
+            },
+            {
+               "key": "DD",
+               "doc_count": 6
+            },
+            {
+               "key": "BLW",
+               "doc_count": 3
+            },
+            {
+               "key": "DET",
+               "doc_count": 3
+            },
+            {
+               "key": "LF",
+               "doc_count": 3
+            },
+            {
+               "key": "OE",
+               "doc_count": 3
+            },
+            {
+               "key": "CRK",
+               "doc_count": 2
+            }
+         ]
+      }
+   }
+}
+,
+"0000678":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 274,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "failure_causes": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 3,
+         "buckets": [
+            {
+               "key": "NL",
+               "doc_count": 12
+            },
+            {
+               "key": "EF",
+               "doc_count": 8
+            },
+            {
+               "key": "NK",
+               "doc_count": 5
+            },
+            {
+               "key": "OE",
+               "doc_count": 5
+            },
+            {
+               "key": "UN",
+               "doc_count": 4
+            },
+            {
+               "key": "BLW",
+               "doc_count": 3
+            },
+            {
+               "key": "CRK",
+               "doc_count": 2
+            },
+            {
+               "key": "AS",
+               "doc_count": 1
+            },
+            {
+               "key": "BEN",
+               "doc_count": 1
+            },
+            {
+               "key": "BH",
+               "doc_count": 1
+            }
+         ]
+      }
+   }
+}
+,
+"0000693":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 0,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "failure_causes": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 0,
+         "buckets": [
+            {
+               "key": "NL",
+               "doc_count": 42
+            },
+            {
+               "key": "NK",
+               "doc_count": 19
+            },
+            {
+               "key": "EF",
+               "doc_count": 9
+            },
+            {
+               "key": "UN",
+               "doc_count": 7
+            },
+            {
+               "key": "DD",
+               "doc_count": 6
+            },
+            {
+               "key": "BLW",
+               "doc_count": 3
+            },
+            {
+               "key": "DET",
+               "doc_count": 3
+            },
+            {
+               "key": "LF",
+               "doc_count": 3
+            },
+            {
+               "key": "OE",
+               "doc_count": 3
+            },
+            {
+               "key": "CRK",
+               "doc_count": 2
+            }
+         ]
+      }
+   }
+}
+
+,
+"0000823":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 0,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "failure_causes": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 0,
+         "buckets": [
+            {
+               "key": "NL",
+               "doc_count": 12
+            },
+            {
+               "key": "EF",
+               "doc_count": 8
+            },
+            {
+               "key": "NK",
+               "doc_count": 5
+            },
+            {
+               "key": "OE",
+               "doc_count": 5
+            },
+            {
+               "key": "UN",
+               "doc_count": 4
+            },
+            {
+               "key": "BLW",
+               "doc_count": 3
+            },
+            {
+               "key": "CRK",
+               "doc_count": 2
+            },
+            {
+               "key": "AS",
+               "doc_count": 1
+            },
+            {
+               "key": "BEN",
+               "doc_count": 1
+            },
+            {
+               "key": "BH",
+               "doc_count": 1
+            }
+         ]
+      }
+   }
+}
+
+}

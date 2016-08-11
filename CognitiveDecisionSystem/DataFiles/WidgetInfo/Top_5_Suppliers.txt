@@ -1,0 +1,15 @@
+﻿                    <div class="panel panel-default lobipanel col-lg-4" id="Top 5 Suppliers"  data-sortable="true">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <h4>Top 5 Suppliers</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!--<div class="col-lg-4">
+                                -->
+                                <h4>Top 5 Suppliers</h4>
+                                <div id="TopSuppliers">
+                                    Loading
+                                </div>
+                            </div>
+                        </div>

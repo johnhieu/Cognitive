@@ -1,0 +1,66 @@
+﻿
+@model CognitiveDecisionSystem.Models.Register
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+@Styles.Render("~/bundles/register")
+<div id="register-section" class="table-responsive">
+    <div id="container">
+        <div class="panel panel-info" id="panel">
+            <div class="panel-heading">
+                <p style="font-size: 16px;"><span class="glyphicon glyphicon-user"></span> Register your account </p>
+            </div>
+            <div class="panel-body">
+                <p>@ViewBag.Error</p>
+                <form action="/RegularUser/Register" name="registerForm" role="form" method="post">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FullName)
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.FullName)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Occupation)
+                        @Html.TextBoxFor(m => m.Occupation, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Occupation)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Age)
+                        @Html.TextBoxFor(m => m.Age, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Age)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.PhoneNumber)
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserName)
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                    </div>
+                    <input class="btn btn-info" type="submit" value="Register">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

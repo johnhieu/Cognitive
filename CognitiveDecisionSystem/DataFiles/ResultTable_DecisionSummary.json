@@ -1,0 +1,307 @@
+﻿{"0000123":[  
+   [  
+      [  
+         {  
+            "summary":"Stock Code",
+            "value":"0000123"
+         },
+         {  
+            "summary":"Stock Name",
+            "value":"AIRCRAFT ENGINE"
+         },
+         {  
+            "summary":"Supplier Location",
+            "value":"1234/NOWRA"
+         },
+         {  
+            "summary":"Cost",
+            "value":"$2,200,000.00"
+         },
+         {  
+            "summary":"Lead Time",
+            "value":"15"
+         },
+         {  
+            "summary":"Criticality",
+            "value":"100%"
+         },
+         {  
+            "summary":"Catch-Up Rate",
+            "value":"100%      "
+         },
+         {  
+            "summary":"After Decision Criticality",
+            "value":"60%"
+         }
+      ],
+      [  
+         "High repair cost. High criticality. Item is old. High lead time. Pool availability is -4. Purchase recommended."
+      ]
+   ],
+   [  
+      [  
+         {  
+            "name":"SYDNEY",
+            "lat":-33.8674869,
+            "lon":151.2069902,
+            "color":"red"
+         }
+      ],
+      [  
+         {  
+            "name":"NOWRA",
+            "lat":-34.8854734,
+            "lon":150.5932105,
+            "color":"Blue"
+         },
+         {  
+            "name":"CAIRNS",
+            "lat":-16.9203338,
+            "lon":145.7708595,
+            "color":"Blue"
+         },
+         {  
+            "name":"GLENORCHY",
+            "lat":-42.8333742,
+            "lon":147.2772003,
+            "color":"Blue"
+         }
+      ]
+   ],
+   [  
+      {  
+         "name":"0000123",
+         "children":[  
+            {  
+               "name":"To Buy(65%)",
+               "children":[  
+                  {  
+                     "name":"Location",
+                     "children":[  
+                        {  
+                           "name":"Demand",
+                           "children":[  
+                              {  
+                                 "name":"SYDNEY"
+                              }
+                           ]
+                        },
+                        {  
+                           "name":"Supplier",
+                           "children":[  
+                              {  
+                                 "name":"NOWRA (Nearest)"
+                              },
+                              {  
+                                 "name":"CAIRNS"
+                              },
+                              {  
+                                 "name":"GLENORCHY"
+                              }
+                           ]
+                        }
+                     ]
+                  },
+                  {  
+                     "name":"Cost($2,200,000.00)",
+                     "children":[  
+                        {  
+                           "name":"Repair Cost($1,000,000.00)"
+                        },
+                        {  
+                           "name":"Transfer Cost($50,000.00)"
+                        }
+                     ]
+                  },
+                  {  
+                     "name":"Lead Time(15)",
+                     "children":[  
+                        {  
+                           "name":"Repair Lead Time(60)"
+                        },
+                        {  
+                           "name":"Transfer Lead Time(90)"
+                        }
+                     ]
+                  },
+                  {  
+                     "name":"Criticality(100%)",
+                     "children":[  
+                        {  
+                           "name":"After Decision Criticality(60%)"
+                        }
+                     ]
+                  }
+               ]
+            },
+            {  
+               "name":"To Repair(35%)"
+            },
+            {  
+               "name":"To Transfer(0%)"
+            }
+         ]
+      }
+   ]
+],
+"0000655":[  
+   [  
+      [  
+         {  
+            "summary":"Stock Code",
+            "value":"0000655"
+         },
+         {  
+            "summary":"Stock Name",
+            "value":"TRACTOR, WHEELED, AIRCRAFT TOWING"
+         },
+         {  
+            "summary":"Supplier Location",
+            "value":"5555/MOOREBANK"
+         },
+         {  
+            "summary":"Cost",
+            "value":"$2,000.00"
+         },
+         {  
+            "summary":"Lead Time",
+            "value":"18"
+         },
+         {  
+            "summary":"Criticality",
+            "value":"10%"
+         },
+         {  
+            "summary":"Catch-Up Rate",
+            "value":"100%      "
+         },
+         {  
+            "summary":"After Decision Criticality",
+            "value":"5%"
+         }
+      ],
+      [  
+         "Pool availability is 68. Low criticality. High repair cost. Low transfer cost. Medium transfer time. Transfer recommended."
+      ]
+   ],
+   [  
+      [  
+         {  
+            "name":"HOLSWORTHY",
+            "lat":-33.9560787,
+            "lon":150.9552762,
+            "color":"red"
+         }
+      ],
+      [  
+         {  
+            "name":"BALMORAL",
+            "lat":-33.0473454,
+            "lon":151.5798494,
+            "color":"Blue"
+         },
+         {  
+            "name":"MOOREBANK",
+            "lat":-33.9338954,
+            "lon":150.9483855,
+            "color":"Blue"
+         },
+         {  
+            "name":"TOWNSVILLE",
+            "lat":-19.2576268,
+            "lon":146.8178707,
+            "color":"Blue"
+         },
+         {  
+            "name":"BANDIANA",
+            "lat":-36.1449362,
+            "lon":146.9243587,
+            "color":"Blue"
+         }
+      ]
+   ],
+   [  
+      {  
+         "name":"0000655",
+         "children":[  
+            {  
+               "name":"To Transfer(75%)",
+               "children":[  
+                  {  
+                     "name":"Location",
+                     "children":[  
+                        {  
+                           "name":"Demand",
+                           "children":[  
+                              {  
+                                 "name":"HOLSWORTHY"
+                              }
+                           ]
+                        },
+                        {  
+                           "name":"Transfer Location",
+                           "children":[  
+                              {  
+                                 "name":"BALMORAL"
+                              },
+                              {  
+                                 "name":"MOOREBANK (Nearest)"
+                              },
+                              {  
+                                 "name":"TOWNSVILLE"
+                              },
+                              {  
+                                 "name":"BANDIANA"
+                              }
+                           ]
+                        }
+                     ]
+                  },
+                  {  
+                     "name":"Cost($2,000.00)",
+                     "children":[  
+                        {  
+                           "name":"Purchase Cost($34,800.00)"
+                        },
+                        {  
+                           "name":"Repair Cost($40,000.00)"
+                        }
+                     ]
+                  },
+                  {  
+                     "name":"Lead Time(18)",
+                     "children":[  
+                        {  
+                           "name":"Purchase Lead Time(10)"
+                        },
+                        {  
+                           "name":"Repair Lead Time(30)"
+                        }
+                     ]
+                  },
+                  {  
+                     "name":"Criticality(10%)",
+                     "children":[  
+                        {  
+                           "name":"After Decision Criticality(5%)"
+                        }
+                     ]
+                  }
+               ]
+            },
+            {  
+               "name":"To Buy(20%)"
+            },
+            {  
+               "name":"To Repair(5%)"
+            }
+         ]
+      }
+   ]
+],
+"0000678":[[[{"summary":"Stock Code","value":"0000678"},{"summary":"Stock Name","value":"MAINTENANCE PLATFORM, AIRCRAFT"},{"summary":"Supplier Location","value":"5645/AMBERLEY"},{"summary":"Cost","value":"$15,000.00"},{"summary":"Lead Time","value":"20"},{"summary":"Criticality","value":"10%"},{"summary":"Catch-Up Rate","value":"100%      "},{"summary":"After Decision Criticality","value":"0%"}],["Pool availabilty is 5. Low criticality. Item condition new. High purchase cost. Repair recommended."]],[[{"name": "LAVERTON","lat": -37.8568598,"lon": 144.759131,"color": "red"}],[{"name": "AMBERLEY","lat": -27.6407442,"lon": 152.7022691,"color": "Blue"},{"name": "GLENORCHY","lat": -42.8333742,"lon": 147.2772003,"color": "Blue"}]],[{"name": "0000678","children": [{"name": "To Repair(70%)","children": [{"name": "Location","children": [{"name": "Demand","children": [{"name": "LAVERTON"}]},{"name": "Repairer","children": [{"name": "AMBERLEY (Nearest)"},{"name": "GLENORCHY"}]}]},{"name": "Cost($15,000.00)","children": [{"name": "Purchase Cost($33,600.00)"},{"name": "Transfer Cost($20,000.00)"}]},{"name": "Lead Time(20)","children": [{"name": "Purchase Lead Time(5)"},{"name": "Transfer Lead Time(15)"}]},{"name": "Criticality(10%)","children": [{"name": "After Decision Criticality(0%)"}]}]},{"name": "To Buy(10%)"},{"name": "To Transfer(20%)"}]}]]
+,
+"0000693":[[[{"summary":"Stock Code","value":"0000693"},{"summary":"Stock Name","value":"TOOL KIT, CONNECTOR"},{"summary":"Supplier Location","value":"4564/CANBERRA"},{"summary":"Cost","value":"$34,800.00"},{"summary":"Lead Time","value":"10"},{"summary":"Criticality","value":"100%"},{"summary":"Catch-Up Rate","value":"100%      "},{"summary":"After Decision Criticality","value":"40%"}],["Pool availability is -7. High criticality. High repair cost. Low purchase lead time. Item is past its life. Very poor item condition. Purchase recommended."]],[[{"name": "BULLSBROOK","lat": -31.6722812,"lon": 116.0318285,"color": "red"}],[{"name": "CANBERRA","lat": -35.2819998,"lon": 149.1286843,"color": "Blue"},{"name": "AMBERLEY","lat": -27.6407442,"lon": 152.7022691,"color": "Blue"},{"name": "MOOREBANK","lat": -33.9338954,"lon": 150.9483855,"color": "Blue"},{"name": "TOWNSVILLE","lat": -19.2576268,"lon": 146.8178707,"color": "Blue"},{"name": "BROADMEADOWS","lat": -37.6832693,"lon": 144.9199591,"color": "Blue"}]],[{"name": "0000693","children": [{"name": "To Buy(100%)","children": [{"name": "Location","children": [{"name": "Demand","children": [{"name": "BULLSBROOK"}]},{"name": "Supplier","children": [{"name": "CANBERRA (Nearest)"},{"name": "AMBERLEY"},{"name": "MOOREBANK"},{"name": "TOWNSVILLE"},{"name": "BROADMEADOWS"}]}]},{"name": "Cost($34,800.00)","children": [{"name": "Repair Cost($20,000.00)"},{"name": "Transfer Cost($5,000.00)"}]},{"name": "Lead Time(10)","children": [{"name": "Repair Lead Time(15)"},{"name": "Transfer Lead Time(10)"}]},{"name": "Criticality(100%)","children": [{"name": "After Decision Criticality(40%)"}]}]},{"name": "To Repair(0%)"},{"name": "To Transfer(0%)"}]}]]
+,
+"0000823":[[[{"summary":"Stock Code","value":"0000823"},{"summary":"Stock Name","value":"TACHOMETER, MECHANICAL, HAND HELD"},{"summary":"Supplier Location","value":"6789/TOWNSVILLE"},{"summary":"Cost","value":"$0.00"},{"summary":"Lead Time","value":"1"},{"summary":"Criticality","value":"5%"},{"summary":"Catch-Up Rate","value":"100%      "},{"summary":"After Decision Criticality","value":"0%"}],["Good item condition. Pool availability 10. Low Criticality. High repair lead time. Transfer recommended."]],[[{"name": "TOWNSVILLE","lat": -19.2576268,"lon": 146.8178707,"color": "red"}],[{"name": "TOWNSVILLE","lat": -19.2576268,"lon": 146.8178707,"color": "Blue"},{"name": "CANBERRA","lat": -35.2819998,"lon": 149.1286843,"color": "Blue"},{"name": "GLENORCHY","lat": -42.8333742,"lon": 147.2772003,"color": "Blue"}]],[{"name": "0000823","children": [{"name": "To Transfer(65%)","children": [{"name": "Location","children": [{"name": "Demand","children": [{"name": "TOWNSVILLE"}]},{"name": "Transfer Location","children": [{"name": "TOWNSVILLE (Nearest)"},{"name": "CANBERRA"},{"name": "GLENORCHY"}]}]},{"name": "Cost($0.00)","children": [{"name": "Purchase Cost($308.00)"},{"name": "Repair Cost($500.00)"}]},{"name": "Lead Time(1)","children": [{"name": "Purchase Lead Time(2)"},{"name": "Repair Lead Time(1)"}]},{"name": "Criticality(5%)","children": [{"name": "After Decision Criticality(0%)"}]}]},{"name": "To Buy(10%)"},{"name": "To Repair(25%)"}]}]]
+}

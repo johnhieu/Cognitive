@@ -1,0 +1,22 @@
+﻿ <div class="panel panel-default lobipanel col-lg-2" id="Item selection" data-sortable="true">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h6>Item Selection</h6>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <!--<div class="col-lg-2">
+                        -->
+                        <h4>Item Selection</h4>
+                        <table id="serial" class="table">
+                            <thead>
+                            <th data-dynatable-column="WorkOrderNumber">Serial Number</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <!--
+                    </div>-->
+                    <!--
+                </div>-->
+            </div>
+        </div>

@@ -1,0 +1,12 @@
+﻿{"0000123":[{"Int_AssetLife":20,"Int_CurrentYear":16,"Int_No_Of_Maint":13,"FAvgBreakDownPerYear":1.5,"Int_MainreportRating":2,"Str_ItemCondition":"Poor","FReqInDays":30}]
+,
+"0000655":[{"Int_AssetLife":5,"Int_CurrentYear":4,"Int_No_Of_Maint":17,"FAvgBreakDownPerYear":4.25,"Int_MainreportRating":3,"Str_ItemCondition":"Good","FReqInDays":15}]
+,
+"0000678":[{"Int_AssetLife":35,"Int_CurrentYear":3,"Int_No_Of_Maint":0,"FAvgBreakDownPerYear":0,"Int_MainreportRating":5,"Str_ItemCondition":"Excellent","FReqInDays":12}]
+,
+"0000693":[{"Int_AssetLife":25,"Int_CurrentYear":36,"Int_No_Of_Maint":55,"FAvgBreakDownPerYear":1.5,"Int_MainreportRating":1,"Str_ItemCondition":"Disposal","FReqInDays":2}]
+
+,
+"0000823":[{"Int_AssetLife":15,"Int_CurrentYear":7,"Int_No_Of_Maint":10,"FAvgBreakDownPerYear":1.25,"Int_MainreportRating":3,"Str_ItemCondition":"Good","FReqInDays":10}]
+
+}

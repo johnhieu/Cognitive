@@ -1,0 +1,333 @@
+﻿{"0000123":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 10,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "suppliers": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 0,
+         "buckets": [
+            {
+               "key": "ABPXAE",
+               "doc_count": 5,
+               "supplier_name": {
+                  "hits": {
+                     "total": 5,
+                     "max_score": 11.432948,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "75591",
+                           "_score": 11.432948,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "SALE BRAKES & ENGINEERING"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z0GM0",
+               "doc_count": 5,
+               "supplier_name": {
+                  "hits": {
+                     "total": 5,
+                     "max_score": 11.432948,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "297566",
+                           "_score": 11.432948,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "7",
+                                 "Name": "BEAK GSE PTY LTD"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            }
+         ]
+      }
+   }
+}
+,
+"0000655":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 0,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "suppliers": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 0,
+         "buckets": [
+            {
+               "key": "ABPXAE",
+               "doc_count": 5,
+               "supplier_name": {
+                  "hits": {
+                     "total": 5,
+                     "max_score": 11.432948,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "75591",
+                           "_score": 11.432948,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "SALE BRAKES & ENGINEERING"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z0GM0",
+               "doc_count": 5,
+               "supplier_name": {
+                  "hits": {
+                     "total": 5,
+                     "max_score": 11.432948,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "297566",
+                           "_score": 11.432948,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "7",
+                                 "Name": "BEAK GSE PTY LTD"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            }
+         ]
+      }
+   }
+}
+,
+"0000678":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 6,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "suppliers": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 0,
+         "buckets": [
+            {
+               "key": "ZAZ32",
+               "doc_count": 6,
+               "supplier_name": {
+                  "hits": {
+                     "total": 6,
+                     "max_score": 11.884934,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "231629",
+                           "_score": 11.884934,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "HATTE AUSTRALIA PTY LTD"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            }
+         ]
+      }
+   }
+}
+,
+"0000693":{
+   "took": 47,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 4,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "suppliers": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 0,
+         "buckets": [
+            {
+               "key": "Z0GM0",
+               "doc_count": 3,
+               "supplier_name": {
+                  "hits": {
+                     "total": 3,
+                     "max_score": 12.221407,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "145267",
+                           "_score": 12.221407,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "7",
+                                 "Name": "BEAK GSE PTY LTD"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z1W03",
+               "doc_count": 1,
+               "supplier_name": {
+                  "hits": {
+                     "total": 1,
+                     "max_score": 12.221407,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "119972",
+                           "_score": 12.221407,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "CONNECTOR TECH ALS PTY LTD"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            }
+         ]
+      }
+   }
+}
+
+,
+"0000823":{
+   "took": 32,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 0,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "suppliers": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 0,
+         "buckets": [
+            {
+               "key": "ABPXAE",
+               "doc_count": 5,
+               "supplier_name": {
+                  "hits": {
+                     "total": 5,
+                     "max_score": 11.432948,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "75591",
+                           "_score": 11.432948,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "BRAKES & ENGINEERING"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z0GM0",
+               "doc_count": 5,
+               "supplier_name": {
+                  "hits": {
+                     "total": 5,
+                     "max_score": 11.432948,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "297566",
+                           "_score": 11.432948,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "7",
+                                 "Name": "GSE PTY"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            }
+         ]
+      }
+   }
+}
+
+}

@@ -1,0 +1,34 @@
+﻿#login-section
+{
+    position:relative;
+    height: auto;
+    margin: auto;
+    margin-bottom: 50px;
+}
+#panel
+{
+    margin: auto;
+    margin-top: 80px;
+    
+    width: 500px;
+    border: 1px solid grey;
+}
+#regPanel
+{
+    margin: auto;
+    margin-top: 20px;
+    width: 500px;
+    border: 1px solid grey;
+}
+
+.field-validation-error
+{
+    color: red;
+    font-weight: bold;
+    padding-top: 1px;
+}
+.validation-summary-errors
+{
+    color: red;
+    font-weight: bold;   
+}

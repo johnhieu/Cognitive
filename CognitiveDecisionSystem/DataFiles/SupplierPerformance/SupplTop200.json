@@ -1,0 +1,3002 @@
+﻿[
+{
+
+"SupplierNo": "000000",
+"SupplierName": ".",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"   
+},
+{
+
+"SupplierNo": "000001",
+"SupplierName": "DE GREVE & AS*****CANCELLED*****",
+"OrderAddressLine1": "***LOCATION UNKNOWN***",
+"OrderAddressLine2": "QUEEN VICTORIA TERRACE ACT",
+"OrderAddressLine3": null,
+"OrderPostCode": "2600",
+"OrderTelephone": "06 2951480",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -35.31,
+"Lon": 149.14,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000002",
+"SupplierName": "TO BE OVERWRITTEN WITH VALID",
+"OrderAddressLine1": "SUPPLIER DETAILS AND REACTIVATED",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000003",
+"SupplierName": "GARAQUIP SALE*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z1X30***",
+"OrderAddressLine2": "MITCHELL ACT",
+"OrderAddressLine3": null,
+"OrderPostCode": "2911",
+"OrderTelephone": "(06) 241 6466",
+"OrderContact": null,
+"OrderFax": "(06) 241 3650^",
+"Lat": -35.22,
+"Lon": 149.12,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000004",
+"SupplierName": "CENTURY 21 TE*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z1L19***",
+"OrderAddressLine2": "FYSHWICK ACT",
+"OrderAddressLine3": null,
+"OrderPostCode": "2609",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -35.3,
+"Lon": 149.19,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000005",
+"SupplierName": "POLAROID AUST*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z2B61***",
+"OrderAddressLine2": "NORTH RYDE NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2113",
+"OrderTelephone": "(02) 842 7133",
+"OrderContact": null,
+"OrderFax": "(02) 842 7111^",
+"Lat": -33.8,
+"Lon": 151.13,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000006",
+"SupplierName": "HELIOS ELECTR*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z2B67***",
+"OrderAddressLine2": "RYDALMERE NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2116",
+"OrderTelephone": "(02) 638 7055",
+"OrderContact": null,
+"OrderFax": "(02) 684 4307^",
+"Lat": -33.81,
+"Lon": 151.03,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000007",
+"SupplierName": "LANIER AUST PTY LTD",
+"OrderAddressLine1": "UNIT 1 / 39 HERBERT ST",
+"OrderAddressLine2": "ST LEONARDS NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2065",
+"OrderTelephone": "(02) 901 6222",
+"OrderContact": "***** CANCELLED USE Z2B22 *****",
+"OrderFax": "(02) 906 2527^",
+"Lat": -33.83,
+"Lon": 151.2,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000008",
+"SupplierName": "VALVOLINE AUS*****CANCELLED*****",
+"OrderAddressLine1": "PORT WAKEFIELD ROAD",
+"OrderAddressLine2": "GREEN FIELDS SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5107",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.79,
+"Lon": 138.6,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000009",
+"SupplierName": "UMT RURAL LTD*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z2K13***",
+"OrderAddressLine2": "WYNYARD TAS",
+"OrderAddressLine3": null,
+"OrderPostCode": "7325",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": "(002) 72 0616^",
+"Lat": -41.07,
+"Lon": 145.63,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000010",
+"SupplierName": "INTEGRAL INTE*****CANCELLED*****",
+"OrderAddressLine1": "FACTORY 4, 27 LASER DR",
+"OrderAddressLine2": "ROWVILLE VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3178",
+"OrderTelephone": "(03) 764 2722",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.93,
+"Lon": 145.24,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000011",
+"SupplierName": "COLOPLAST PTY*****CANCELLED*****",
+"OrderAddressLine1": "PO BOX 200",
+"OrderAddressLine2": "BURWOOD VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3125",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.84,
+"Lon": 145.12,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000012",
+"SupplierName": "GINA'S GALLERY PICTURE FRAMING",
+"OrderAddressLine1": "SHOP 142, 16-28 RESEARCH RD",
+"OrderAddressLine2": "POORAKA",
+"OrderAddressLine3": "SA",
+"OrderPostCode": "5095",
+"OrderTelephone": "(08) 260 6929",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.82,
+"Lon": 138.62,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000013",
+"SupplierName": "NOWRA SHOE BA*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z2S04***",
+"OrderAddressLine2": "NOWRA NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2541",
+"OrderTelephone": "(044) 21 7933",
+"OrderContact": null,
+"OrderFax": "(044) 23 2502^",
+"Lat": -34.84,
+"Lon": 150.57,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000014",
+"SupplierName": "EXICOM COMMUN*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z3X47***",
+"OrderAddressLine2": "ALBURY NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2640",
+"OrderTelephone": "(060) 41 1168",
+"OrderContact": null,
+"OrderFax": "(060) 21 5160^",
+"Lat": -36.08,
+"Lon": 146.91,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000015",
+"SupplierName": "MONITORING & *****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z3X45***",
+"OrderAddressLine2": "LAVINGTON NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2641",
+"OrderTelephone": "(018) 69 0275",
+"OrderContact": null,
+"OrderFax": "(060) 40 2415^",
+"Lat": -36.04,
+"Lon": 146.92,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000016",
+"SupplierName": "WATSON-WILL &*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z3N67***",
+"OrderAddressLine2": "FORTITUDE VALLEY QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4006",
+"OrderTelephone": "07-32525552",
+"OrderContact": null,
+"OrderFax": "07-32521326^",
+"Lat": -27.44,
+"Lon": 153.04,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000017",
+"SupplierName": "KANGAROO (EXP*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z4Q36***",
+"OrderAddressLine2": "CURTIN ACT",
+"OrderAddressLine3": null,
+"OrderPostCode": "2605",
+"OrderTelephone": "06-2852425",
+"OrderContact": null,
+"OrderFax": "06-2810802^",
+"Lat": -35.32,
+"Lon": 149.08,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000018",
+"SupplierName": "TELSTRA APPLI*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z5142***",
+"OrderAddressLine2": "LEVEL 2 / 620 CHURCH ST",
+"OrderAddressLine3": "RICHMOND, VICTORIA",
+"OrderPostCode": "3121",
+"OrderTelephone": "03-92748222",
+"OrderContact": null,
+"OrderFax": "03-92748333^",
+"Lat": -37.83,
+"Lon": 145.01,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000019",
+"SupplierName": "LASER LOC AUS*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z6Z56***",
+"OrderAddressLine2": "UNANDERRA NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2526",
+"OrderTelephone": "02-42715240",
+"OrderContact": "ACN: 050 681 046",
+"OrderFax": "02-42715240^",
+"Lat": -34.38,
+"Lon": 150.78,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000020",
+"SupplierName": "INVALID NUMBER",
+"OrderAddressLine1": "***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000021",
+"SupplierName": "STRATEGIC SOF*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z5J42***",
+"OrderAddressLine2": "PHILLIP ACT",
+"OrderAddressLine3": null,
+"OrderPostCode": "2606",
+"OrderTelephone": "06-2827066",
+"OrderContact": null,
+"OrderFax": "06-2827099^",
+"Lat": -35.35,
+"Lon": 149.08,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000022",
+"SupplierName": "GARRARD'S PES*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z5J61***",
+"OrderAddressLine2": "WINNELLIE NT",
+"OrderAddressLine3": null,
+"OrderPostCode": "0821",
+"OrderTelephone": "08-8947 2856",
+"OrderContact": "ACN: 010 648 325",
+"OrderFax": "08-8947 2918^",
+"Lat": -12.43,
+"Lon": 130.88,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000023",
+"SupplierName": "DAYCOM COMMUN*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z7F53***",
+"OrderAddressLine2": "OAKLEIGH VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3166",
+"OrderTelephone": "03-95436444",
+"OrderContact": "ACN: 061 819 949",
+"OrderFax": "03-95437238^",
+"Lat": -37.9,
+"Lon": 145.08,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000024",
+"SupplierName": "AWA PLESSEY *****CANCELLED*****",
+"OrderAddressLine1": "***USE Z7N14***",
+"OrderAddressLine2": "NORTH RYDE NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2113",
+"OrderTelephone": "02-98569000",
+"OrderContact": "ACN: 076 409 311",
+"OrderFax": "02-98569527^",
+"Lat": -33.8,
+"Lon": 151.13,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000025",
+"SupplierName": "VERTICAL PTY *****CANCELLED*****",
+"OrderAddressLine1": "***USE Z7P28***",
+"OrderAddressLine2": "BAYSWATER WA",
+"OrderAddressLine3": null,
+"OrderPostCode": "6053",
+"OrderTelephone": "08-9377 3535",
+"OrderContact": "ACN: 009 445 747",
+"OrderFax": "08-9377 3539^",
+"Lat": -31.92,
+"Lon": 115.91,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000026",
+"SupplierName": "MOULTON AGENCIES",
+"OrderAddressLine1": "PO BOX 363",
+"OrderAddressLine2": "NEWFARM QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4005",
+"OrderTelephone": "07-33584800",
+"OrderContact": null,
+"OrderFax": "07-33584752^",
+"Lat": -27.47,
+"Lon": 153.05,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000029",
+"SupplierName": "SMART COVER *****CANCELLED*****",
+"OrderAddressLine1": "****USE Z8E81***ILDA RD",
+"OrderAddressLine2": "MELBOURNE VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3004",
+"OrderTelephone": "03-9690 3062",
+"OrderContact": "ACN: 052-231-937",
+"OrderFax": "03-9696 6112^",
+"Lat": -37.84,
+"Lon": 144.98,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000030",
+"SupplierName": "HANDIYARD CHAINSAW & BRUSHCUTTER",
+"OrderAddressLine1": "622A STANLEY ST",
+"OrderAddressLine2": "WOOLLonGABBA QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4102",
+"OrderTelephone": "07-38442307",
+"OrderContact": null,
+"OrderFax": "07-38463675^",
+"Lat": -27.5,
+"Lon": 153.04,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000031",
+"SupplierName": "REVERSE REASONING SOFTWARE P/L",
+"OrderAddressLine1": "370 BAY ST",
+"OrderAddressLine2": "PORT MELBOURNE VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3207",
+"OrderTelephone": "03-96451733",
+"OrderContact": null,
+"OrderFax": "03-96451733^",
+"Lat": -37.83,
+"Lon": 144.96,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000032",
+"SupplierName": "CHEMETALL (AUSTRALASIA) PTY LTD",
+"OrderAddressLine1": "CNR LatHE & ENGINEERING ST",
+"OrderAddressLine2": "SALISBURY QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4107",
+"OrderTelephone": "07-32167406",
+"OrderContact": "ACN: 074 869 015",
+"OrderFax": "07-32741401^",
+"Lat": -27.54,
+"Lon": 153.03,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000034",
+"SupplierName": "****************************",
+"OrderAddressLine1": "*************************",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": "3220",
+"OrderTelephone": "***********",
+"OrderContact": null,
+"OrderFax": "**************^",
+"Lat": -38.18,
+"Lon": 145.11,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000036",
+"SupplierName": "************************",
+"OrderAddressLine1": "************",
+"OrderAddressLine2": "******************",
+"OrderAddressLine3": null,
+"OrderPostCode": "*****",
+"OrderTelephone": "***********",
+"OrderContact": "********************",
+"OrderFax": "**************^",
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000037",
+"SupplierName": "MCCRACKEN'S W*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z8607***T",
+"OrderAddressLine2": "WESTCOURT",
+"OrderAddressLine3": "CAIRNS QLD",
+"OrderPostCode": "4870",
+"OrderTelephone": "07-40313811",
+"OrderContact": "ACN; 010 853 586",
+"OrderFax": "07-40313821^",
+"Lat": -16.88,
+"Lon": 145.75,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000038",
+"SupplierName": "IM-PRESS PROMOTIONS GLADESVILLE",
+"OrderAddressLine1": "PO BOX 243",
+"OrderAddressLine2": "HUNTERS HILL NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2110",
+"OrderTelephone": "02-98172141",
+"OrderContact": null,
+"OrderFax": "02-98161907^",
+"Lat": -33.83,
+"Lon": 151.15,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000039",
+"SupplierName": "TRADELINK IND*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z8613***",
+"OrderAddressLine2": "151-155 WOODLANDS DRIVE",
+"OrderAddressLine3": "BRAESIDE VIC",
+"OrderPostCode": "3195",
+"OrderTelephone": "03-8586 0327",
+"OrderContact": "ACN: 000 003 832",
+"OrderFax": "03-85860348^",
+"Lat": -38.03,
+"Lon": 145.1,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000040",
+"SupplierName": "GLENELG POOL *****CANCELLED*****",
+"OrderAddressLine1": "***USE Z8615***",
+"OrderAddressLine2": "SOMERTON PARK SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5044",
+"OrderTelephone": "08-82957544",
+"OrderContact": "ACN; 073 769 968",
+"OrderFax": "08-82957440^",
+"Lat": -34.99,
+"Lon": 138.53,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000041",
+"SupplierName": "YORKSHIRE FIT*****CANCELLED*****",
+"OrderAddressLine1": "PO BOX 1375 *** USE Z8633 ***",
+"OrderAddressLine2": "CANNING VALE WA",
+"OrderAddressLine3": null,
+"OrderPostCode": "6155",
+"OrderTelephone": null,
+"OrderContact": "ACN; 004 174 467",
+"OrderFax": "08-94554143^",
+"Lat": -32.06,
+"Lon": 115.92,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000043",
+"SupplierName": "****************************",
+"OrderAddressLine1": "*************",
+"OrderAddressLine2": "*************************",
+"OrderAddressLine3": null,
+"OrderPostCode": "*******",
+"OrderTelephone": "***************",
+"OrderContact": "*****************",
+"OrderFax": "************^",
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000046",
+"SupplierName": "21 CONST SQN",
+"OrderAddressLine1": "21 CONT SQN",
+"OrderAddressLine2": "GALLIPOLI BKS",
+"OrderAddressLine3": "ENOGGERA QLD 4052",
+"OrderPostCode": "4052",
+"OrderTelephone": "07 33326592",
+"OrderContact": "CAPT CONNELL",
+"OrderFax": "07 33327856^",
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000047",
+"SupplierName": "************************",
+"OrderAddressLine1": "*****",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000048",
+"SupplierName": "JOINT LOGISTIC UNIT - (SOUTH)",
+"OrderAddressLine1": "WARRADALE BARRACKS",
+"OrderAddressLine2": "OAKLANDS ROAD",
+"OrderAddressLine3": "WARRADALE, SA",
+"OrderPostCode": "5046",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": "(08) 8259-7844^",
+"Lat": -35.01,
+"Lon": 138.55,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000049",
+"SupplierName": "CANCELLED",
+"OrderAddressLine1": "8 BENJAMIN STREET",
+"OrderAddressLine2": "ST. MARYS SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5042",
+"OrderTelephone": "08-82769111",
+"OrderContact": "ABN: 46 008 167 191",
+"OrderFax": "08-83740775^",
+"Lat": -35.02,
+"Lon": 138.57,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000050",
+"SupplierName": "ABBOTT AND SO*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZAU67***",
+"OrderAddressLine2": "BOWEN HILLS QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4006",
+"OrderTelephone": "07-32160900",
+"OrderContact": "ABN: 22 010 917 843",
+"OrderFax": "07-32160901^",
+"Lat": -27.44,
+"Lon": 153.04,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000051",
+"SupplierName": "WALES TRUCK R*****CANCELLED*****",
+"OrderAddressLine1": "PO BOX",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000052",
+"SupplierName": "NAVPAQ PTY LTD",
+"OrderAddressLine1": "11 PRESCOTT TCE",
+"OrderAddressLine2": "ROSE PARK ADELAIDE SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5067",
+"OrderTelephone": "08-84315633",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.92,
+"Lon": 138.64,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000058",
+"SupplierName": "DEFENSE COURIER SERVICE",
+"OrderAddressLine1": "830 CHISHOLM AVE",
+"OrderAddressLine2": "FORT GEORGE C. MEAD",
+"OrderAddressLine3": "MARYLAND USA",
+"OrderPostCode": "27055-5370",
+"OrderTelephone": "301-677-6021",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000059",
+"SupplierName": "INTEGRATED WAVE TECHNOLOGIES",
+"OrderAddressLine1": "4042 CLIPPER CR",
+"OrderAddressLine2": "FREMONT CA USA",
+"OrderAddressLine3": null,
+"OrderPostCode": "94538",
+"OrderTelephone": "510-353-0260",
+"OrderContact": null,
+"OrderFax": "510-353-0261^",
+"Lat": 37.530799865722656,
+"Lon": -121.97119903564453,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000060",
+"SupplierName": "WBS DEMOLITION & SALVAGE",
+"OrderAddressLine1": "17 SHORT STREET",
+"OrderAddressLine2": "WALLOON QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4306",
+"OrderTelephone": "? 54645398",
+"OrderContact": null,
+"OrderFax": "? 54645945^",
+"Lat": -27.64,
+"Lon": 152.7,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000061",
+"SupplierName": "ANGUS TRADING*****CANCELLED*****",
+"OrderAddressLine1": "***LOCATION UNKNOWN***",
+"OrderAddressLine2": "MOORABBIN VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3189",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.93,
+"Lon": 145.04,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000064",
+"SupplierName": "SCHRADER AUTO*****CANCELLED*****",
+"OrderAddressLine1": "***BUSINESS DISCONTINUED***",
+"OrderAddressLine2": "SOUTH OAKLEIGH VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3167",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.93,
+"Lon": 145.1,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000068",
+"SupplierName": "VAN DUSEN AIR*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZA014***",
+"OrderAddressLine2": "AIRPORT WEST VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3042",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.71,
+"Lon": 144.89,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00007",
+"SupplierName": "CUSTOM COACH CO THE",
+"OrderAddressLine1": "8332 PULASKI HWY",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "BALTIMORE MD US",
+"OrderPostCode": "21237-2942",
+"OrderTelephone": "410-687-7200",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "00008",
+"SupplierName": "DURANT IRVINE CO LTD",
+"OrderAddressLine1": "STREET",
+"OrderAddressLine2": "HONOLULU",
+"OrderAddressLine3": "HI US",
+"OrderPostCode": "96800",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "00009",
+"SupplierName": "A C F MOTORS CO",
+"OrderAddressLine1": "STREET",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "PHILADELPHIA PA US",
+"OrderPostCode": "19092",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": 40.001800537109375,
+"Lon": -75.1178970336914,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000097",
+"SupplierName": "ACI FIBREGLAS*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z4767***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000099",
+"SupplierName": "ADAMS WILLIAM*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZA045***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000106",
+"SupplierName": "ANDREW ANTENN*****DUPLICATE*****",
+"OrderAddressLine1": "***USE MIMS 027502***",
+"OrderAddressLine2": "RESERVOIR VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3073",
+"OrderTelephone": "03 359 2322",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.69,
+"Lon": 145.01,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00011",
+"SupplierName": "GTE SYLVANIA INC ELECTRONIC SYST",
+"OrderAddressLine1": "8632 DAKOTA DRIVE",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "GAITHERSBURG NY US",
+"OrderPostCode": null,
+"OrderTelephone": "3014177202",
+"OrderContact": null,
+"OrderFax": "3014177204^",
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000126",
+"SupplierName": "BRADMILL INDU*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z0344***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": "3013",
+"OrderTelephone": "(03) 314 0166",
+"OrderContact": null,
+"OrderFax": "(03) 314 8617^",
+"Lat": -37.82,
+"Lon": 144.89,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000133",
+"SupplierName": "BRYANT AND MA*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z1U00***",
+"OrderAddressLine2": "RICHMOND VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3121",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.83,
+"Lon": 145.01,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000136",
+"SupplierName": "COMMONWEALTH *****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z0209***",
+"OrderAddressLine2": "PRESTON VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3072",
+"OrderTelephone": "(03) 287 8444",
+"OrderContact": null,
+"OrderFax": "(03) 287 8380^",
+"Lat": -37.74,
+"Lon": 145.03,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000138",
+"SupplierName": "CABLEMAKERS A*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z0478***",
+"OrderAddressLine2": "ABBOTSFORD VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3067",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.8,
+"Lon": 145,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000139",
+"SupplierName": "CADBURY SCHWE*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZX224***",
+"OrderAddressLine2": "RINGWOOD VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3134",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.81,
+"Lon": 145.23,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000183",
+"SupplierName": "DUNLOP BATTER*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z3552***",
+"OrderAddressLine2": "SANDRINGHAM VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3191",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.95,
+"Lon": 145.01,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000193",
+"SupplierName": "ELMEASCO INST*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZU890***",
+"OrderAddressLine2": "RINGWOOD VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3134",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.81,
+"Lon": 145.23,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00020",
+"SupplierName": "LFE CORP",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "CLINTON MA US",
+"OrderPostCode": "01510-3002",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000211",
+"SupplierName": "GRAZCOS CO-OP*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZX645***",
+"OrderAddressLine2": "MELBOURNE VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3000",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.81,
+"Lon": 144.97,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000229",
+"SupplierName": "HONEYWELL PTY*****CANCELLED*PROG",
+"OrderAddressLine1": "***USE Z5117***",
+"OrderAddressLine2": "RICHMOND VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3121",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.83,
+"Lon": 145.01,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00023",
+"SupplierName": "HULL R W CO INC",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "BOSTON MA US",
+"OrderPostCode": "02100",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "00024",
+"SupplierName": "GOLDMAN PRESSING MACHINE CO",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "NEW YORK NY US",
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "00026",
+"SupplierName": "MMC INTERNATIONAL CORP.",
+"OrderAddressLine1": "PO BOX 960664",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "INWOOD NY US",
+"OrderPostCode": "11096-0664",
+"OrderTelephone": "5162397339",
+"OrderContact": null,
+"OrderFax": "5163713134^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "000266",
+"SupplierName": "WARBURTON THO*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZA212***",
+"OrderAddressLine2": "SOUTH MELBOURNE VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3205",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.93,
+"Lon": 145.03,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000273",
+"SupplierName": "WICKMAN AUSTR*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z1U24***",
+"OrderAddressLine2": "KNOXFIELD VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3180",
+"OrderTelephone": null,
+"OrderContact": "BEV",
+"OrderFax": null,
+"Lat": -37.89,
+"Lon": 145.25,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00028",
+"SupplierName": "MORRISON MACHINE CO",
+"OrderAddressLine1": "STREET",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "PATERSON NJ US",
+"OrderPostCode": "07509",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": 41.01139831542969,
+"Lon": -74.30480194091797,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000285",
+"SupplierName": "LAWRENCE & HA*****DUPLICATE*****",
+"OrderAddressLine1": "***USE MIMS 029244***",
+"OrderAddressLine2": "SOUTH MELBOURNE VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3205",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.93,
+"Lon": 145.03,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000286",
+"SupplierName": "LAMSON PARAGO*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZY200***",
+"OrderAddressLine2": "RICHMOND VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3121",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.83,
+"Lon": 145.01,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00029",
+"SupplierName": "REECE CORP",
+"OrderAddressLine1": "STREET",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "BROOKLYN NY US",
+"OrderPostCode": "11200",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "0002K",
+"SupplierName": "COMPANHIA BRASILEIRA DE CARTUCHO",
+"OrderAddressLine1": "AVENIDA HUMBERTO DE CAMPOS",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "RIBEIRAO PIRES . BR",
+"OrderPostCode": "09400000",
+"OrderTelephone": "48228210??",
+"OrderContact": null,
+"OrderFax": "48276099^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "00031",
+"SupplierName": "SCHNEIDER HEINRICH O H G",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": ". DE",
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000314",
+"SupplierName": "MULDER G V AU*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZA260***",
+"OrderAddressLine2": "EAST MALVERN VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3145",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.88,
+"Lon": 145.04,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00032",
+"SupplierName": "KRAUMENDAHL WALTER MASCHINEN",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": ". DE",
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "00033",
+"SupplierName": "ANIMATED PRODUCTION INC",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "NEW YORK NY US",
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "00036",
+"SupplierName": "CONTROL DESIGN AND FABRICATE INC",
+"OrderAddressLine1": "SUITE 107",
+"OrderAddressLine2": "9301 ANNAPOLIS ROAD",
+"OrderAddressLine3": "LANHAM MD US",
+"OrderPostCode": "20706",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": 38.967498779296875,
+"Lon": -76.8551025390625,
+"Status": "7"
+},
+{
+
+"SupplierNo": "00037",
+"SupplierName": "ELGIN INDUSTRIES",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "HAWTHORNE CA US",
+"OrderPostCode": "90250",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": 33.91429901123047,
+"Lon": -118.34929656982422,
+"Status": "7"
+},
+{
+
+"SupplierNo": "00038",
+"SupplierName": "ABBE PAUL-O INC",
+"OrderAddressLine1": "755 UNION BLVD",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "LITTLE FALLS NJ US",
+"OrderPostCode": "07424-2220",
+"OrderTelephone": "201-256-4242",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "00039",
+"SupplierName": "HOGLUND TRI-ORDINATE CORP",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "BERKELEY HEIGHTS NJ US",
+"OrderPostCode": "07922",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": 40.675201416015625,
+"Lon": -74.43460083007812,
+"Status": "7"
+},
+{
+
+"SupplierNo": "00041",
+"SupplierName": "OVIATT ENGINEERING AND MFG CO",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "SUN VALLEY CA US",
+"OrderPostCode": "91352",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": 34.22090148925781,
+"Lon": -118.36990356445312,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000414",
+"SupplierName": "CSR LTD SUGAR*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZA360***",
+"OrderAddressLine2": "YARRAVILLE VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3013",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.82,
+"Lon": 144.89,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00042",
+"SupplierName": "ABBOTT ASSOCIATES",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "HARTFORD CT US",
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000454",
+"SupplierName": "HALAS DENTAL *****DUPLICATE*PROG",
+"OrderAddressLine1": "***USE ZA400***",
+"OrderAddressLine2": "WATERLOO NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2017",
+"OrderTelephone": "(02) 697 6288",
+"OrderContact": null,
+"OrderFax": "(02) 697 6250^",
+"Lat": -33.9,
+"Lon": 151.21,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00048",
+"SupplierName": "ABRAMS INSTRUMENT CORPORATION",
+"OrderAddressLine1": "1322 RENSEN ST",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "LANSING MI US",
+"OrderPostCode": null,
+"OrderTelephone": "5178827211",
+"OrderContact": null,
+"OrderFax": "5178823136^",
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000492",
+"SupplierName": "PERMUTIT CO O*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z3578***",
+"OrderAddressLine2": "BROOKVALE NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2100",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -33.77,
+"Lon": 151.25,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000495",
+"SupplierName": "PHILIPS LIGHT*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZA441***",
+"OrderAddressLine2": "BROOKVALE NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2100",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -33.77,
+"Lon": 151.25,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00054",
+"SupplierName": "ABRASIVE CO",
+"OrderAddressLine1": "PO BOX 511",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "ANNAPOLIS JUNCTI PA US",
+"OrderPostCode": "20701",
+"OrderTelephone": "3014907951",
+"OrderContact": null,
+"OrderFax": "3012069789^",
+"Lat": 39.133201599121094,
+"Lon": -76.79879760742188,
+"Status": "7"
+},
+{
+
+"SupplierNo": "00056",
+"SupplierName": "CAE AIRCRAFT LTD",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "SANTA BARBARA CA US",
+"OrderPostCode": "93140-4232",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000575",
+"SupplierName": "AIP SMA PROJE*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZA521***",
+"OrderAddressLine2": "HAWTHORN VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3122",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.84,
+"Lon": 145.05,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00060",
+"SupplierName": "HARCO LABORATORIES INC.",
+"OrderAddressLine1": "186 CEDAR ST",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "BRANFORD CT US",
+"OrderPostCode": null,
+"OrderTelephone": "2034833764",
+"OrderContact": null,
+"OrderFax": "2034833701^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "00062",
+"SupplierName": "MARINE ELECTRIC SYSTEMS, INC. D*",
+"OrderAddressLine1": "80 WESLEY ST",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "SOUTH HACKENSACK NJ",
+"OrderPostCode": "07606-1544",
+"OrderTelephone": "2015318600",
+"OrderContact": null,
+"OrderFax": "2015318606^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "000638",
+"SupplierName": "A R C ENGINEE*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z1L62***",
+"OrderAddressLine2": "TORRENSVILLE SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5031",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.93,
+"Lon": 138.56,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000648",
+"SupplierName": "ADELAIDE ROPE*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z1N22***",
+"OrderAddressLine2": "CLARENCE GARDENS SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5039",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.97,
+"Lon": 138.58,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000666",
+"SupplierName": "AMSCOL ICE CR*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZB667***",
+"OrderAddressLine2": "ADELAIDE SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5001",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -35.12,
+"Lon": 139.27,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000668",
+"SupplierName": "ANAX PTY LTD *****CANCELLED*****",
+"OrderAddressLine1": "***USE ZC303***",
+"OrderAddressLine2": "ADELAIDE SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5000",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.93,
+"Lon": 138.6,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000703",
+"SupplierName": "AUSTRAL STAND*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZA649***",
+"OrderAddressLine2": "CLAYTON VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3168",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.93,
+"Lon": 145.12,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000728",
+"SupplierName": "BELL AND HOWE*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZB695***",
+"OrderAddressLine2": "HINDMARSH SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5007",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.9,
+"Lon": 138.58,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000730",
+"SupplierName": "CAPRON CARTER*****DUPLICATE*PROG",
+"OrderAddressLine1": "***USE ZA676***",
+"OrderAddressLine2": "ABBOTSFORD VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3069",
+"OrderTelephone": "(03) 419 4588",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000785",
+"SupplierName": "CALDER CALDER*****DUPLICATE*PROG",
+"OrderAddressLine1": "***USE ZA731***",
+"OrderAddressLine2": "WAYVILLE SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5034",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.96,
+"Lon": 138.59,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000830",
+"SupplierName": "CONSOLIDATED *****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZA776***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000846",
+"SupplierName": "BORAL BUILDIN*****DUPLICATE*PROG",
+"OrderAddressLine1": "***USE ZA792***",
+"OrderAddressLine2": "KILKENNY SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5009",
+"OrderTelephone": "(08) 268 6699",
+"OrderContact": null,
+"OrderFax": "(08) 347 0600^",
+"Lat": -34.9,
+"Lon": 138.56,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000858",
+"SupplierName": "CLARK NORMAN *****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z5375***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00088",
+"SupplierName": "ROYAL OAK PRODUCTS CO",
+"OrderAddressLine1": "321 PARK DR",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "TROY MI US",
+"OrderPostCode": null,
+"OrderTelephone": "8105730500",
+"OrderContact": null,
+"OrderFax": "8105730790^",
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "000890",
+"SupplierName": "DOMINANT AUST*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z4248***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000898",
+"SupplierName": "DUNLOP OLYMPI*****DUPLICATE*****",
+"OrderAddressLine1": "***USE MIMS O30289***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": "5086",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.86,
+"Lon": 138.66,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000918",
+"SupplierName": "BAKERS MILK T*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZA864***",
+"OrderAddressLine2": "LENAH VALLEY TAS",
+"OrderAddressLine3": null,
+"OrderPostCode": "7009",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -42.84,
+"Lon": 147.29,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000921",
+"SupplierName": "REPCO AUTO PA*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZA867***",
+"OrderAddressLine2": "CLAYTON VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3168",
+"OrderTelephone": "(03)542-5411",
+"OrderContact": null,
+"OrderFax": "(03)543-7225^",
+"Lat": -37.93,
+"Lon": 145.12,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000939",
+"SupplierName": "EAGLE & GLOBE*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z1H75***",
+"OrderAddressLine2": "BROMPTON SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5007",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.9,
+"Lon": 138.58,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000943",
+"SupplierName": "ELDER SMITH-G*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z1J46***",
+"OrderAddressLine2": "ADELAIDE SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5000",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.93,
+"Lon": 138.6,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000959",
+"SupplierName": "EUTECTIC (AUS*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z1429***",
+"OrderAddressLine2": "HOLDEN HILL SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5088",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.86,
+"Lon": 138.66,
+"Status": "9"
+},
+{
+
+"SupplierNo": "000W3",
+"SupplierName": "MICROWAVE CIRCUITS INC.",
+"OrderAddressLine1": "1611 KEMPER STREET",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "LYNCHBURG VIRGINIA UNITED STATE*",
+"OrderPostCode": "24501-2033",
+"OrderTelephone": "434-455-2800",
+"OrderContact": null,
+"OrderFax": "434-455-0291^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "001022",
+"SupplierName": "MOBIL OIL AUS*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZA968***",
+"OrderAddressLine2": "ADELAIDE SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5000",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.93,
+"Lon": 138.6,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001081",
+"SupplierName": "NAMCO INDUSTR*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZA696***",
+"OrderAddressLine2": "EDWARDSTOWN SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5039",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.97,
+"Lon": 138.58,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001082",
+"SupplierName": "NASHUA ADELAI*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZB847***",
+"OrderAddressLine2": "NORWOOD SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5067",
+"OrderTelephone": "(08) 362 0021",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.92,
+"Lon": 138.64,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001132",
+"SupplierName": "TUFFCO PTY LT*****CANCELLED*****",
+"OrderAddressLine1": "***LOCATION UNKNOWN***",
+"OrderAddressLine2": "PARAFIELD SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5106",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.79,
+"Lon": 138.64,
+"Status": "9"
+},
+{
+
+"SupplierNo": "0011N",
+"SupplierName": "HIRTENBERGER AG",
+"OrderAddressLine1": "LEOBERSDORFER STRASSE 31-33",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "HIRTENBERG . AT",
+"OrderPostCode": "A-2552",
+"OrderTelephone": "2256811840",
+"OrderContact": null,
+"OrderFax": "445681181807^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "001200",
+"SupplierName": "MCMILLAN DIST*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z0981***",
+"OrderAddressLine2": "MOORABBIN VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3189",
+"OrderTelephone": "(03)555 0599",
+"OrderContact": null,
+"OrderFax": "(03)555 3420^",
+"Lat": -37.93,
+"Lon": 145.04,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001227",
+"SupplierName": "NAPCO INTL INC",
+"OrderAddressLine1": "11055 EXCELSIOR BLVD",
+"OrderAddressLine2": "HOPKINS MINNESOTA USA",
+"OrderAddressLine3": null,
+"OrderPostCode": "55343-7464",
+"OrderTelephone": "952-931-2400",
+"OrderContact": null,
+"OrderFax": "952-931-2402^",
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "001283",
+"SupplierName": "AAB-K Q STORE",
+"OrderAddressLine1": "BLAMEY BKS",
+"OrderAddressLine2": "KAPOOKA NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2661",
+"OrderTelephone": "02 69210433",
+"OrderContact": null,
+"OrderFax": "02 92610430^",
+"Lat": -35.15,
+"Lon": 147.3,
+"Status": "7"
+},
+{
+
+"SupplierNo": "001300",
+"SupplierName": "DONAGHYS INDUSTRIES LTD",
+"OrderAddressLine1": "179 PAGES RD",
+"OrderAddressLine2": "ARANUI CHRISTCHURCH NZ",
+"OrderAddressLine3": null,
+"OrderPostCode": "8007",
+"OrderTelephone": "(03)-9834100",
+"OrderContact": null,
+"OrderFax": "(03)-9834191^",
+"Lat": 0,
+"Lon": 0,
+"Status": "7"
+},
+{
+
+"SupplierNo": "001316",
+"SupplierName": "JOHNSON & JOH*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z0302***",
+"OrderAddressLine2": "GREENWICH NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2065",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -33.83,
+"Lon": 151.2,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001359",
+"SupplierName": "EMAIL LTD PRO*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z2794***",
+"OrderAddressLine2": "SOUTH MELBOURNE VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3205",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.93,
+"Lon": 145.03,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00141",
+"SupplierName": "ROLLER BEARING COMPANY OF AMERI*",
+"OrderAddressLine1": "86 BENSON RD",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "MIDDLEBURY CT",
+"OrderPostCode": "06762-3215",
+"OrderTelephone": "203-758-8272",
+"OrderContact": null,
+"OrderFax": "203-758-8271^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "001434",
+"SupplierName": "A R C ENGINEE*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z1S64***",
+"OrderAddressLine2": "TOWNSVILLE QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4810",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -19.25,
+"Lon": 146.8,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00144",
+"SupplierName": "TE CONNECTIVITY NETWORKS, INC. *",
+"OrderAddressLine1": "1187 PARK PLACE",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "SHAKOPEE MN",
+"OrderPostCode": "55379-3817",
+"OrderTelephone": "802-753-1621",
+"OrderContact": null,
+"OrderFax": "802-447-3845^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "001463",
+"SupplierName": "C1BA-GEIGY AU*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z2741***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001472",
+"SupplierName": "JOHN DEERE PT*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZB419***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001484",
+"SupplierName": "COMMONWEALTH IND****DUPLICATE***",
+"OrderAddressLine1": "***USE ZB431***",
+"OrderAddressLine2": "ROCKLEA QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4106",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -27.53,
+"Lon": 153,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001502",
+"SupplierName": "EGG MARKETING*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZG692***",
+"OrderAddressLine2": "RED HILL QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4059",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -27.45,
+"Lon": 153.01,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00153",
+"SupplierName": "BEI SENSORS&SYSTEMS CO. INC",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "TUSTIN CA US",
+"OrderPostCode": "92780-7303",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "001555",
+"SupplierName": "IRVING JOHN A*****CANCELLED*****",
+"OrderAddressLine1": "***NO LonGER REQUIRED***",
+"OrderAddressLine2": "MOORVALE QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4105",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -27.53,
+"Lon": 153.03,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001717",
+"SupplierName": "ALCAN ALUMINI*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZB664***",
+"OrderAddressLine2": "WINGFIELD SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5013",
+"OrderTelephone": "08 457333",
+"OrderContact": null,
+"OrderFax": "08 2432619^",
+"Lat": -34.84,
+"Lon": 138.53,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001741",
+"SupplierName": "SIGMA PHARMAC*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z0766***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001748",
+"SupplierName": "BELL AND HOWE*****DUPLICATE*****",
+"OrderAddressLine1": "**USE ZB695**",
+"OrderAddressLine2": "HINDMARSH SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5007",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.9,
+"Lon": 138.58,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00175",
+"SupplierName": "ACME INDUSTRIAL COMPANY",
+"OrderAddressLine1": "441 MAPLE AVE",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "CARPENTERSVILLE IL UNITED STATE*",
+"OrderPostCode": "60110-1939",
+"OrderTelephone": "847-428-3911",
+"OrderContact": null,
+"OrderFax": "847-428-1820^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "001829",
+"SupplierName": "ICI AUSTRALIA*****DUPLICATE*PROG",
+"OrderAddressLine1": "***USE Z0015***",
+"OrderAddressLine2": "EAST MELBOURNE VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3002",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.82,
+"Lon": 144.99,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001921",
+"SupplierName": "AERO FLOUR C0*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZD719***",
+"OrderAddressLine2": "COTTESLOE WA",
+"OrderAddressLine3": null,
+"OrderPostCode": "6011",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -32,
+"Lon": 115.76,
+"Status": "9"
+},
+{
+
+"SupplierNo": "001951",
+"SupplierName": "F G P CO PTY *****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z3734***",
+"OrderAddressLine2": "CLEARVIEW SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5085",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.86,
+"Lon": 138.62,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00198",
+"SupplierName": "PRATT & WHITNEY CANADA CIE DIV *",
+"OrderAddressLine1": "1000 MARIE-VICTORIN BLVD",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "LonGUEUIL QC CANADA",
+"OrderPostCode": "J4J 1A1",
+"OrderTelephone": "450-647-7623",
+"OrderContact": null,
+"OrderFax": "450-647-2910^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "002038",
+"SupplierName": "HEWLETT PACKA*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZB985***",
+"OrderAddressLine2": "PARKSIDE SA",
+"OrderAddressLine3": null,
+"OrderPostCode": "5063",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.94,
+"Lon": 138.62,
+"Status": "9"
+},
+{
+
+"SupplierNo": "002096",
+"SupplierName": "PAINS WESSEX *****CANCELLED*****",
+"OrderAddressLine1": "***USE Z3487***",
+"OrderAddressLine2": "SOUTH BURNLEY VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3121",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.83,
+"Lon": 145.01,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00213",
+"SupplierName": "MSD INC.",
+"OrderAddressLine1": "700 ORANGE ST.",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "DARLINGTON SC US",
+"OrderPostCode": null,
+"OrderTelephone": "8433958500",
+"OrderContact": null,
+"OrderFax": "8433934123^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "002185",
+"SupplierName": "VIDEO SYSTEMS*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZY052***",
+"OrderAddressLine2": "BORONIA VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3155",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.86,
+"Lon": 145.28,
+"Status": "9"
+},
+{
+
+"SupplierNo": "002474",
+"SupplierName": "M S A AUST PT*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z1028***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "002578",
+"SupplierName": "TYRESOLES AVI*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z4974***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00261",
+"SupplierName": "GENERAL ELECTRIC CO",
+"OrderAddressLine1": ".",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "CHICAGO HEIGHTS IL US",
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "7"
+},
+{
+
+"SupplierNo": "002673",
+"SupplierName": "BARTLETT INDU*****DUPLICATE*PROG",
+"OrderAddressLine1": "***USE ZC621***",
+"OrderAddressLine2": "RICHMOND VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3121",
+"OrderTelephone": "(03) 428 4063",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.83,
+"Lon": 145.01,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00268",
+"SupplierName": "CEF INDUSTRIES INC",
+"OrderAddressLine1": "320 SOUTH CHURCH ST.",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "ADDISON IL US",
+"OrderPostCode": null,
+"OrderTelephone": "6306282594",
+"OrderContact": null,
+"OrderFax": "6306281386^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "002699",
+"SupplierName": "LAMSON ENGINE*****DUPLICATE*PROG",
+"OrderAddressLine1": "***USE ZC647***",
+"OrderAddressLine2": "BANKSTOWN NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2200",
+"OrderTelephone": "(02) 708 3000",
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -33.92,
+"Lon": 151.03,
+"Status": "9"
+},
+{
+
+"SupplierNo": "002704",
+"SupplierName": "ACROW VIC PTY*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z0840***",
+"OrderAddressLine2": "MOORABIN VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3189",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.93,
+"Lon": 145.04,
+"Status": "9"
+},
+{
+
+"SupplierNo": "002714",
+"SupplierName": "BEAZLEY & BRU*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z1W33***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "002724",
+"SupplierName": "CUMMINS DIESE*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZC672***",
+"OrderAddressLine2": "DR",
+"OrderAddressLine3": "SCORESBY VIC",
+"OrderPostCode": "3179",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.86,
+"Lon": 145.26,
+"Status": "9"
+},
+{
+
+"SupplierNo": "002786",
+"SupplierName": "OCE-REPROGRAP*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z1245***",
+"OrderAddressLine2": "ARTARMON NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2064",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -33.81,
+"Lon": 151.19,
+"Status": "9"
+},
+{
+
+"SupplierNo": "002787",
+"SupplierName": "ABDIP (VIC) P*****DUPLICATE*PROG",
+"OrderAddressLine1": "***USE ZC735***",
+"OrderAddressLine2": "MORDIALLOC VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3195",
+"OrderTelephone": "(03) 580 2022",
+"OrderContact": null,
+"OrderFax": "(03)587 1754^",
+"Lat": -38.03,
+"Lon": 145.1,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00288",
+"SupplierName": "CURTISS-WRIGHT CONTROLS",
+"OrderAddressLine1": "INTEGRATED SENSING INC.",
+"OrderAddressLine2": "5875 OBISPO AVE",
+"OrderAddressLine3": "LonG BEACH CA",
+"OrderPostCode": "90805-3715",
+"OrderTelephone": "562-531-6500",
+"OrderContact": null,
+"OrderFax": "562-531-4020^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "002884",
+"SupplierName": "ANAX PTY LTD *****CANCELLED*****",
+"OrderAddressLine1": "***USE ZC301***",
+"OrderAddressLine2": "BOWEN HILLS QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4006",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -27.44,
+"Lon": 153.04,
+"Status": "9"
+},
+{
+
+"SupplierNo": "002921",
+"SupplierName": "FIRE FIGHTING*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z4867***",
+"OrderAddressLine2": "ERMINGTON NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2115",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -33.81,
+"Lon": 151.05,
+"Status": "9"
+},
+{
+
+"SupplierNo": "002929",
+"SupplierName": "HALL-THERMOTA*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZW720***",
+"OrderAddressLine2": "EAGLE FARM QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4007",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -27.43,
+"Lon": 153.06,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00293",
+"SupplierName": "BEAVER PRECISION PRODUCTS INC",
+"OrderAddressLine1": "1970, E. BIG BEAVER",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "TROY MI US",
+"OrderPostCode": "48099",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": 42.58760070800781,
+"Lon": -83.17369842529297,
+"Status": "7"
+},
+{
+
+"SupplierNo": "002939",
+"SupplierName": "KAYELL PHOTOG*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z4001***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "002L0",
+"SupplierName": "CAMP NOBLE, INC. DBA 3-D MARKET*",
+"OrderAddressLine1": "16812 EL ZORRO VISTA",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "RANCHO SANTA FE CA UNITED STATE*",
+"OrderPostCode": "92067-0000",
+"OrderTelephone": "8888096105",
+"OrderContact": null,
+"OrderFax": "8587569415^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "002M0",
+"SupplierName": "MATHEWS ASSOCIATES INC",
+"OrderAddressLine1": "220 POWER CT",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "SANFORD FL UNITED STATES",
+"OrderPostCode": "32771-9530",
+"OrderTelephone": "407-323-3390",
+"OrderContact": null,
+"OrderFax": "407-323-3115^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003017",
+"SupplierName": "BOUSTEAD WOOD*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZN578***",
+"OrderAddressLine2": "SILVERWATER NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2141",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -33.87,
+"Lon": 151.03,
+"Status": "9"
+},
+{
+
+"SupplierNo": "003018",
+"SupplierName": "HMAS ALBATROSS",
+"OrderAddressLine1": "NOWRANSW",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": "2540",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": "02-44211770^",
+"Lat": -34.89,
+"Lon": 150.53,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003020",
+"SupplierName": "ADAMS WILLIAM*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZA045***",
+"OrderAddressLine2": "FOOTSCRAY VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3011",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.8,
+"Lon": 144.9,
+"Status": "9"
+},
+{
+
+"SupplierNo": "003025",
+"SupplierName": "AUSTRAL PLYWO*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z4642***",
+"OrderAddressLine2": "TENNYSON QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4105",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -27.53,
+"Lon": 153.03,
+"Status": "9"
+},
+{
+
+"SupplierNo": "003026",
+"SupplierName": "HMAS CERBERUS",
+"OrderAddressLine1": "WESTERNPORT VIC",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": "3920",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": "03-59839805^",
+"Lat": 0,
+"Lon": 0,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003031",
+"SupplierName": "BROWNBUILT LT*****CANCELLED*****",
+"OrderAddressLine1": "***USE ZC214***",
+"OrderAddressLine2": "SALISBURY QLD",
+"OrderAddressLine3": null,
+"OrderPostCode": "4107",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -27.54,
+"Lon": 153.03,
+"Status": "9"
+},
+{
+
+"SupplierNo": "003034",
+"SupplierName": "HMAS CRESWELL",
+"OrderAddressLine1": "JERVIS BAY NSW",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": "2540",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": "02-44421175^",
+"Lat": -34.89,
+"Lon": 150.53,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003050",
+"SupplierName": "HMAS HARMAN",
+"OrderAddressLine1": "HMAS HARMAN",
+"OrderAddressLine2": "CANBERRA",
+"OrderAddressLine3": "ACT 2600",
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003066",
+"SupplierName": "1 JSU",
+"OrderAddressLine1": "MAIN Q STORE",
+"OrderAddressLine2": "GALLIPOLI BKS",
+"OrderAddressLine3": "ENOGGERA",
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003077",
+"SupplierName": "HMAS KUTTABUL",
+"OrderAddressLine1": "WYLDE ST.,",
+"OrderAddressLine2": "POTTS POINT NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2011",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -33.87,
+"Lon": 151.23,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003080",
+"SupplierName": "16 AD REGT RPS",
+"OrderAddressLine1": "WOODSIDE BARRACKS",
+"OrderAddressLine2": "WOODSIDE",
+"OrderAddressLine3": "S.A.",
+"OrderPostCode": "5244",
+"OrderTelephone": "(08) 8389-0286",
+"OrderContact": null,
+"OrderFax": "(08) 8389-0369^",
+"Lat": -34.92,
+"Lon": 138.9,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003100",
+"SupplierName": "4 CSSB RPS",
+"OrderAddressLine1": "OAKLEIGH BARRACKS",
+"OrderAddressLine2": "1318 NORTH RD",
+"OrderAddressLine3": "OAKLEIGH SOUTH, VIC",
+"OrderPostCode": "3167",
+"OrderTelephone": "03 95503958",
+"OrderContact": null,
+"OrderFax": "03 95503921^",
+"Lat": -37.93,
+"Lon": 145.1,
+"Status": "7"
+},
+{
+
+"SupplierNo": "003116",
+"SupplierName": "131 LOC BTY RPS",
+"OrderAddressLine1": "MAIN Q STORE",
+"OrderAddressLine2": "GALLIPOLI BKS",
+"OrderAddressLine3": "ENOGGERA",
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003126",
+"SupplierName": "145 SIG SQN RPS",
+"OrderAddressLine1": "VINCENT LINES",
+"OrderAddressLine2": "HOLSWORTHY BARRACKS",
+"OrderAddressLine3": "HOLSWORTHY, NSW",
+"OrderPostCode": "2173",
+"OrderTelephone": "(02) 9600-1806",
+"OrderContact": null,
+"OrderFax": "(02) 9600-2894^",
+"Lat": -33.95,
+"Lon": 150.95,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003158",
+"SupplierName": "HMAS PENGUIN",
+"OrderAddressLine1": "BALMORAL NSW",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": "2091",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": 0,
+"Lon": 0,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003166",
+"SupplierName": "HMAS PLatYPUS",
+"OrderAddressLine1": "NEUTRAL BAY",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": "2089",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -33.83,
+"Lon": 151.22,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003200",
+"SupplierName": "8 CSSB RPS",
+"OrderAddressLine1": "MILITARY ROAD",
+"OrderAddressLine2": "ADAMSTOWN NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2289",
+"OrderTelephone": "02 49793607",
+"OrderContact": null,
+"OrderFax": "02 49793682^",
+"Lat": -32.93,
+"Lon": 151.73,
+"Status": "7"
+},
+{
+
+"SupplierNo": "003204",
+"SupplierName": "HMAS WATERHEN",
+"OrderAddressLine1": "WAVERTON NSW",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": "2060",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -33.84,
+"Lon": 151.19,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003205",
+"SupplierName": "BINKS-BURROWS*****DUPLICATE*****",
+"OrderAddressLine1": "***USE Z4096***",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": null,
+"Lon": null,
+"Status": "9"
+},
+{
+
+"SupplierNo": "003208",
+"SupplierName": "BOWTHORPE AUST****CANCELLED*****",
+"OrderAddressLine1": "****USE Z3663****",
+"OrderAddressLine2": "CARINGBAH NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2229",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -34.04,
+"Lon": 151.12,
+"Status": "9"
+},
+{
+
+"SupplierNo": "003209",
+"SupplierName": "BOWTHORPE AUS*****DUPLICATE*****",
+"OrderAddressLine1": "***USE ZD158***",
+"OrderAddressLine2": "SOUTH MELBOURNE VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3205",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.93,
+"Lon": 145.03,
+"Status": "9"
+},
+{
+
+"SupplierNo": "003210",
+"SupplierName": "4 CSSB FSC",
+"OrderAddressLine1": "MAYGAR BARRACKS",
+"OrderAddressLine2": "CAMP RD",
+"OrderAddressLine3": "BROADMEADOWS, VIC",
+"OrderPostCode": "3047",
+"OrderTelephone": "03 93581334",
+"OrderContact": null,
+"OrderFax": "03 93581273^",
+"Lat": -37.68,
+"Lon": 144.92,
+"Status": "7"
+},
+{
+
+"SupplierNo": "003212",
+"SupplierName": "HMAS WATSON",
+"OrderAddressLine1": "WATSONS BAY NSW",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": "2030",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -33.87,
+"Lon": 151.28,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003215",
+"SupplierName": "A SQN 10 LHR RPS STORE",
+"OrderAddressLine1": "IRWIN BRKS",
+"OrderAddressLine2": "KARRAKATTA WA",
+"OrderAddressLine3": null,
+"OrderPostCode": "6010",
+"OrderTelephone": "08 9383 6360",
+"OrderContact": null,
+"OrderFax": "08 9383 6351^",
+"Lat": -31.98,
+"Lon": 115.78,
+"Status": "7"
+},
+{
+
+"SupplierNo": "003239",
+"SupplierName": "HMAS COONAWARRA",
+"OrderAddressLine1": "DARWIN NT",
+"OrderAddressLine2": null,
+"OrderAddressLine3": null,
+"OrderPostCode": "0820",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": "08-89804434^",
+"Lat": -12.41,
+"Lon": 130.86,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003251",
+"SupplierName": "NAMCO FURNITU*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z0140***",
+"OrderAddressLine2": "HARRISFIELD VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3174",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.97,
+"Lon": 145.18,
+"Status": "9"
+},
+{
+
+"SupplierNo": "003273",
+"SupplierName": "SMITH FAMILY *****CANCELLED*****",
+"OrderAddressLine1": "***USE Z5091***",
+"OrderAddressLine2": "VILLAWOOD NSW",
+"OrderAddressLine3": null,
+"OrderPostCode": "2163",
+"OrderTelephone": "02-7257555",
+"OrderContact": "JOHN BULL",
+"OrderFax": "02-7283381^",
+"Lat": -33.88,
+"Lon": 150.96,
+"Status": "9"
+},
+{
+
+"SupplierNo": "003298",
+"SupplierName": "HMAS STIRLING",
+"OrderAddressLine1": "HMAS STIRLING",
+"OrderAddressLine2": "GARDEN ISLAND",
+"OrderAddressLine3": "WESTERN AUSTRALIA",
+"OrderPostCode": null,
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": "08-95283854^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+},
+{
+
+"SupplierNo": "003391",
+"SupplierName": "EDUCATIONAL W*****CANCELLED*****",
+"OrderAddressLine1": "***USE Z4403***",
+"OrderAddressLine2": "SPRINGVALE VIC",
+"OrderAddressLine3": null,
+"OrderPostCode": "3171",
+"OrderTelephone": null,
+"OrderContact": null,
+"OrderFax": null,
+"Lat": -37.95,
+"Lon": 145.16,
+"Status": "9"
+},
+{
+
+"SupplierNo": "00341",
+"SupplierName": "LEXAN INDUSTRIES INC",
+"OrderAddressLine1": "40 DREXEL DRIVE",
+"OrderAddressLine2": null,
+"OrderAddressLine3": "BAY SHORE NY US",
+"OrderPostCode": null,
+"OrderTelephone": "6314347586",
+"OrderContact": null,
+"OrderFax": "6314347589^",
+"Lat": null,
+"Lon": null,
+"Status": "3"
+}
+]

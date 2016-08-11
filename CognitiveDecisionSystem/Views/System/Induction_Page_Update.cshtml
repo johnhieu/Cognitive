@@ -1,0 +1,343 @@
+﻿@{
+    ViewBag.Title = "Induction_Page_Update";
+    Layout = "~/Views/Shared/_Site1.cshtml";
+}
+
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<!--<link rel="stylesheet" href="CSS/jquery.mobile-1.4.5.min.css" /> -->
+<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+<script type="text/javascript">
+        $.getJSON("../DataFiles/ResultTable_Induction.json", function (data) {
+
+        $(function () {
+            ResultJsonObj = data;
+
+            var dynatable = $('#RIPriorityTable').dynatable({
+                dataset: {
+                    records: ResultJsonObj[0],
+                    sorts: { 'criticality': -1 }
+                },
+                writers: {
+                    'action': function (record) {
+                        if (record.computedPriority.toString() == 'High')
+                            return '<div class="circleRed"></div>';
+                        else if (record.computedPriority.toString() == 'Medium')
+                            return '<div class="circleOrange"></div>';
+                        else
+                            return '<div class="circleGreen"></div>';
+                    }
+                },
+
+                features: {
+                    paginate: true,
+                    search: false,
+                    show: true,
+                    recordCount: true,
+                    perPageSelect: false,
+                    pushState: false,
+                    sort: true
+                }
+            }).data("dynatable");
+
+            dynatable.settings.dataset.originalRecords = ResultJsonObj[0];
+            dynatable.paginationPerPage.set(20);
+            //dynatable.sortedByColumnValue("Criticality");
+            dynatable.process();
+
+            ////////////////////////RiPri Table on click///////////////////////
+
+
+            $('body').on('click', '#RIPriorityTable tr', function (ev) {
+
+                var tablerow = document.getElementById('RIPriorityTable').rows[($(this).index() + 1)],
+                cellvalue = tablerow.cells[0].innerHTML;
+                itemHeaderID.innerHTML = "<i class=\"ion-chevron-right\"></i>" + "&nbsp;&nbsp;&nbsp;" + cellvalue + "   -   " + tablerow.cells[1].innerHTML;
+                // $("#RIPriorityDIV").hide();
+                setStockCodeSelection(cellvalue, tablerow);
+
+            });
+
+        });
+        });
+        //});
+        function setStockCodeSelection(stockCode, table) {
+            var selected = $(table).hasClass("highlight");
+            $("#RIPriorityTable tr").removeClass("highlight");
+            $("#RIPriorityTable tr").css('background-color', '#FFFFFF');
+            $("#RIPriorityTable tr").css('color', '#030303');
+
+
+            if (!selected) {
+                $(table).addClass("highlight");
+                $(table).css('background-color', '#e7e7e7');
+                $(table).css('color', '#000000');
+            }
+
+
+
+            /////Get Stock details Data////////////////////////////////////////
+            var dynatable2 = $('#SCodeSummaryTable').dynatable({
+                dataset: {
+                    records: ResultJsonObj[1][0][stockCode][0]
+                },
+                features: {
+                    //paginate: false,
+                    search: false,
+                    show: true,
+                    recordCount: false,
+                    perPageSelect: false,
+                    pushState: false,
+                    paginate: false
+                }
+            }).data("dynatable");
+
+            dynatable2.settings.dataset.originalRecords = ResultJsonObj[1][0][stockCode][0];
+            dynatable2.paginationPerPage.set(20);
+            dynatable2.process();
+
+            $("#img1SD").attr("src", "../Images/StockDetails/" + ResultJsonObj[1][0][stockCode][1][0] + ".jpg");
+            $("#img2SD").attr("src", "../Images/StockDetails/" + ResultJsonObj[1][0][stockCode][1][1] + ".jpg");
+            //////////////////////////Adding decisions///////////////////////////////////////////
+
+            switch (ResultJsonObj[1][0][stockCode][2][0]['Str_BestDec']) {
+                case 'B':
+                    document.getElementById('lblDec1').innerHTML = 'Buy';
+                    document.getElementById('lblDec2').innerHTML = 'Repair';
+                    document.getElementById('lblDec3').innerHTML = 'Transfer';
+
+                    document.getElementById('lblDec1Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToBuy'];
+                    document.getElementById('lblDec2Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToRepair'];
+                    document.getElementById('lblDec3Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToTransfer'];
+
+                    document.getElementById('lblCost').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_PurchasingCost'];
+                    document.getElementById('lblLTime').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_PurchasingLTime'];
+                    document.getElementById('lblBudget').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_Budget'];
+                    break;
+                case 'R':
+                    document.getElementById('lblDec2').innerHTML = 'Buy';
+                    document.getElementById('lblDec1').innerHTML = 'Repair';
+                    document.getElementById('lblDec3').innerHTML = 'Transfer';
+
+                    document.getElementById('lblDec2Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToBuy'];
+                    document.getElementById('lblDec1Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToRepair'];
+                    document.getElementById('lblDec3Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToTransfer'];
+
+                    document.getElementById('lblCost').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_RepairCost'];
+                    document.getElementById('lblLTime').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_RepairLTime'];
+                    document.getElementById('lblBudget').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_Budget'];
+                    break;
+                case 'T':
+                    document.getElementById('lblDec2').innerHTML = 'Buy';
+                    document.getElementById('lblDec3').innerHTML = 'Repair';
+                    document.getElementById('lblDec1').innerHTML = 'Transfer';
+
+                    document.getElementById('lblDec2Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToBuy'];
+                    document.getElementById('lblDec3Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToRepair'];
+                    document.getElementById('lblDec1Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToTransfer'];
+
+                    document.getElementById('lblCost').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_TransferCost'];
+                    document.getElementById('lblLTime').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_TransferLTime'];
+                    document.getElementById('lblBudget').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_Budget'];
+                    break;
+                default:
+                    document.getElementById('lblDec1').innerHTML = 'Buy';
+                    document.getElementById('lblDec2').innerHTML = 'Repair';
+                    document.getElementById('lblDec3').innerHTML = 'Transfer';
+
+                    document.getElementById('lblDec1Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToBuy'];
+                    document.getElementById('lblDec2Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToRepair'];
+                    document.getElementById('lblDec3Value').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_ToTransfer'];
+
+                    document.getElementById('lblCost').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_TransferCost'];
+                    document.getElementById('lblLTime').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_TransferLTime'];
+                    document.getElementById('lblBudget').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_Budget'];
+                    break;
+
+            }
+
+            document.getElementById('lblCriticality').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_Criticality'];
+            document.getElementById('lblLocation').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_NearestLocationID'];
+            document.getElementById('lblCURate').innerHTML = ResultJsonObj[1][0][stockCode][2][0]['Str_CatchupRate'];
+            /////////////////////////////////////////////////////////////////////////////////////
+            $("#StockDetailsDiv").css("visibility", "visible");
+            $("#divDSupportList").css("visibility", "visible");
+
+            ///////////////////////////////////
+            //Set selected stock code hidden field
+            //$("#SelectedSCode").val(stockCode);
+            if (document.getElementById('lblDec1Value').innerHTML != 'Unavailable') {
+                //$("#iframeMasterPopup").attr('src', 'MasterDecisionPopUp.aspx?SSCode=' + stockCode);
+                $("#anchorToBuy").css('background-color', '#71AF5A');
+                $("#DecisionSummary").attr('src', 'DecisionSummary_Page_Update?SSCode=' + stockCode);
+
+
+            }
+
+            $("#DSupportList").css("visibility", "visible");
+            $("#UserComments").css("visibility", "visible");
+            $('#lblSelectedItem').text(stockCode);
+
+
+        }
+</script>
+<script>
+        $(function () {
+            $('#anchorToBuy').click(function () {
+                $('#DecisionSummaryLink')[0].click();
+            });
+        });
+
+</script>
+
+
+<div id="induction" class="container-fluid">
+    <div class="row">
+        <div id="RIPriorityDIV" class="col-md-6">
+            <h4>RI Priority</h4>
+            <table id="RIPriorityTable" class="table table-hover">
+                <thead>
+                <th>Stock Code</th>
+                <th>Item Name</th>
+                <th>Computed Priority</th>
+                <th>Action Codes</th>
+                <th>Criticality</th>
+                <th>Demand Priority</th>
+                <th>Action</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="StockDetailsDiv" class="col-md-4">
+
+            <h4>Stock Details</h4>
+            <div class="row">
+                <div class="col-md-8">
+                    <table id="SCodeSummaryTable" class="table nohover">
+                        <thead>
+                        <th>Category</th>
+                        <th>Details</th>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                </div>
+                <div class="col-md-4">
+                    <img id="img1SD" src="#" style="width: 200px; height: 150px" />
+
+                    <img id="img2SD" src="#" style="width: 200px; height: 150px" />
+                </div>
+            </div>
+        </div>
+        <div id="DSupportList" class="col-md-2">
+
+            <div class="content">
+                <h4>Recommendations</h4>
+                <ul>
+
+                    <li class="active">
+                        <a id="anchorToBuy" href="#">
+                            <div>
+                                <label id="lblDec1" class="mainLabel" style="font-weight: bold;"></label><br />
+                                <label id="lblDec1Value" style="font-weight: normal;"></label>
+                                <i class="ion-chevron-right"></i>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+
+                        <div>
+                            <label id="lblDec2" class="mainLabel" style="font-weight: bold;"></label><br />
+                            <label id="lblDec2Value" style="font-weight: normal;"></label>
+                        </div>
+
+                    </li>
+                    <li>
+                        <!-- <a id="anchorToTransfer" href="#" style="background-color:#ADCBFF">
+                            -->
+                        <div>
+                            <label id="lblDec3" class="mainLabel" style="font-weight: bold;"></label><br />
+                            <label id="lblDec3Value" style="font-weight: normal;"></label>
+                        </div>
+                        <!--
+                        </a>-->
+                    </li>
+                    <li>
+                        <div>
+                            <label id="Label17" class="mainLabel" style="font-weight: bold;">Criticality</label><br />
+                            <label id="lblCriticality" style="font-weight: normal;"></label>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <label id="Label9" class="mainLabel" style="font-weight: bold;">Nearest one</label><br />
+                            <label id="lblLocation" style="font-weight: normal;"></label>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <label id="Label11" class="mainLabel" style="font-weight: bold;">Cost</label><br />
+                            <label id="lblCost" style="font-weight: normal;"></label>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <label id="Label13" class="mainLabel" style="font-weight: bold;">Lead Time</label><br />
+                            <label id="lblLTime" style="font-weight: normal;"></label>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <label id="Label1" class="mainLabel" style="font-weight: bold;">Avail. Budget</label><br />
+                            <label id="lblBudget" style="font-weight: normal;"></label>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <label id="Label15" class="mainLabel" style="font-weight: bold;">Catch up rate</label><br />
+                            <label id="lblCURate" style="font-weight: normal;"></label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="UserComments" class="col-md-6" style="float:right;visibility:hidden">
+            <p>
+                <strong>Your Decision:</strong><br />
+                <select id="DDListDecision" style="width: 150px;">
+                    <option value="To Buy" selected>To Buy</option>
+                    <option value="To Repair">To Repair</option>
+                    <option value="To Transfer">To Transfer</option>
+                </select>
+                <br />
+                <strong>Selected Item:</strong><br />
+                <label id="lblSelectedItem"></label>
+                <br />
+                <strong>Your Name:</strong><br />
+                <input type="text" rows="60" style="width:150px; height: 40px;" id="NameArea1" />
+
+                <br />
+                <strong>Your Comments:</strong><br />
+                <input type="text" id="commentArea1" rows="60" style="width: 360px; height: 70px;" />
+
+
+            </p>
+            <button id="btnSubmitComment" onclick="btnSubmitComment_Click()">Submit</button>
+
+        </div>
+    </div>
+</div>
+<!-- Iframe Collection -->
+
+
+
+<a href="#" data-featherlight="#DecisionSummary" id="DecisionSummaryLink" style="visibility: hidden;">Decision summary</a>
+<iframe class="lightbox iframe" src="" id="DecisionSummary" scrolling="yes" seamless="seamless"></iframe>
+
+
+
+
+

@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "DecisionSummary_Page_Update";
+    string SSCode = ViewBag.SSCode;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1">
+    <title>Decision Summary Page</title>
+    <meta charset="UTF-8" />
+
+    <link href="../Content/CSS/faceplate_stylesheet.css?version=4" rel="stylesheet" />
+    <link href="../Content/CSS/boostrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/CSS/jquery.dynatable.css" rel="stylesheet" />
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="../Scripts/js/jquery.dynatable.js"></script>
+    <script src="../Scripts/js/bootstrap.min.js"></script>
+    <script src="../Scripts/js/highcharts.js"></script>
+    <script src="../Scripts/js/proj4.js"></script>
+    <script src="../Scripts/js/map.js"></script>
+    <script src="../Scripts/js/exporting.js"></script>
+    <script src="../Scripts/js/au-all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="../Scripts/js/DecTree.js"></script>
+
+</head>
+<body>
+    <form id="form1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <div id="DivDecSummary" class="row">
+                        <h4> Decision Summary</h4>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label id="Label1" style="font-weight:bold; font-size: medium;">Reason</label>:
+                                    <!--                        <asp:Label ID="lblReason" runat="server" Text="" data-trigger="hover" Font-Size="Medium"></asp:Label>-->
+                                    <a id="lblReason" class="btn" href="#" rel="popover" style:"white-space:nowrap;" data-placement="bottom" data-original-title="Data" data-trigger="hover">Popover with data-trigger</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table id="DSummaryTable" class="table">
+                                        <thead>
+                                        <th>Summary</th>
+                                        <th>Value</th>
+
+                                        </thead>
+                                        <tbody class="tableHeaderDataStyle"></tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="LocationContainer" class="row">
+                    </div>
+                </div>
+                <div id="DecisionTreeDiv" class="col-md-8">
+                    <h4>Decision Tree</h4>
+
+                    <div id="DecisionTreeTD"></div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+        <script>
+            $.getJSON("../DataFiles/ResultTable_DecisionSummary.json", function (data) {
+                $.getJSON("../DataFiles/DecisionJusti_DecisionSummary.json", function (data1) {
+
+                    //var selectedCode = '0000'+ViewBag.SSCode;
+                    var selectedCode = "@SSCode";
+                    
+                    var ResultJsonObj = data[selectedCode];
+                    var decisionJustification2 = data1[selectedCode];
+                    createPopUp(decisionJustification2);
+
+                    /////Dec tree////
+                    loadDecTree(ResultJsonObj[2][0]);
+                    //  createChartForPopUp();
+                    ////////////Dsummary table
+                    $(function () {
+                        var dynatable = $('#DSummaryTable').dynatable({
+                            dataset: {
+                                records: ResultJsonObj[0][0]
+                            },
+                            features: {
+                                //paginate: false,
+                                search: false,
+                                show: true,
+                                recordCount: false,
+                                perPageSelect: false,
+                                pushState: false,
+                                paginate: false
+
+                            }
+                        }).data("dynatable");
+
+                        dynatable.settings.dataset.originalRecords = ResultJsonObj[0][0];
+                        dynatable.process();
+
+                        document.getElementById('lblReason').innerHTML = ResultJsonObj[0][1][0];
+                    });
+
+
+                    ///////////Location
+
+
+                    $(function () {
+
+                        // Initiate the chart
+                        $('#LocationContainer').highcharts('Map', {
+                            chart: {
+                                borderWidth: 0,
+                                shadow: false,
+                                backgroundColor: 'transparent'
+                                //width: 1000
+                            },
+                            title: {
+                                text: 'Demand/Suppliers Locations'
+                            },
+
+                            mapNavigation: {
+                                enabled: true
+                            },
+
+                            tooltip: {
+                                headerFormat: '',
+                                pointFormat: '<b>{point.name}</b><br>"Lat": {point."Lat"}, "Lon": {point."Lon"}'
+                            },
+
+                            series: [{
+                                // Use the gb-all map with no data as a basemap
+                                mapData: Highcharts.maps['countries/au/au-all'],
+                                name: 'Basemap',
+                                borderColor: '#A0A0A0',
+                                nullColor: 'rgba(200, 200, 200, 0.3)',
+                                showInLegend: false
+                            }, {
+                                name: 'Separators',
+                                type: 'mapline',
+                                data: Highcharts.geojson(Highcharts.maps['countries/au/au-all'], 'mapline'),
+                                color: '#707070',
+                                showInLegend: false,
+                                enableMouseTracking: false
+                            }, {
+                                "type": "mappoint",
+                                "name": "Demand",
+                                "color": "red",
+                                "data": ResultJsonObj[1][0]
+                            },
+                                {
+                                    "type": "mappoint",
+                                    "name": "Supplier",
+                                    "color": "Blue",
+                                    "data": ResultJsonObj[1][1]
+                                }
+                            ]
+
+
+                        });
+                    });
+                });
+            });
+
+            function createPopUp(dj) {
+
+                var description = "Current Year: " + dj[0]['Int_CurrentYear'] + " (Asset life:" + dj[0]['Int_AssetLife'] + ")" + "<br> Number of Maintenance: " + dj[0]['Int_No_Of_Maint'] + "<br> Average breakdowns per year: " + dj[0]['FAvgBreakDownPerYear'] + "<br> Maintenance report rating: " + dj[0]['Int_MainreportRating'] + "<br> Required in days: " + dj[0]['FReqInDays'];
+               // $('#lblReason').popover({ html: true, content: description });
+            }
+
+        </script>
+    </form>
+</body>
+</html>

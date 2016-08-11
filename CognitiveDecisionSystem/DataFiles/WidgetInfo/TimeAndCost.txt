@@ -1,0 +1,30 @@
+﻿ <div class="panel panel-default lobipanel col-lg-2" id="Time and Cost"  data-sortable="true">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h6>Time & Cost</h6>
+                </div>
+            </div>
+            <!--<div class="col-lg-2">
+                -->
+                <div class="panel-body">
+                    <div class="row">
+                        <div id="leadtime" class="col-lg-6 center">
+                            <h4>Lead time (Weeks):</h4>
+                            <br />
+                            <br />
+                            <label id="AvgLeadTime">Loading</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="cost" class="col-lg-6 center">
+                            <h4>Cost (Dollars):</h4>
+                            <br />
+                            <br />
+                        
+                            <label id="AvgCost">Loading</label>
+                        </div>
+                    </div>
+                </div>
+                <!--
+            </div>-->
+        </div>

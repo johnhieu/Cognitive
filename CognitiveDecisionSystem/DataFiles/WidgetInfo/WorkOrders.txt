@@ -1,0 +1,22 @@
+﻿<div class="panel panel-default lobipanel col-lg-4" id="Work Orders" data-sortable="true">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>Work Orders</h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <!--<div class="col-lg-4">
+                        -->
+                        <h4>Work Orders</h4>
+                        <table id="WorkOrders" class="table">
+                            <thead>
+                            <th data-dynatable-column="WorkOrderNumber">Work Order Number</th>
+                            <th data-dynatable-column="WorkOrderType">Work Order Type</th>
+                            <th data-dynatable-column="CreationDate">Date</th>
+                            <th data-dynatable-column="ActualMaterialCost">Total Costs</th>
+                            <th data-dynatable-column="ActualLabourHours">Repair Time</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>

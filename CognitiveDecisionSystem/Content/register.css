@@ -1,0 +1,21 @@
+﻿#register-section
+{
+    position:relative;
+    height: auto;
+    margin: auto;
+    margin-bottom: 50px;
+}
+#panel
+{
+    margin: auto;
+    margin-top: 50px;
+    width: 500px;
+    border: 1px solid grey;
+    height: auto;
+}
+.field-validation-error
+{
+    color: red;
+    font-weight: bold;
+    padding-top: 1px;
+}

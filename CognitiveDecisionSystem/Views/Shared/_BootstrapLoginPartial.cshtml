@@ -1,0 +1,13 @@
+﻿@Styles.Render("~/bundles/partial")
+@if (Request.IsAuthenticated)
+{
+    
+
+}
+else
+{
+   <li>
+        <img style="margin-top: 1px;" src='https://secure.gravatar.com/avatar/?s=46&#038;d=mm&#038;r=pg' srcset='https://secure.gravatar.com/avatar/?s=92&amp;d=mm&amp;r=pg 2x'
+             class='avatar avatar-46 photo avatar-default'  height='50' width='50' /> <font style="color: white">&nbsp; Anoynomous</font>
+    </li>
+}

@@ -1,0 +1,302 @@
+﻿{"0000123":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 2718,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "repairs_per_year": {
+         "buckets": [
+            {
+               "key_as_string": "2008-01-01T00:00:00.000Z",
+               "key": 1199145600000,
+               "doc_count": 6
+            },
+            {
+               "key_as_string": "2009-01-01T00:00:00.000Z",
+               "key": 1230768000000,
+               "doc_count": 134
+            },
+            {
+               "key_as_string": "2010-01-01T00:00:00.000Z",
+               "key": 1262304000000,
+               "doc_count": 327
+            },
+            {
+               "key_as_string": "2011-01-01T00:00:00.000Z",
+               "key": 1293840000000,
+               "doc_count": 419
+            },
+            {
+               "key_as_string": "2012-01-01T00:00:00.000Z",
+               "key": 1325376000000,
+               "doc_count": 532
+            },
+            {
+               "key_as_string": "2013-01-01T00:00:00.000Z",
+               "key": 1356998400000,
+               "doc_count": 588
+            },
+            {
+               "key_as_string": "2014-01-01T00:00:00.000Z",
+               "key": 1388534400000,
+               "doc_count": 645
+            },
+            {
+               "key_as_string": "2015-01-01T00:00:00.000Z",
+               "key": 1420070400000,
+               "doc_count": 67
+            }
+         ]
+      }
+   }
+}
+,
+"0000655":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 544,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "repairs_per_year": {
+         "buckets": [
+            {
+               "key_as_string": "2009-01-01T00:00:00.000Z",
+               "key": 1230768000000,
+               "doc_count": 5
+            },
+            {
+               "key_as_string": "2010-01-01T00:00:00.000Z",
+               "key": 1262304000000,
+               "doc_count": 75
+            },
+            {
+               "key_as_string": "2011-01-01T00:00:00.000Z",
+               "key": 1293840000000,
+               "doc_count": 97
+            },
+            {
+               "key_as_string": "2012-01-01T00:00:00.000Z",
+               "key": 1325376000000,
+               "doc_count": 97
+            },
+            {
+               "key_as_string": "2013-01-01T00:00:00.000Z",
+               "key": 1356998400000,
+               "doc_count": 107
+            },
+            {
+               "key_as_string": "2014-01-01T00:00:00.000Z",
+               "key": 1388534400000,
+               "doc_count": 142
+            },
+            {
+               "key_as_string": "2015-01-01T00:00:00.000Z",
+               "key": 1420070400000,
+               "doc_count": 21
+            }
+         ]
+      }
+   }
+}
+,
+"0000678":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 274,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "repairs_per_year": {
+         "buckets": [
+            {
+               "key_as_string": "2007-01-01T00:00:00.000Z",
+               "key": 1167609600000,
+               "doc_count": 4
+            },
+            {
+               "key_as_string": "2008-01-01T00:00:00.000Z",
+               "key": 1199145600000,
+               "doc_count": 8
+            },
+            {
+               "key_as_string": "2009-01-01T00:00:00.000Z",
+               "key": 1230768000000,
+               "doc_count": 24
+            },
+            {
+               "key_as_string": "2010-01-01T00:00:00.000Z",
+               "key": 1262304000000,
+               "doc_count": 36
+            },
+            {
+               "key_as_string": "2011-01-01T00:00:00.000Z",
+               "key": 1293840000000,
+               "doc_count": 42
+            },
+            {
+               "key_as_string": "2012-01-01T00:00:00.000Z",
+               "key": 1325376000000,
+               "doc_count": 56
+            },
+            {
+               "key_as_string": "2013-01-01T00:00:00.000Z",
+               "key": 1356998400000,
+               "doc_count": 48
+            },
+            {
+               "key_as_string": "2014-01-01T00:00:00.000Z",
+               "key": 1388534400000,
+               "doc_count": 49
+            },
+            {
+               "key_as_string": "2015-01-01T00:00:00.000Z",
+               "key": 1420070400000,
+               "doc_count": 7
+            }
+         ]
+      }
+   }
+}
+,
+"0000693":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 0,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "repairs_per_year": {
+         "buckets": [
+            {
+               "key_as_string": "2008-01-01T00:00:00.000Z",
+               "key": 1199145600000,
+               "doc_count": 6
+            },
+            {
+               "key_as_string": "2009-01-01T00:00:00.000Z",
+               "key": 1230768000000,
+               "doc_count": 134
+            },
+            {
+               "key_as_string": "2010-01-01T00:00:00.000Z",
+               "key": 1262304000000,
+               "doc_count": 327
+            },
+            {
+               "key_as_string": "2011-01-01T00:00:00.000Z",
+               "key": 1293840000000,
+               "doc_count": 419
+            },
+            {
+               "key_as_string": "2012-01-01T00:00:00.000Z",
+               "key": 1325376000000,
+               "doc_count": 532
+            },
+            {
+               "key_as_string": "2013-01-01T00:00:00.000Z",
+               "key": 1356998400000,
+               "doc_count": 588
+            },
+            {
+               "key_as_string": "2014-01-01T00:00:00.000Z",
+               "key": 1388534400000,
+               "doc_count": 645
+            },
+            {
+               "key_as_string": "2015-01-01T00:00:00.000Z",
+               "key": 1420070400000,
+               "doc_count": 67
+            }
+         ]
+      }
+   }
+}
+
+,
+"0000823":{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 0,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "repairs_per_year": {
+         "buckets": [
+            {
+               "key_as_string": "2009-01-01T00:00:00.000Z",
+               "key": 1230768000000,
+               "doc_count": 5
+            },
+            {
+               "key_as_string": "2010-01-01T00:00:00.000Z",
+               "key": 1262304000000,
+               "doc_count": 75
+            },
+            {
+               "key_as_string": "2011-01-01T00:00:00.000Z",
+               "key": 1293840000000,
+               "doc_count": 97
+            },
+            {
+               "key_as_string": "2012-01-01T00:00:00.000Z",
+               "key": 1325376000000,
+               "doc_count": 97
+            },
+            {
+               "key_as_string": "2013-01-01T00:00:00.000Z",
+               "key": 1356998400000,
+               "doc_count": 107
+            },
+            {
+               "key_as_string": "2014-01-01T00:00:00.000Z",
+               "key": 1388534400000,
+               "doc_count": 142
+            },
+            {
+               "key_as_string": "2015-01-01T00:00:00.000Z",
+               "key": 1420070400000,
+               "doc_count": 21
+            }
+         ]
+      }
+   }
+}
+
+}

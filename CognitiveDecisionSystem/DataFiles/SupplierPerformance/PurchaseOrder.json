@@ -1,0 +1,262 @@
+﻿{
+   "took": 16,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 373564,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "suppliers": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 226955,
+         "buckets": [
+            {
+               "key": "Z5394",
+               "doc_count": 40864,
+               "supplier_name": {
+                  "hits": {
+                     "total": 40864,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "190",
+                           "_score": 1,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "LAND ROVER AUSTRALIA"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z0C81",
+               "doc_count": 29527,
+               "supplier_name": {
+                  "hits": {
+                     "total": 29527,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "104",
+                           "_score": 1,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "MERCEDES-BENZ AUSTRALIA/PACIFIC"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z3P78",
+               "doc_count": 18372,
+               "supplier_name": {
+                  "hits": {
+                     "total": 18372,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "341",
+                           "_score": 1,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "THALES AUSTRALIA"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z4779",
+               "doc_count": 17019,
+               "supplier_name": {
+                  "hits": {
+                     "total": 17019,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "116",
+                           "_score": 1,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "ASC PTY LTD"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z0H52",
+               "doc_count": 13224,
+               "supplier_name": {
+                  "hits": {
+                     "total": 13224,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "485",
+                           "_score": 1,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "AUSTRALIAN AEROSPACE LIMITED"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z0HU0",
+               "doc_count": 7065,
+               "supplier_name": {
+                  "hits": {
+                     "total": 7065,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "26",
+                           "_score": 1,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "C130 AUSTRALIAN AEROSPACE LIMIT*"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "ZD484",
+               "doc_count": 6195,
+               "supplier_name": {
+                  "hits": {
+                     "total": 6195,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "144",
+                           "_score": 1,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "J BLACKWOOD & SON LTD"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z1844",
+               "doc_count": 5296,
+               "supplier_name": {
+                  "hits": {
+                     "total": 5296,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "202",
+                           "_score": 1,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "AUSTRALIAN DEFENCE APPAREL"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z4067",
+               "doc_count": 5116,
+               "supplier_name": {
+                  "hits": {
+                     "total": 5116,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "114",
+                           "_score": 1,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "MERCEDES-BENZ AUSTRALIA PACIFIC*"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "Z4117",
+               "doc_count": 3931,
+               "supplier_name": {
+                  "hits": {
+                     "total": 3931,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "purchase_orders",
+                           "_type": "purchase_order",
+                           "_id": "392",
+                           "_score": 1,
+                           "_source": {
+                              "Supplier": {
+                                 "Status": "3",
+                                 "Name": "VOLVO GROUP GOVERNMENT SALES OC*"
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            }
+         ]
+      }
+   }
+}

@@ -1,0 +1,292 @@
+﻿{
+   "took": 1,
+   "timed_out": false,
+   "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+   },
+   "hits": {
+      "total": 21593,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "warehouse_demand": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 5554,
+         "buckets": [
+            {
+               "key": "7019",
+               "doc_count": 3796,
+               "warehouse_location": {
+                  "hits": {
+                     "total": 3796,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "warehouse_demands",
+                           "_type": "warehouse_demand",
+                           "_id": "AVMa4Px6-K3tO0-PojN7",
+                           "_score": 1,
+                           "_source": {
+                              "Warehouse": {
+                                 "Name": "SUWIL"
+                              },
+                              "WarehouseLocation": {
+                                 "lon": 144.78,
+                                 "lat": -37.87
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "AAML",
+               "doc_count": 3766,
+               "warehouse_location": {
+                  "hits": {
+                     "total": 3766,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "warehouse_demands",
+                           "_type": "warehouse_demand",
+                           "_id": "AVMa4Px6-K3tO0-PojNm",
+                           "_score": 1,
+                           "_source": {
+                              "Warehouse": {
+                                 "Name": "DNSDC"
+                              },
+                              "WarehouseLocation": {
+                                 "lon": 150.92,
+                                 "lat": -33.95
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "7008",
+               "doc_count": 1670,
+               "warehouse_location": {
+                  "hits": {
+                     "total": 1670,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "warehouse_demands",
+                           "_type": "warehouse_demand",
+                           "_id": "AVMa4Px6-K3tO0-PojNa",
+                           "_score": 1,
+                           "_source": {
+                              "Warehouse": {
+                                 "Name": "RAAF BASE RICHMOND"
+                              },
+                              "WarehouseLocation": {
+                                 "lon": 150.71,
+                                 "lat": -33.62
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "7014",
+               "doc_count": 1490,
+               "warehouse_location": {
+                  "hits": {
+                     "total": 1490,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "warehouse_demands",
+                           "_type": "warehouse_demand",
+                           "_id": "AVMa4Px6-K3tO0-PojNb",
+                           "_score": 1,
+                           "_source": {
+                              "Warehouse": {
+                                 "Name": "RAAF BASE AMBERLY"
+                              },
+                              "WarehouseLocation": {
+                                 "lon": 152.7,
+                                 "lat": -27.64
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "7018",
+               "doc_count": 1284,
+               "warehouse_location": {
+                  "hits": {
+                     "total": 1284,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "warehouse_demands",
+                           "_type": "warehouse_demand",
+                           "_id": "AVMa4Px6-K3tO0-PojNg",
+                           "_score": 1,
+                           "_source": {
+                              "Warehouse": {
+                                 "Name": "DEPARTMENT OF DEFENCE"
+                              },
+                              "WarehouseLocation": {
+                                 "lon": 138.63,
+                                 "lat": -34.71
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "7025",
+               "doc_count": 1116,
+               "warehouse_location": {
+                  "hits": {
+                     "total": 1116,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "warehouse_demands",
+                           "_type": "warehouse_demand",
+                           "_id": "AVMa4Px6-K3tO0-PojN9",
+                           "_score": 1,
+                           "_source": {
+                              "Warehouse": {
+                                 "Name": "302ABW"
+                              },
+                              "WarehouseLocation": {
+                                 "lon": 151.85,
+                                 "lat": -32.77
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "AABN",
+               "doc_count": 959,
+               "warehouse_location": {
+                  "hits": {
+                     "total": 959,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "warehouse_demands",
+                           "_type": "warehouse_demand",
+                           "_id": "AVMa4Px6-K3tO0-PojN2",
+                           "_score": 1,
+                           "_source": {
+                              "Warehouse": {
+                                 "Name": "JOINT LOGISTICS UNIT - SOUTH QLD"
+                              },
+                              "WarehouseLocation": {
+                                 "lon": 153,
+                                 "lat": -27.42
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "7024",
+               "doc_count": 746,
+               "warehouse_location": {
+                  "hits": {
+                     "total": 746,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "warehouse_demands",
+                           "_type": "warehouse_demand",
+                           "_id": "AVMa4Px6-K3tO0-PojNj",
+                           "_score": 1,
+                           "_source": {
+                              "Warehouse": {
+                                 "Name": "PROCUREMENT OFFICER"
+                              },
+                              "WarehouseLocation": {
+                                 "lon": 147.51,
+                                 "lat": -35.16
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "7035",
+               "doc_count": 621,
+               "warehouse_location": {
+                  "hits": {
+                     "total": 621,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "warehouse_demands",
+                           "_type": "warehouse_demand",
+                           "_id": "AVMa4Px6-K3tO0-PojPT",
+                           "_score": 1,
+                           "_source": {
+                              "Warehouse": {
+                                 "Name": "322ABW"
+                              },
+                              "WarehouseLocation": {
+                                 "lon": 132.3478477,
+                                 "lat": -14.525786
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "key": "3018",
+               "doc_count": 591,
+               "warehouse_location": {
+                  "hits": {
+                     "total": 591,
+                     "max_score": 1,
+                     "hits": [
+                        {
+                           "_index": "warehouse_demands",
+                           "_type": "warehouse_demand",
+                           "_id": "AVMa4Px6-K3tO0-PojNX",
+                           "_score": 1,
+                           "_source": {
+                              "Warehouse": {
+                                 "Name": "HMAS ALBATROSS"
+                              },
+                              "WarehouseLocation": {
+                                 "lon": 150.57,
+                                 "lat": -34.84
+                              }
+                           }
+                        }
+                     ]
+                  }
+               }
+            }
+         ]
+      }
+   }
+}

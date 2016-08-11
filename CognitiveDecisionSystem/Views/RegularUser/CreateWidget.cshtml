@@ -1,0 +1,315 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.js"></script>
+    @Styles.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap-jquery")
+    @Styles.Render("~/bundles/homepage")
+    @Styles.Render("~/bundles/dashboard")
+
+
+    <script>
+        var tables = [];
+        var attrs = [];
+        var values = [];
+    
+    function displayContent(id)
+    {
+        $("#" + id).css("display", "block");
+    }
+
+    function closeContent(id) {
+        $("#" + id).css("display", "none");
+    }
+
+    function enableAttr() {
+        var value = $("#view-select").val();
+        console.log(value);
+        if (value != "raw") {
+            $("#grouping-other-view").prop("disabled", false);
+        }
+        else
+        {
+            $("#grouping-other-view").prop("disabled", true);
+        }
+    }
+
+    function selectDatabase()
+    {
+        var chosenDatabase = $("#database-select option:selected").text();
+        /*We will use the chosenDatabase varible to send an ajax request to the server to retreive a list of 
+          tables in that database. For now we will unlock the table selection input
+         */
+        $.ajax({
+            dataType: "json",
+            url: "http://localhost:50931/Service/RegularUsers",
+            success: function (result) {
+                console.log(result);
+            }
+        });
+        $("#table-select").prop("disabled", false);
+    }
+   
+    function selectTable()
+    {
+        var chosenTable = $("#table-select option:selected").text();
+     
+       
+        /*Same thing with select a database. We will end an ajax request to hold a list of attributes*/
+
+        // Add a badge to inform the user that this table has been selected
+
+        $("#attribute-select").prop("disabled", false);
+    }
+    </script>
+    
+    <style>
+        #create-widget-session
+        {
+            height: 1400px;
+        }
+        .popover
+        {
+            min-width: 980px;
+        }
+        #visualization-container button{
+            font-size: 15px;
+        }
+        .custom-content{
+            display: none; 
+            padding: 10px;  
+            box-shadow:1px 1px 1px 1px #C0C0C0; 
+            border-radius: 5px; 
+            background-color: white;
+            border: 1px solid #C0C0C0;
+            margin: 10px;
+
+        }
+        
+    </style>
+    <title>Create widget</title>
+</head>
+<body>
+    <nav class="navbar navbar-default" style="background-color:#779ECB;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Action("Index", "System")">Logo </a>
+            </div>
+            <ul class="nav navbar-nav" id="nav">
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("Login", "User")">Home </a></li>
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("About", "System")">About us</a></li>
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("Contact", "System")">Contact us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="body" >
+        <!--if((System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)-->
+
+        <div class="container-fluid " style=" position: relative; margin-top: -21px;" >
+            <div class="row" id="main-content">
+                <div class="col-sm-2" id="content-menu">
+                    <ul class="list-group">
+                        <li id="user" class="list-group-item">
+                            <h3>Welcome back,</h3>
+                            <img id="user-image" src="~/Images/default_user_img.png" alt="Profile image" width="60" height="60" /><br /><br />
+                            <p>Chau Hoang Hieu LAM</p>
+                        </li>
+                        <li class="list-group-item" id="profile">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <p>Profile</p>
+                        </li>
+                        <li class="list-group-item" id="summary-dashboard" onclick=" location.href='/RegularUser/YourDashboard'">
+                            <span class="glyphicon glyphicon-dashboard"></span>
+                            <p>Dashboard</p>
+                        </li>
+                        <li class="list-group-item" id="create-widget" style="background-color: #337ab7; color: white;">
+                            <span class="glyphicon glyphicon-duplicate"></span>
+                            <p>Create Widget</p>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-sm-10" id="create-widget-session" style="background-color: white;">
+                    <p style="color: #5DADE2; font-size: 40px; " id="title"><img src="~/Images/widget-icon.png" style="width: 15%; height: 15%;" /> Create Widget</p>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="database-select">Select a database  </label>
+                                <select id="database-select" class="form-control" onchange="selectDatabase();">
+                                    <option>Finance</option>
+                                    <option>Engineer</option>
+                                    <option>Transaction</option>
+                                </select>
+                            </div>
+                            
+                                 
+                        </div>
+                        <br />
+                        <div class="row" id="condition-container">
+                            <div class="col-sm-12">
+                                <h4><b>Filter By</b></h4>
+                                <div class="well well-lg">
+                                    <!--Select tables-->
+                                    <div id="table-selection">
+                                        <p><b>Tables</b></p>
+                                        <p><a href="javascript:void(0);" id="table-popover" style="animation: true;text-decoration: none;" onclick="displayContent('table-content');"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; Add a table</p>   
+                                        <!--Popover for Table part-->
+                                        <div  id="table-content" class="custom-content">
+
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <label for="table-select">Select a table</label>
+                                                    <select id="table-select" class="form-control" disabled title="Activate when database is selected">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <button type="button" class="close btn-default" onclick="closeContent('table-content')" style="font-size: 30px; float: right;">&times;</button>
+                                                    <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;">Add</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                    <!--Conditions containe: data will be added later once user has selected a condition-->
+                                    <div id="condition-container">
+                                        <p><b>Conditions</b></p>
+                                    </div>
+
+                                    <p><a href="javascript:void(0);" id="condition-popover" onclick="displayContent('condition-content');"  style="animation: true;text-decoration: none;"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; Add a condition</p>
+                                    <!--Popover for conditions part-->
+                                    <div style="display: none;" id="condition-content" class="custom-content">
+
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label for="attribute-select">Select an attribute</label>
+                                                <select class="form-control" id="attribute-select" disabled>
+                                                    <option>Default</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label for="operation">Operation</label>
+                                                <select class="form-control" id="operation">
+                                                    <option><</option>
+                                                    <option>></option>
+                                                    <option>>=</option>
+                                                    <option><=</option>
+                                                    <option>=</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label for="data">Data</label>
+                                                <input type="text" class="form-control" id="data" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <button type="button" class="close btn-default" onclick="closeContent('condition-content')" style="font-size: 30px; float: right;">&times;</button>
+                                                <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;">Add</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div id="view-container">
+                                        <p><b>View</b></p>
+                                    </div>
+                                    <p><a href="javascript:void(0);" id="view-popover"  onclick="displayContent('view-content');" style="animation: true;text-decoration: none;"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; Add a view</p>
+                                    
+                                    <!--Popover for View part-->
+                                    <div  id="view-content" class="custom-content">
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label for="view-select">View data</label>
+                                                <select class="form-control" id="view-select" title="Active when database is selected" onchange="enableAttr();">
+                                                    <option value="raw">Raw (list the chosen attributes as raw data)</option>
+                                                    <option value="sum">Sum (the total value in a attribute)</option>
+                                                    <option value="avg">Avg (the average value in a attribute)</option>
+                                                    <option value="min">Min (the smallest value in a attribute)</option>
+                                                    <option value="max">Max (the largest value in a attribute)</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label for="attribute-other-view">Choose one attribute</label>
+                                                <select class="form-control" id="attribute-other-view">
+                                                    <option></option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label for="grouping-other-view">Add a grouping</label>
+                                                <select class="form-control" id="grouping-other-view" disabled>
+                                                    <option></option>
+                                                </select>
+
+                                            </div>
+                                            <div class="col-sm-3">   
+                                                <button type="button" class="close btn-default" onclick="closeContent('view-content')" style="font-size: 30px; float: right;">&times;</button>                         
+                                                <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;">Add</button>
+                                            </div>
+                                            
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    
+
+                    <h4><b>Visualization</b></h4>
+                        <div class="row" id="visualization-container">
+                            
+                            <div class="col-sm-6" >   
+                                <p style="text-align: center; font-size: 20px;">Basic charts
+                                    <div style="text-align: center;">
+                                        <div>
+                                            <button class="btn btn-sm btn-default" id="table" ><img src="~/Images/table-icon.png" style=" height: 25px; width: 25px;  " /> Table</button>
+                                            <button class="btn btn-sm btn-default" id="pie-chart"><img src="~/Images/pie-chart-icon.png" style=" height: 25px; width: 25px;  " /> Pie Chart</button>
+                                            <button class="btn btn-sm btn-default" id="line-chart" ><img src="~/Images/line_chart_icon.jpg" style=" height: 25px; width: 25px;  " /> Line Chart</button>
+                                        </div>
+                                        <br />
+                                        <div>
+                                            <button class="btn btn-sm btn-default" id="2d-pie-chart"><img src="~/Images/pie-chart-icon.png" style=" height: 25px; width: 25px;  " /> 2D Pie chart</button>                                       
+                                            <button class="btn btn-sm btn-default" id="area-chart"><img src="~/Images/area-chart-icon.png" style=" height: 25px; width: 25px;  " /> Area Chart</button>
+                                            <button class="btn btn-sm btn-default" id="column-chart"><img src="~/Images/column-chart-icon.png" style=" height: 25px; width: 25px;  " /> Column Chart</button>
+                                        </div>
+                                        
+                                    </div>    
+                                </p>                                                    
+                            </div>
+                            <div class="col-sm-6">
+                                <p style="text-align: center;  font-size: 20px;">
+                                   Stack charts
+                                    <div style="text-align: center;">
+                                        <div>
+                                            <button class="btn btn-sm btn-default" id="stacked-bar-chart"><img src="~/Images/stack-bar-chart.png" style=" height: 25px; width: 25px;  " /> Stacked Bar</button>
+                                            <button class="btn btn-sm btn-default" id="stacked-column-chart"><img src="~/Images/stacked-column-chart.jpg" style=" height: 25px; width: 25px;  " /> Stacked Column</button>
+                                            <button class="btn btn-sm btn-default" id="stacked-area-chart"><img src="~/Images/stacked-area-chart.png" style=" height: 25px; width: 25px;  " /> Stacked Area</button>
+                                        </div>
+                                    </div>
+                                </p>                   
+                            </div>
+                        </div>
+                     <h4 style="text-align: center;"><b>Chart Representation</b></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <footer>
+        <div class="content-wrapper" id="footer">
+            <div id="bottomMid">
+                <a class="bottomNav" href="@Url.Action("About", "System")">About us</a> |
+                <a class="bottomNav" href="@Url.Action("Contact", "System")">Contact us</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

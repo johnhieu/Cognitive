@@ -1,0 +1,14 @@
+﻿                <div class="panel panel-default lobipanel col-lg-4" id="Demand/Supplier Locations" data-sortable="true">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>Demand / Supplier Locations</h4>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <!--<div class="col-lg-4">
+                            -->
+                            <h4>Demand / Supplier Locations</h4>
+                            <div id="Locations" style="height:400px; width:100%;padding:15px;">
+                            </div>
+                        </div>
+                    </div>

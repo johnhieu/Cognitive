@@ -1,0 +1,21 @@
+﻿                        <div class="panel panel-default lobipanel col-lg-4" id="Suppliers and Suppliers Performance" data-sortable="true">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <h4>Suppliers and Suppliers Performance</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <!--<div class="col-lg-4">
+                                    -->
+                                    <h4>Suppliers and Suppliers Performance</h4>
+
+                                    <table id="SupplierAndPerformance" class="table">
+                                        <thead>
+                                        <th data-dynatable-column="SupplierNo">Supplier Id</th>
+                                        <th data-dynatable-column="SupplierName">Company Name</th>
+                                        <th data-dynatable-column="Status">Lead Time</th>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
