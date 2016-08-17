@@ -29,6 +29,7 @@ namespace CognitiveDecisionSystem.Controllers
         public ActionResult Index()
         {
             return View(db.Users.ToList());
+           
         }
 
         //
@@ -53,6 +54,8 @@ namespace CognitiveDecisionSystem.Controllers
            
             return View();
         }
+
+        
 
         //
         // POST: /RegularUser/Login
@@ -221,12 +224,12 @@ namespace CognitiveDecisionSystem.Controllers
             String popularWidget = "";
              int sessionCount = db.Sessions.Count(s => s.RegularUser.Username == username);
              RegularUser user = db.Users.Find(WebSecurity.GetUserId(username));
-             if(sessionCount != 1)
+             if(sessionCount == 1)
              {
                  MLApp.MLApp matlab = new MLApp.MLApp();
 
                  matlab.Execute(@"cd D:\functions");
-
+                    
                  object result = null;
 
                  matlab.Feval("DemoDecisionTree_2", 1 , out result, Double.Parse(user.Role.RoleId.ToString()), Double.Parse((DateTime.Now.Month-DateTime.Parse(user.RegisteredDate).Month).ToString()));

@@ -15,10 +15,23 @@
 
 
     <script>
+
+        // Array of database or tables have been requested from the server
+
+        // Temporary arrays to hold values from the request and will be displayed on the screen
+       
         var tables = [];
         var attrs = [];
         var values = [];
     
+        // Chosen arrays of selected tables and attributes
+        var chosenTables = [];
+        var chosenConditions = [];
+        var chosenDatabase = "";
+        // This is only for temporary solution, should not be here, later will check tables or attributes 
+        // if they are not empty then show the confirm
+        var firstTime = true;
+
     function displayContent(id)
     {
         $("#" + id).css("display", "block");
@@ -40,32 +53,115 @@
         }
     }
 
+    function reset()
+    {
+        // Reset all the things when a user chose another database. Consider we only works with one table only
+        condition = confirm("Changing database will remove any current selection. Do you want to proceed?");
+        if(condition)
+        {
+            tables = []
+            attrs = [];
+
+            chosenDatabase = "";
+            chosenTables = [];
+            chosenConditions = [];
+
+            // Delete all the badge, option
+            $("#table-badge-selection").empty();
+            $("#table-select").empty();
+            $("#attribute-select").empty();
+            $("#attribute-other-view").empty();
+            $("#condition-badge-selection").empty();
+
+            $("#table-select").append("<option selected disabled>-- Select an option -- </option>");
+            $("#attribute-select").append("<option selected disabled>-- Select an option --</option>");
+            $("#attribute-other-view").append("<option selected disabled>-- Select an option --</option>");
+            $("#attribute-select").prop("disabled", true);
+        }
+        return condition;
+    }
+
+    function convertToJavaScriptObject(data)
+    {
+        return JSON.parse(JSON.stringify(data));
+
+    }
+
     function selectDatabase()
     {
-        var chosenDatabase = $("#database-select option:selected").text();
         /*We will use the chosenDatabase varible to send an ajax request to the server to retreive a list of 
           tables in that database. For now we will unlock the table selection input
          */
-        $.ajax({
-            dataType: "json",
-            url: "http://localhost:50931/Service/RegularUsers",
-            success: function (result) {
-                console.log(result);
-            }
-        });
+        if (!firstTime) {
+            var condition = reset();
+        }
+        else {
+            condition = true;
+            firstTime = false;
+        }
+
+        chosenDatabase = $("#database-select option:selected").text();
+
+        if (condition)
+        {
+            $.getJSON("http://localhost:50931/Service/GetTables(Database='"+chosenDatabase+"')", function (data) {
+                var obj = convertToJavaScriptObject(data);
+                for (var i = 0; i < obj.value.length; i++) {
+                    tables.push(obj.value[i]);
+                    $("#table-select").append("<option>" + obj.value[i] + "</option>");
+                }
+            });
+        }
+
+
         $("#table-select").prop("disabled", false);
     }
    
     function selectTable()
     {
         var chosenTable = $("#table-select option:selected").text();
-     
-       
+        var alreadyChosen = false;
+        for (var i = 0; i < chosenTables.length; i++)
+        {
+ 
+            if(chosenTable == chosenTables[i])
+            {
+                alreadyChosen = true;
+            }
+        }
+        
         /*Same thing with select a database. We will end an ajax request to hold a list of attributes*/
+        if (!alreadyChosen && chosenTable != "-- Select an option --") {
+            $.getJSON("http://localhost:50931/Service/GetAttributes(Database='" + chosenDatabase + "',Table='" + chosenTable + "')", function (data) {
+                var obj = convertToJavaScriptObject(data);
+                for (var i = 0; i < obj.value.length; i++) {
+                    attrs.push(obj.value[i]);
+                    $("#attribute-select").append("<option>" + obj.value[i] + "</option>");
+                    $("#attribute-other-view").append("<option>" + obj.value[i] + "</option>");
+                }
+            });
 
-        // Add a badge to inform the user that this table has been selected
+            $("#table-badge-selection").append("&nbsp<span class=\"badge\">" + chosenTable + "</span>");
+            // Add a badge to inform the user that this table has been selected
+            chosenTables.push(chosenTable);
+            $("#attribute-select").prop("disabled", false);
+        }
+    }
 
-        $("#attribute-select").prop("disabled", false);
+    function selectAttribute()
+    {
+        var chosenAttribute = $("#attribute-select option:selected").text();
+        var chosenOperation = $("#operation option:selected").text();
+        var value = $("#data").val();
+
+        var condition = new Object();
+        condition.attr = chosenAttribute;
+        condition.opertion;
+        var finalCondition = chosenAttribute + " " + chosenOperation + " " + value;
+        chosenConditions.push(finalCondition);
+        $("#condition-badge-selection").append("&nbsp<span class=\"badge\">" + finalCondition + "</span>");
+
+        
     }
     </script>
     
@@ -141,7 +237,8 @@
                             <div class="col-sm-4">
                                 <label for="database-select">Select a database  </label>
                                 <select id="database-select" class="form-control" onchange="selectDatabase();">
-                                    <option>Finance</option>
+                                    <option disabled selected>-- Select an option -- </option>
+                                    <option>finance</option>
                                     <option>Engineer</option>
                                     <option>Transaction</option>
                                 </select>
@@ -156,7 +253,7 @@
                                 <div class="well well-lg">
                                     <!--Select tables-->
                                     <div id="table-selection">
-                                        <p><b>Tables</b></p>
+                                        <p><b>Tables</b> <font style="font-size: 15px;" id="table-badge-selection"></font></p>
                                         <p><a href="javascript:void(0);" id="table-popover" style="animation: true;text-decoration: none;" onclick="displayContent('table-content');"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; Add a table</p>   
                                         <!--Popover for Table part-->
                                         <div  id="table-content" class="custom-content">
@@ -164,13 +261,13 @@
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <label for="table-select">Select a table</label>
-                                                    <select id="table-select" class="form-control" disabled title="Activate when database is selected">
-                                                        <option></option>
+                                                    <select id="table-select" class="form-control" disabled title="Activate when database is selected" >
+                                                        <option disabled selected>-- Select an option --</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <button type="button" class="close btn-default" onclick="closeContent('table-content')" style="font-size: 30px; float: right;">&times;</button>
-                                                    <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;">Add</button>
+                                                    <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;" onclick="selectTable();">Add</button>
                                                 </div>
                                             </div>
 
@@ -180,7 +277,7 @@
                                     </div>
                                     <!--Conditions containe: data will be added later once user has selected a condition-->
                                     <div id="condition-container">
-                                        <p><b>Conditions</b></p>
+                                        <p><b>Conditions</b><font id="condition-badge-selection" style="font-size: 15px;"></font></p>
                                     </div>
 
                                     <p><a href="javascript:void(0);" id="condition-popover" onclick="displayContent('condition-content');"  style="animation: true;text-decoration: none;"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; Add a condition</p>
@@ -192,7 +289,7 @@
                                             <div class="col-sm-3">
                                                 <label for="attribute-select">Select an attribute</label>
                                                 <select class="form-control" id="attribute-select" disabled>
-                                                    <option>Default</option>
+                                                    <option selected disabled>-- Select an option --</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-3">
@@ -211,7 +308,7 @@
                                             </div>
                                             <div class="col-sm-3">
                                                 <button type="button" class="close btn-default" onclick="closeContent('condition-content')" style="font-size: 30px; float: right;">&times;</button>
-                                                <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;">Add</button>
+                                                <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;" onclick="selectAttribute();" >Add</button>
                                             </div>
                                         </div>
 
@@ -238,7 +335,7 @@
                                             <div class="col-sm-3">
                                                 <label for="attribute-other-view">Choose one attribute</label>
                                                 <select class="form-control" id="attribute-other-view">
-                                                    <option></option>
+                                                    <option selected disabled>-- Select an option --</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-3">
