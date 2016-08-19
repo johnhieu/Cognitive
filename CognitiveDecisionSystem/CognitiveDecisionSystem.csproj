@@ -269,6 +269,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="Models\RegularUser.cs" />
@@ -572,6 +573,7 @@
     <Content Include="Views\RegularUser\Register.cshtml" />
     <Content Include="Views\RegularUser\YourDashboard.cshtml" />
     <Content Include="Views\RegularUser\CreateWidget.cshtml" />
+    <Content Include="Views\System\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

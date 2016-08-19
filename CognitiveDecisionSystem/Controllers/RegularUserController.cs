@@ -201,7 +201,7 @@ namespace CognitiveDecisionSystem.Controllers
                     user.RegisteredDate = DateTime.Now.ToString();
                     user.LastAccess = DateTime.Now.ToString();
                     user.Role = db.Roles.OrderByDescending(r => r.RoleId).FirstOrDefault(r => r.RoleId == 1);
-
+                    user.Rank = null;
                     db.Users.Add(user);
                     db.SaveChanges();
                     WebSecurity.CreateAccount(model.UserName, model.Password);
@@ -232,7 +232,7 @@ namespace CognitiveDecisionSystem.Controllers
                     
                  object result = null;
 
-                 matlab.Feval("DemoDecisionTree_2", 1 , out result, Double.Parse(user.Role.RoleId.ToString()), Double.Parse((DateTime.Now.Month-DateTime.Parse(user.RegisteredDate).Month).ToString()));
+                 matlab.Feval("DemoDecisionTree_2", 1, out result, Double.Parse(user.Rank.RankID.ToString()), Double.Parse(user.Role.RoleId.ToString()), Double.Parse((DateTime.Now.Month - DateTime.Parse(user.RegisteredDate).Month).ToString()));
 
                  object[] res = result as object[];
 
@@ -412,16 +412,27 @@ namespace CognitiveDecisionSystem.Controllers
         public int InitUsername()
         {
             return WebSecurity.CurrentUserId;
+
         }
 
         public ActionResult YourDashboard()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+
+            }
+            return RedirectToAction("Error", "System");
         }
 
         public ActionResult CreateWidget()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+
+            }
+            return RedirectToAction("Error", "System");
         }
         //
         // GET: /User/Create

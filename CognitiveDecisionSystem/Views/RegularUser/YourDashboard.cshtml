@@ -38,11 +38,11 @@
                         <li id="user" class="list-group-item">
                             <h3>Welcome back,</h3>
                             <img id="user-image" src="~/Images/default_user_img.png" alt="Profile image" width="60" height="60" /><br /><br />
-                            <p>Chau Hoang Hieu LAM</p>
+                            <p>@User.Identity.Name</p>
                         </li>
-                        <li class="list-group-item" id="profile">
-                            <span class="glyphicon glyphicon-user"></span>
-                            <p>Profile</p>
+                        <li class="list-group-item" id="profile" onclick="location.href='/System/Induction_Page_Update'">
+                            <span class="glyphicon glyphicon glyphicon-th-list"></span>
+                            <p>Workspace</p>
                         </li>
                         <li class="list-group-item" id="summary-dashboard" style="background-color: #337ab7; color: white;">
                             <span class="glyphicon glyphicon-dashboard"></span>

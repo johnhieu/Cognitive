@@ -7,8 +7,10 @@ namespace CognitiveDecisionSystem.Models
 {
     public class Rank
     {
-        public int RankID;
-        public String RankName;
-        public String RankDescription;
+        public int RankID { get; set; }
+        public String RankName { get; set; }
+        public String RankDescription { get; set; }
+
+        public virtual ICollection<RegularUser> RegularUsers { get; set; }
     }
 }

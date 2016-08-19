@@ -27,6 +27,7 @@
         // Chosen arrays of selected tables and attributes
         var chosenTables = [];
         var chosenConditions = [];
+        var chosenViews = [];
         var chosenDatabase = "";
         // This is only for temporary solution, should not be here, later will check tables or attributes 
         // if they are not empty then show the confirm
@@ -65,17 +66,19 @@
             chosenDatabase = "";
             chosenTables = [];
             chosenConditions = [];
-
+            chosenViews = [];
             // Delete all the badge, option
             $("#table-badge-selection").empty();
             $("#table-select").empty();
             $("#attribute-select").empty();
             $("#attribute-other-view").empty();
             $("#condition-badge-selection").empty();
+            $("#view-badge-selection").empty();
 
             $("#table-select").append("<option selected disabled>-- Select an option -- </option>");
             $("#attribute-select").append("<option selected disabled>-- Select an option --</option>");
             $("#attribute-other-view").append("<option selected disabled>-- Select an option --</option>");
+           
             $("#attribute-select").prop("disabled", true);
         }
         return condition;
@@ -141,14 +144,14 @@
                 }
             });
 
-            $("#table-badge-selection").append("&nbsp<span class=\"badge\">" + chosenTable + "</span>");
+            $("#table-badge-selection").append("&nbsp<span class=\"badge\">" + chosenTable + " </span> ");
             // Add a badge to inform the user that this table has been selected
             chosenTables.push(chosenTable);
             $("#attribute-select").prop("disabled", false);
         }
     }
 
-    function selectAttribute()
+    function selectCondition()
     {
         var chosenAttribute = $("#attribute-select option:selected").text();
         var chosenOperation = $("#operation option:selected").text();
@@ -156,12 +159,142 @@
 
         var condition = new Object();
         condition.attr = chosenAttribute;
-        condition.opertion;
+        condition.opertion = chosenOperation;
+        condition.value = value;
         var finalCondition = chosenAttribute + " " + chosenOperation + " " + value;
-        chosenConditions.push(finalCondition);
-        $("#condition-badge-selection").append("&nbsp<span class=\"badge\">" + finalCondition + "</span>");
 
+        // No repeated condition
+        var alreadyChosen = false;
+        for (var i = 0; i < chosenConditions.length; i++) {
+
+            if (finalCondition == chosenConditions[i]) {
+                alreadyChosen = true;
+            }
+        }
+
+        if(!alreadyChosen && chosenAttribute != "-- Select an option --") {
+
+            chosenConditions.push(finalCondition);
+            $("#condition-badge-selection").append("&nbsp<span class=\"badge\">" + finalCondition + "</span>");
+        }
         
+    }
+
+    function selectView()
+    {
+        var chosenAttribute = $("#attribute-other-view option:selected").text();
+        var chosenView = $("#view-select option:selected").val();
+
+        var alreadyChosen = false;
+        for (var i = 0; i < chosenViews.length; i++) {
+
+            if (chosenView + " (" + chosenAttribute + ")" == chosenViews[i]) {
+                alreadyChosen = true;
+            }
+        }
+        
+        if (!alreadyChosen && chosenAttribute != "-- Select an option --") {
+            chosenViews.push(chosenView + " (" + chosenAttribute + ")");
+            $("#view-badge-selection").append("&nbsp<span class=\"badge\">" + chosenView + " (" + chosenAttribute + ")</span>");
+        }
+    }
+
+    function query()
+    {
+        if(chosenTables != 0)
+        {
+            var uriQuery = "http://localhost:50931/Service/" + chosenTables[0];
+            var selectClause = "$select=";
+            var filterClause = "$filter=";
+            // Define the select part of the query
+            for(var i =0 ; i< chosenViews.length; i++)
+            {
+                switch(chosenViews[i].substring(0,3))
+                {
+                    case "Raw":
+
+                        var first = chosenViews[i].indexOf("(");
+                        var last = chosenViews[i].indexOf(")");
+                        selectClause += chosenViews[i].substring(first + 1, last) + ",";
+                        break;
+                }
+            }
+      
+            selectClause = selectClause.substring(0, selectClause.lastIndexOf(","));
+        
+            // Define the filter part of the query
+            for(var i=0; i< chosenConditions.length; i++)
+            {
+                var tokens = chosenConditions[i].split(" ");
+                switch(tokens[1])
+                {
+                    case "=":
+                        filterClause += tokens[0] + " eq " + tokens[2] + " and ";
+                        break;
+                    case ">":
+                        filterClause += tokens[0] + " gt " + tokens[2] + " and ";
+                        break;
+                    case ">=":
+                        filterClause += tokens[0] + " ge " + tokens[2] + " and ";
+                        break;
+                    case "<=":
+                        filterClause += tokens[0] + " le " + tokens[2] + " and ";
+                        break;
+                    case "<":
+                        filterClause += tokens[0] + " lt " + tokens[2] + " and ";
+                        break;
+                }
+            }
+
+            filterClause = filterClause.substring(0, filterClause.lastIndexOf("and"));
+
+            // check if one of the clause is empty
+            if (selectClause == " ")
+            {
+                uriQuery += "?" + filterClause;
+            }
+            else if(filterClause == " ")
+            {
+                uriQuery += "?" + selectClause;
+            }
+            else
+            {
+                uriQuery += ("?"+selectClause + "&"+filterClause);
+            }
+
+
+            console.log(uriQuery);
+            $.getJSON(uriQuery, function (data) {
+                var obj = convertToJavaScriptObject(data);
+                for (var i = 0; i < obj.value.length; i++) {
+                    console.log(obj.value[i]);
+                }
+            });
+        }
+    }
+
+    function removeAttribute(arrayName, id)
+    {
+        switch(arrayName)
+        {
+            case "table":
+                var temp = [];
+                for(var i = 0; i< chosenTables.length; i++)
+                {
+                    if (chosenTables[i] != id) {
+                        temp[i] = chosenTables[i];
+                        chosenTables[i].shift();
+                    }
+                    else {
+                        chosenTables.shift();
+                    }
+                }
+                chosenTables = temp;
+                $("#table-badge-selection").remove("#" + id);
+                console.log(chosenTables);
+                break;
+        }
+
     }
     </script>
     
@@ -214,11 +347,11 @@
                         <li id="user" class="list-group-item">
                             <h3>Welcome back,</h3>
                             <img id="user-image" src="~/Images/default_user_img.png" alt="Profile image" width="60" height="60" /><br /><br />
-                            <p>Chau Hoang Hieu LAM</p>
+                            <p>@User.Identity.Name</p>
                         </li>
-                        <li class="list-group-item" id="profile">
-                            <span class="glyphicon glyphicon-user"></span>
-                            <p>Profile</p>
+                        <li class="list-group-item" id="profile" onclick="location.href='/System/Induction_Page_Update'">
+                            <span class="glyphicon glyphicon glyphicon-th-list"></span>
+                            <p>Workspace</p>
                         </li>
                         <li class="list-group-item" id="summary-dashboard" onclick=" location.href='/RegularUser/YourDashboard'">
                             <span class="glyphicon glyphicon-dashboard"></span>
@@ -295,11 +428,11 @@
                                             <div class="col-sm-3">
                                                 <label for="operation">Operation</label>
                                                 <select class="form-control" id="operation">
-                                                    <option><</option>
+                                                    <option>=</option>
                                                     <option>></option>
                                                     <option>>=</option>
+                                                    <option><</option>
                                                     <option><=</option>
-                                                    <option>=</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-3">
@@ -308,13 +441,13 @@
                                             </div>
                                             <div class="col-sm-3">
                                                 <button type="button" class="close btn-default" onclick="closeContent('condition-content')" style="font-size: 30px; float: right;">&times;</button>
-                                                <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;" onclick="selectAttribute();" >Add</button>
+                                                <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;" onclick="selectCondition();" >Add</button>
                                             </div>
                                         </div>
 
                                     </div>
                                     <div id="view-container">
-                                        <p><b>View</b></p>
+                                        <p><b>View</b><font style="font-size:15px;" id="view-badge-selection"></font></p>
                                     </div>
                                     <p><a href="javascript:void(0);" id="view-popover"  onclick="displayContent('view-content');" style="animation: true;text-decoration: none;"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; Add a view</p>
                                     
@@ -323,13 +456,13 @@
 
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <label for="view-select">View data</label>
+                                                <label for="view-select">View data ()</label>
                                                 <select class="form-control" id="view-select" title="Active when database is selected" onchange="enableAttr();">
-                                                    <option value="raw">Raw (list the chosen attributes as raw data)</option>
-                                                    <option value="sum">Sum (the total value in a attribute)</option>
-                                                    <option value="avg">Avg (the average value in a attribute)</option>
-                                                    <option value="min">Min (the smallest value in a attribute)</option>
-                                                    <option value="max">Max (the largest value in a attribute)</option>
+                                                    <option value="Raw">Raw (list the chosen attributes as raw data)</option>
+                                                    <option value="Sum">Sum (the total value in a attribute)</option>
+                                                    <option value="Avg">Avg (the average value in a attribute)</option>
+                                                    <option value="Min">Min (the smallest value in a attribute)</option>
+                                                    <option value="Max">Max (the largest value in a attribute)</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-3">
@@ -347,7 +480,7 @@
                                             </div>
                                             <div class="col-sm-3">   
                                                 <button type="button" class="close btn-default" onclick="closeContent('view-content')" style="font-size: 30px; float: right;">&times;</button>                         
-                                                <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;">Add</button>
+                                                <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;" onclick="selectView();">Add</button>
                                             </div>
                                             
                                         </div>
@@ -394,7 +527,7 @@
                                 </p>                   
                             </div>
                         </div>
-                     <h4 style="text-align: center;"><b>Chart Representation</b></h4>
+                     <h4 style="text-align: center;"><button class="btn btn-info btn-lg" onclick="query();">Run query</button></h4>
                     </div>
                 </div>
             </div>

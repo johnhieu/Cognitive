@@ -27,6 +27,7 @@ namespace CognitiveDecisionSystem.Models
 
         public virtual ICollection<Session> Sessions { get; set; }
         public virtual Role Role { get; set; }
+        public virtual Rank Rank { get; set; }
     }
 
     public class Login

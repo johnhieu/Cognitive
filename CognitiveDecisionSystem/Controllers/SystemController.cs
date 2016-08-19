@@ -16,15 +16,25 @@ namespace CognitiveDecisionSystem.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+
+            }
+            return RedirectToAction("Error", "System");
         }
 
         // GET: /System/dashboard
       
         public ActionResult Induction_Page_Update()
         {
-        
-            return View();
+
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+
+            }
+            return RedirectToAction("Error", "System");
         }
 
         // GET: /System/DecisionSummary_Page_Update
@@ -33,16 +43,30 @@ namespace CognitiveDecisionSystem.Controllers
         {
   
             ViewBag.SSCode = SSCode;
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+
+            }
+            return RedirectToAction("Error", "System");
         }
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult SupplierPerformance()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+
+            }
+            return RedirectToAction("Error", "System");
             
         }
 
+        public ActionResult Error()
+        {
+            return View();
+        }
      
     }
 }
