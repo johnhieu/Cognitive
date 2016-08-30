@@ -15,6 +15,7 @@ using NPOI.HSSF.UserModel;
 using MySql.Data.Entity;
 using System.Data.Entity;
 using MySql.Data.MySqlClient;
+using System.Web.Routing;
 
 namespace CognitiveDecisionSystem.Controllers
 {
@@ -64,6 +65,7 @@ namespace CognitiveDecisionSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(Login model)
         {
+            
             int length = db.Widgets.Count();
             int[] widgetCount = new int[length+1];
             if (ModelState.IsValid && WebSecurity.Login(model.Username, model.Password))
@@ -73,6 +75,8 @@ namespace CognitiveDecisionSystem.Controllers
                 user = db.Users.Find(WebSecurity.GetUserId(model.Username));
                 user.LastAccess = DateTime.Now.ToString();
                 db.Entry(user).State = EntityState.Modified;
+                
+              
 
                 // Check user's rank
                 DateTime registeredDate = DateTime.Parse(user.RegisteredDate);
@@ -99,12 +103,12 @@ namespace CognitiveDecisionSystem.Controllers
                 if(sessionCount == 0)
                 {
                     var users = db.Users.ToList();
-                    var highestTemp = 1;
+                    var highestTemp = 0;
                    
                     Array.Clear(widgetCount, 0, length+1);
                  
                     DataTable dt = new DataTable();
-
+                    dt.Columns.Add("Ranks", typeof(Int32));
                     dt.Columns.Add("RoleID", typeof(Int32));
                     dt.Columns.Add("Duration", typeof(Int32));
                     dt.Columns.Add("WidgetID", typeof(String));
@@ -131,7 +135,7 @@ namespace CognitiveDecisionSystem.Controllers
                        }
                         if(highestTemp != 0)
                         {
-                            dt.Rows.Add(u.Role.RoleId, DateTime.Now.Month - DateTime.Parse(u.RegisteredDate).Month, "W" + highestTemp);
+                            dt.Rows.Add(u.Rank.RankID,u.Role.RoleId, DateTime.Now.Month - DateTime.Parse(u.RegisteredDate).Month, "W" + highestTemp);
                         }
                         Array.Clear(widgetCount, 0, length+1);
                         highestTemp = 0;
@@ -152,6 +156,8 @@ namespace CognitiveDecisionSystem.Controllers
                 db.Sessions.Add(newSession);
                 db.SaveChanges();
 
+                ViewBag.RnR = "";
+
                 return RedirectToAction("Induction_Page_Update", "System");
 
                
@@ -165,7 +171,28 @@ namespace CognitiveDecisionSystem.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            Register model = new Register();
+            model.ListRole = new List<SelectListItem>();
+
+            model.ListRole.Add(new SelectListItem
+            {
+                Text = "Financial Executive",
+                Value = "Financial Executive"
+            });
+            model.ListRole.Add(new SelectListItem
+            {
+                Text = "Logistic",
+                Value = "Logistic",
+                Selected = true
+            });
+            model.ListRole.Add(new SelectListItem
+            {
+                Text = "Transaction Manager",
+                Value = "Transaction Manager"
+            });
+            return View(model);
+           
+      
         }
 
         //
@@ -200,8 +227,17 @@ namespace CognitiveDecisionSystem.Controllers
                     user.Email = model.Email;
                     user.RegisteredDate = DateTime.Now.ToString();
                     user.LastAccess = DateTime.Now.ToString();
-                    user.Role = db.Roles.OrderByDescending(r => r.RoleId).FirstOrDefault(r => r.RoleId == 1);
-                    user.Rank = null;
+                    user.PhoneNumber = model.PhoneNumber;
+                    user.FirstTimeRecommendedWidget = null;
+                    var roles = db.Roles.ToList();
+                    foreach(var role in roles)
+                    {
+                        if(role.RoleType.Equals(model.selectedValue))
+                        {
+                            user.Role = role;
+                        }
+                    }
+                    user.Rank = db.Ranks.OrderByDescending(r => r.RankID).FirstOrDefault(r => r.RankID == 1); 
                     db.Users.Add(user);
                     db.SaveChanges();
                     WebSecurity.CreateAccount(model.UserName, model.Password);
@@ -216,6 +252,23 @@ namespace CognitiveDecisionSystem.Controllers
              
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpGet]
+        public String GetLastWidgetOrder(String username)
+        {
+            RegularUser user = db.Users.Find(WebSecurity.GetUserId(username));
+            return user.FirstTimeRecommendedWidget;
+        }
+
+        [HttpGet]
+        public String StoreCurrentDashboard(String username, String widgetID)
+        {
+            RegularUser user = db.Users.Find(WebSecurity.GetUserId(username));
+            user.FirstTimeRecommendedWidget = widgetID;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return "Success";   
         }
 
         [HttpGet]
@@ -239,7 +292,81 @@ namespace CognitiveDecisionSystem.Controllers
 
                  String temp = Convert.ToString(res[0]);
                  popularWidget = temp.Substring(1);
+                 user.FirstTimeRecommendedWidget = "1 2 3 4 5 6 7 8 9";
+                 
+                 db.Entry(user).State = EntityState.Modified;
+                 db.SaveChanges();
              }
+                 // Not the first time user, use the second suggestion including the first widget recommedation
+             else
+             {
+                 string widgetOrder = user.FirstTimeRecommendedWidget;
+                 int length = 9;
+                 int[] widgetCount = new int[length + 1];
+                 int highestTemp = 0;
+                 int count = 0;
+                 bool notEmpty = false;
+                 
+                 // Check if the last session is empty or not
+                 var sessions = db.Sessions.OrderByDescending(s => s.SessionID).Where(u => u.RegularUser.ID == user.ID);
+                 foreach (var s in sessions)
+                 {
+                    
+                    if (count == 1)
+                    {
+                        var session = s;
+                        var records = db.Records.Where(rec => rec.Session.SessionID == session.SessionID);
+                        foreach (var r in records)
+                        {
+                            if (r.Widget != null)
+                            {
+                                if(!notEmpty)
+                                {
+                                    notEmpty = true;
+                                }
+                                widgetCount[(r.Widget.WidgetID)]++;
+                            }
+
+                        }
+                       
+                     }
+
+                     count++;
+                 }
+                 
+                 // If empty, we just need to populate the old data already stored in the database
+                 if(!notEmpty)
+                 {
+                     popularWidget = widgetOrder;
+                 }
+                 else
+                 {
+                     for (int i = 1; i < length + 1; i++)
+                     {
+                         if (widgetCount[i] > widgetCount[highestTemp])
+                         {
+                             highestTemp = i;
+                         }
+                     }
+
+                     popularWidget = highestTemp.ToString();
+
+                     String[] splits = widgetOrder.Split(null);
+                     for (int i = 0; i < splits.Length; i++ )
+                     {
+                         if(highestTemp.ToString().Equals(splits[i]))
+                         {
+                             continue;
+                         }
+                         else
+                         {
+                             popularWidget += " " + splits[i];
+                         }
+                     }
+ 
+                 }                 
+             }
+             
              return popularWidget;
         }
 
@@ -417,18 +544,37 @@ namespace CognitiveDecisionSystem.Controllers
 
         public ActionResult YourDashboard()
         {
+           
             if (User.Identity.IsAuthenticated)
             {
+                int id = WebSecurity.GetUserId(User.Identity.Name);
+                RegularUser user = db.Users.Find(id);
+                ViewBag.Rank = "Rank: " + user.Rank.RankName;
+                ViewBag.Role = "Role: " + user.Role.RoleType;
+                var dashboards = db.Dashboards.Where(d => d.RegularUser.ID == id);
+                ViewBag.Dashboards = new Dashboard[dashboards.Count()];
+                int count = 0;
+                foreach(var d in dashboards)
+                {
+                    ViewBag.Dashboards[count++] = d;
+                }
                 return View();
 
             }
             return RedirectToAction("Error", "System");
         }
 
+      
+
         public ActionResult CreateWidget()
         {
+      
             if (User.Identity.IsAuthenticated)
             {
+                int id = WebSecurity.GetUserId(User.Identity.Name);
+                RegularUser user = db.Users.Find(id);
+                ViewBag.Rank = "Rank: " + user.Rank.RankName;
+                ViewBag.Role = "Role: " + user.Role.RoleType;
                 return View();
 
             }

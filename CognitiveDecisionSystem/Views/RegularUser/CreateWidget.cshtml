@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CognitiveDecisionSystem.Models.WidgetDashboard
+@{
     Layout = null;
 }
 
@@ -8,34 +9,81 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     @Styles.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/bootstrap-jquery")
+   
     @Styles.Render("~/bundles/homepage")
     @Styles.Render("~/bundles/dashboard")
 
-
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script>
 
         // Array of database or tables have been requested from the server
 
         // Temporary arrays to hold values from the request and will be displayed on the screen
-       
+
         var tables = [];
         var attrs = [];
         var values = [];
-    
+        var dashboards = [];
+        var dashboardids = [];
         // Chosen arrays of selected tables and attributes
         var chosenTables = [];
         var chosenConditions = [];
         var chosenViews = [];
         var chosenDatabase = "";
-        // This is only for temporary solution, should not be here, later will check tables or attributes 
+        var finalQuery = "";
+
+        // Configuration for charts
+        var dimension = "";
+        var measure = "";
+        var title = "";
+        var xaxis ="";
+        var yaxis = "";
+
+        // Chart type
+        var chartType = "";
+        var stacking = false;
+        // This is only for temporary solution, should not be here, later will check tables or attributes
         // if they are not empty then show the confirm
         var firstTime = true;
 
+        var tableAdded = false;
+
+
+        (function () {
+            $.ajax({
+                url: "../System/GetDashboard/?username="+"@User.Identity.Name",
+                async: true,
+                success: function (result) {
+                    var tokens = result.split();
+                    for(var i=0; i< tokens.length; i++)
+                    {
+                        var seperate = tokens[i].split(",");
+                       
+                        dashboards.push(seperate[0]);
+                        dashboardids.push(seperate[1]);
+                       
+                        $("#dashboard-list").append("<option>"+seperate[0]+"</option>");
+                    }
+                }
+            });
+           
+        })();
+
     function displayContent(id)
     {
-        $("#" + id).css("display", "block");
+        if (chosenTables.length != 0)
+        {
+            $("#" + id).css("display", "block");
+        }
+        if(chosenDatabase != "")
+        {
+            $("#table-content").css("display", "block");
+        }
+       
     }
 
     function closeContent(id) {
@@ -56,6 +104,7 @@
 
     function reset()
     {
+       
         // Reset all the things when a user chose another database. Consider we only works with one table only
         condition = confirm("Changing database will remove any current selection. Do you want to proceed?");
         if(condition)
@@ -67,6 +116,11 @@
             chosenTables = [];
             chosenConditions = [];
             chosenViews = [];
+
+            chartType = "";
+            stacking = false;
+      
+
             // Delete all the badge, option
             $("#table-badge-selection").empty();
             $("#table-select").empty();
@@ -74,12 +128,36 @@
             $("#attribute-other-view").empty();
             $("#condition-badge-selection").empty();
             $("#view-badge-selection").empty();
+            $("#chart-badge-selection").empty();
+            $("#pie-value-name").empty();
+            $("#pie-value").empty();
+            $("#x-axis").empty();
+            $("#y-axis").empty();
 
-            $("#table-select").append("<option selected disabled>-- Select an option -- </option>");
+            $("#data").val('');
+            // Got bug: Unable to get property 'style' of undefined or null reference
+            $("#chart-visualization").empty();
+            
+
+            // Close all contents
+            closeContent("table-content");
+            closeContent("condition-content");
+            closeContent("view-content");
+
+
+            $("#table-select").append("<option selected disabled>-- Select an option --</option>");
             $("#attribute-select").append("<option selected disabled>-- Select an option --</option>");
             $("#attribute-other-view").append("<option selected disabled>-- Select an option --</option>");
-           
+            $("#pie-value-name").append("<option selected disabled>-- Select an option -- </option>");
+            $("#pie-value").append("<option selected disabled>-- Select an option --</option>");
+            $("#x-axis").append("<option selected disabled>-- Select an option --</option>");
+            $("#y-axis").append("<option selected disabled>-- Select an option --</option>");
+
             $("#attribute-select").prop("disabled", true);
+            $("#pie-value-name").prop("disabled", true);
+            $("#pie-value").prop("disabled", true);
+            $("#x-axis").prop("disabled", true);
+            $("#y-axis").prop("disabled", true);
         }
         return condition;
     }
@@ -92,18 +170,19 @@
 
     function selectDatabase()
     {
-        /*We will use the chosenDatabase varible to send an ajax request to the server to retreive a list of 
+        /*We will use the chosenDatabase varible to send an ajax request to the server to retreive a list of
           tables in that database. For now we will unlock the table selection input
          */
         if (!firstTime) {
             var condition = reset();
+          
         }
         else {
             condition = true;
             firstTime = false;
         }
 
-        chosenDatabase = $("#database-select option:selected").text();
+        chosenDatabase = $("#database-select option:selected").val();
 
         if (condition)
         {
@@ -116,23 +195,25 @@
             });
         }
 
-
+        // Open the table content automatically
+        displayContent("table-content");
         $("#table-select").prop("disabled", false);
     }
-   
+
     function selectTable()
     {
+
         var chosenTable = $("#table-select option:selected").text();
         var alreadyChosen = false;
         for (var i = 0; i < chosenTables.length; i++)
         {
- 
+
             if(chosenTable == chosenTables[i])
             {
                 alreadyChosen = true;
             }
         }
-        
+
         /*Same thing with select a database. We will end an ajax request to hold a list of attributes*/
         if (!alreadyChosen && chosenTable != "-- Select an option --") {
             $.getJSON("http://localhost:50931/Service/GetAttributes(Database='" + chosenDatabase + "',Table='" + chosenTable + "')", function (data) {
@@ -141,6 +222,7 @@
                     attrs.push(obj.value[i]);
                     $("#attribute-select").append("<option>" + obj.value[i] + "</option>");
                     $("#attribute-other-view").append("<option>" + obj.value[i] + "</option>");
+                   
                 }
             });
 
@@ -148,6 +230,10 @@
             // Add a badge to inform the user that this table has been selected
             chosenTables.push(chosenTable);
             $("#attribute-select").prop("disabled", false);
+
+            // Open view and condition content automatically
+            displayContent("view-content");
+            displayContent("condition-content");
         }
     }
 
@@ -177,11 +263,12 @@
             chosenConditions.push(finalCondition);
             $("#condition-badge-selection").append("&nbsp<span class=\"badge\">" + finalCondition + "</span>");
         }
-        
+
     }
 
     function selectView()
     {
+        // Get the view and store in the array in the form example: Raw (name)
         var chosenAttribute = $("#attribute-other-view option:selected").text();
         var chosenView = $("#view-select option:selected").val();
 
@@ -192,16 +279,85 @@
                 alreadyChosen = true;
             }
         }
-        
+
         if (!alreadyChosen && chosenAttribute != "-- Select an option --") {
-            chosenViews.push(chosenView + " (" + chosenAttribute + ")");
+            
+            
+            if (chosenViews.length != 0)
+            {
+                console.log(chosenViews.length);
+                chosenViews.push(chosenView + " (" + chosenAttribute + ")");
+                $("#pie-value-name").append("<option>" + chosenAttribute + "</option>");
+                $("#pie-value").append("<option>" + chosenAttribute + "</option>");
+                $("#x-axis").append("<option>" + chosenAttribute + "</option>");
+                $("#y-axis").append("<option>" + chosenAttribute + "</option>");
+            }
+            else
+            {
+                // Append view attribute to the chart details
+                $("#pie-value-name").empty();
+                $("#pie-value").empty();
+                $("#pie-value-name").append("<option selected disabled>-- Select an option --</option>");
+                $("#pie-value").append("<option selected disabled>-- Select an option --</option>");
+
+                $("#x-axis").empty();
+                $("#y-axis").empty();
+                $("#x-axis").append("<option selected disabled>-- Select an option --</option>");
+                $("#y-axis").append("<option selected disabled>-- Select an option --</option>");
+
+
+
+                $("#pie-value-name").append("<option>" + chosenAttribute + "</option>");
+                $("#pie-value").append("<option>" + chosenAttribute + "</option>");
+                $("#x-axis").append("<option>" + chosenAttribute + "</option>");
+                $("#y-axis").append("<option>" + chosenAttribute + "</option>");
+
+                chosenViews.push(chosenView + " (" + chosenAttribute + ")");
+            }
             $("#view-badge-selection").append("&nbsp<span class=\"badge\">" + chosenView + " (" + chosenAttribute + ")</span>");
+        }
+    }
+
+    function changeChartType(type)
+    {
+        chartType = type;
+        $("#chart-badge-selection").empty();
+        $("#chart-badge-selection").append("<span class=\"badge\">" + chartType + " chart</span>");
+        switch(type){
+            case "Pie":
+                $("#pie-value-name").prop("disabled", false);
+                $("#pie-value").prop("disabled", false);
+                $("#x-axis").prop("disabled", true);
+                $("#y-axis").prop("disabled", true);
+                break;
+            case "Area":
+            case "Line":
+            case "Column":
+                $("#pie-value-name").prop("disabled", true);
+                $("#pie-value").prop("disabled", true);
+                $("#x-axis").prop("disabled", false);
+                $("#y-axis").prop("disabled", false);
+                break;
+            default:
+                $("#pie-value-name").prop("disabled", true);
+                $("#pie-value").prop("disabled", true);
+                $("#x-axis").prop("disabled", true);
+                $("#y-axis").prop("disabled", true);
+                break;
         }
     }
 
     function query()
     {
-        if(chosenTables != 0)
+        $("#chart-visualization").empty();
+        if (chosenViews.length == 0) {
+            alert("Please choose at least 1 view");
+        }
+        else if(chartType == "Pie" && (dimension == "" || measure == ""))
+        {
+            alert("Please select options for chart in Chart Details.");
+        }
+        else if(chosenTables != 0)
         {
             var uriQuery = "http://localhost:50931/Service/" + chosenTables[0];
             var selectClause = "$select=";
@@ -213,15 +369,13 @@
                 {
                     case "Raw":
 
-                        var first = chosenViews[i].indexOf("(");
-                        var last = chosenViews[i].indexOf(")");
-                        selectClause += chosenViews[i].substring(first + 1, last) + ",";
+                        selectClause += seperateBrackets(chosenViews[i]) + ",";
                         break;
                 }
             }
-      
+
             selectClause = selectClause.substring(0, selectClause.lastIndexOf(","));
-        
+
             // Define the filter part of the query
             for(var i=0; i< chosenConditions.length; i++)
             {
@@ -257,19 +411,298 @@
             {
                 uriQuery += "?" + selectClause;
             }
+            else if(selectClause == "" & filterClause == "" )
+            {
+
+            }
             else
             {
                 uriQuery += ("?"+selectClause + "&"+filterClause);
             }
 
+            finalQuery = uriQuery;
+          
+            
+            switch(chartType){
+                case "":
+                case "Table":
+                    // Only if user does not choose chart type, default option is just create a table
+                    if (chartType == "")
+                    {
+                        $("#chart-badge-selection").append("<span class=\"badge\">Table chart</span>")
+                    }
+                    $("#chart-visualization").append(" <table class=\"display\" id=\"tableChart\" style=\"display: none;\" cellspacing=\"0\"  >  <thead id=\"column-name\"> </thead>  </table>           ");
+    
+                    // Check to see if they are raw view
+                    var data = [];
+                   
+                    if (chosenViews.length == 0)
+                    {
+                        
+                        for(var i =0; i< attrs.length; i++)
+                        {
+                            
+                            data.push({ "data": attrs[i] });
+                            $("#column-name").append("<th>" + attrs[i] + "</th>");
+                           
+                        }
+                    }
+                    else {
+                        for (var i = 0 ; i < chosenViews.length; i++)
+                        {                                 
+                            if(chosenViews[i].search("Raw") != -1)
+                            {
+                                var chosen = seperateBrackets(chosenViews[i]);
+                                data.push({ "data": chosen });
+                                $("#column-name").append("<th>" + chosen + "</th>");
+                               
+                            }
+                        }
+                    }
+                  
+                   
+                    $('#tableChart').DataTable({
+                        "responsive": true,
+                        "paging" : true,
+                        "ordering": true,
+                        "processing": true,
+                        "ajax": {
+                            "url": uriQuery,
+                            "dataSrc": "value"
+                        },
+                        "columns": data
+                    });
+                        
+                    // Got bug: Unable to get property 'style' of undefined or null reference
+                    $("#tableChart").show();
+                    
+                    break;
 
-            console.log(uriQuery);
-            $.getJSON(uriQuery, function (data) {
-                var obj = convertToJavaScriptObject(data);
-                for (var i = 0; i < obj.value.length; i++) {
-                    console.log(obj.value[i]);
-                }
-            });
+                case "Pie":
+                    if (dimension == "" & measure == "") {
+
+                        dimension = attrs[0];
+                        measure = attrs[1];
+                    }
+                    var options = {
+                        chart: {
+                            renderTo: "chart-visualization",
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false,
+                            type: 'pie'
+                        },
+                        //tooltip: {
+                        //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        // },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                    style: {
+                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                    }
+                                }
+                            }
+                        },
+                        title: {
+                            text: title
+                        },
+                        series: [{
+                            name: measure,
+                            data: []
+                            
+                        }]
+                    };
+
+                    $.getJSON(uriQuery,  function(result) {
+                        var data = convertToJavaScriptObject(result);
+                        
+                        for (var i = 0 ; i < result.value.length; i++)
+                        {                        
+                            options.series[0].data.push({ name: data.value[i][dimension], y: parseInt(data.value[i][measure]) });
+                        }
+                     
+                        var chart = new Highcharts.Chart(options);
+                    });
+
+
+                   
+                    break;
+                case "Area":
+                    var options = {
+                        chart: {
+                            renderTo: "chart-visualization",
+                            type: 'area'
+                        },
+
+                        //tooltip: {
+                        //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        // },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                    style: {
+                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                    }
+                                }
+                            }
+                        },
+                        title: {
+                            text: title
+                        },
+                        series: [{
+                            name: measure,
+                            data: []
+
+                        }]
+                    };
+                    break;
+                case 'Column':
+                    var options = {
+                        chart: {
+                            renderTo: "chart-visualization",
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false,
+                            type: 'column'
+                        },
+                        //tooltip: {
+                        //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        // },
+                        title: {
+                            text: title,
+
+                        },
+
+                        xAxis: {
+                            title: {
+                                text: xaxis
+                            },
+                            categories: []
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: yaxis,
+                               
+                            },
+                            labels: {
+                                overflow: 'justify'
+                            }
+
+                        },
+                        plotOptions: {
+                            bar: {
+                                dataLabels: {
+                                    enabled: true
+                                }
+                            }
+                        },
+                        legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'top',
+                           
+                            floating: true,
+                            borderWidth: 1,
+                            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                            shadow: true
+
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        series: [{
+                            name: yaxis,
+                            data: []
+                        }]
+
+                    };
+
+                    $.getJSON(uriQuery, function (result) {
+                        var data = convertToJavaScriptObject(result);
+
+                        for (var i = 0 ; i < result.value.length; i++) {
+                            options.xAxis.categories.push(data.value[i][xaxis]);
+                            options.series[0].data.push(parseInt(data.value[i][yaxis]));
+                        }
+
+                        var chart = new Highcharts.Chart(options);
+                    });
+                    break;
+                case 'Line':
+                    var options = {
+                        chart: {
+                            renderTo: "chart-visualization",
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false,
+                            type: 'line'
+                        },
+                        //tooltip: {
+                        //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        // },
+                        title: {
+                            text: title,
+                          
+                        },
+                       
+                        xAxis: {
+                            title: {
+                                text: xaxis
+                            },
+                            categories: []
+                        },
+                        yAxis: {
+                            title: {
+                                text: yaxis
+                            },
+                            plotLines: [{
+                                value: 0,
+                                width: 1,
+                                color: '#808080'
+                            }]
+                        },
+                       
+                        legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle',
+                            borderWidth: 0
+                        },
+                        series: [{
+                            name: yaxis,
+                            data: []
+                        }]
+
+                    };
+
+                    $.getJSON(uriQuery, function (result) {
+                        var data = convertToJavaScriptObject(result);
+
+                        for (var i = 0 ; i < result.value.length; i++) {
+                            options.xAxis.categories.push(data.value[i][xaxis]);
+                            options.series[0].data.push(parseInt(data.value[i][yaxis]) );
+                        }
+
+                        var chart = new Highcharts.Chart(options);
+                    });
+                    break;
+                default:
+                    break;
+            }
+                
+            
+
+           
         }
     }
 
@@ -291,17 +724,72 @@
                 }
                 chosenTables = temp;
                 $("#table-badge-selection").remove("#" + id);
-                console.log(chosenTables);
+                
                 break;
         }
 
     }
-    </script>
     
-    <style>
+    // Seperate the view and the attribute column to be used in the function
+    function seperateBrackets(data)
+    {
+        var first = data.indexOf("(");
+        var last = data.indexOf(")");
+        return data.substring(first + 1, last);
+        
+    }
+
+    
+    function configureChart() {
+            title = $("#chart-title").val();
+            if (title == "") {
+                title = "Fill in Chart Title to display";
+            }
+            switch (chartType) {
+                case "Pie":
+                    if ($("#pie-value-name option:selected").text() != "-- Select an option --" & $("#pie-value option:selected").text() != "-- Select an option --") 
+                        { 
+                            dimension = $("#pie-value-name option:selected").text();
+                            measure = $("#pie-value option:selected").text();
+                    }
+                    else {
+                        alert("Requires both field to be selected");
+                    }
+                    break;
+
+                case "Line":
+                case 'Column':
+                    if ($("#x-axis option:selected").text() != "-- Select an option --" & $("#y-axis option:selected").text() != "-- Select an option --") {
+                        xaxis = $("#x-axis option:selected").text();
+                        yaxis = $("#y-axis option:selected").text();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        
+    }
+
+    function checkWidgetInfo()
+    {
+        $("#widget-query").val(finalQuery);
+     
+        $("#widget-title").val(title);
+        $("#widget-type").val(chartType);
+        var text = $("#dashboard-list option:selected").text();
+        $("#dashboard-list option:selected").val(dashboardids[dashboards.indexOf(text)]);
+    }
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+ 
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"><style>
         #create-widget-session
         {
-            height: 1400px;
+            height: 1800px;
         }
         .popover
         {
@@ -311,21 +799,25 @@
             font-size: 15px;
         }
         .custom-content{
-            display: none; 
-            padding: 10px;  
-            box-shadow:1px 1px 1px 1px #C0C0C0; 
-            border-radius: 5px; 
+            display: none;
+            padding: 10px;
+            box-shadow:1px 1px 1px 1px #C0C0C0;
+            border-radius: 5px;
             background-color: white;
             border: 1px solid #C0C0C0;
             margin: 10px;
 
         }
-        
+        #chart-detail{
+             box-shadow:2px 2px 2px 2px #808080;
+             padding-bottom: 5px;
+        }
+  
     </style>
     <title>Create widget</title>
 </head>
 <body>
-    <nav class="navbar navbar-default" style="background-color:#779ECB;">
+    <nav class="navbar navbar-default" style="background-color:#779ECB; margin-bottom: 0px; ">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="@Url.Action("Index", "System")">Logo </a>
@@ -337,17 +829,19 @@
             </ul>
         </div>
     </nav>
-    <div id="body" >
+    <div id="body" style="position: relative;   ">
         <!--if((System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)-->
 
-        <div class="container-fluid " style=" position: relative; margin-top: -21px;" >
+        <div class="container-fluid " style=" position: relative;  " >
             <div class="row" id="main-content">
-                <div class="col-sm-2" id="content-menu">
+                <div class="col-sm-2" id="content-menu" >
                     <ul class="list-group">
                         <li id="user" class="list-group-item">
                             <h3>Welcome back,</h3>
                             <img id="user-image" src="~/Images/default_user_img.png" alt="Profile image" width="60" height="60" /><br /><br />
-                            <p>@User.Identity.Name</p>
+                            <p style="font-size: 20px;">@User.Identity.Name</p>
+                            <p style="font-size: 15px;">@ViewBag.Role</p>
+                            <p style="font-size: 15px;">@ViewBag.Rank</p>
                         </li>
                         <li class="list-group-item" id="profile" onclick="location.href='/System/Induction_Page_Update'">
                             <span class="glyphicon glyphicon glyphicon-th-list"></span>
@@ -364,16 +858,16 @@
 
                     </ul>
                 </div>
-                <div class="col-sm-10" id="create-widget-session" style="background-color: white;">
+                <div class="col-sm-10" id="create-widget-session" style="background-color: white;  ">
                     <p style="color: #5DADE2; font-size: 40px; " id="title"><img src="~/Images/widget-icon.png" style="width: 15%; height: 15%;" /> Create Widget</p>
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="database-select">Select a database  </label>
                                 <select id="database-select" class="form-control" onchange="selectDatabase();">
                                     <option disabled selected>-- Select an option -- </option>
-                                    <option>finance</option>
-                                    <option>Engineer</option>
-                                    <option>Transaction</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="engineer">Engineer</option>
+                                    <option value="transaction">Transaction</option>
                                 </select>
                             </div>
                             
@@ -426,6 +920,7 @@
                                                 </select>
                                             </div>
                                             <div class="col-sm-3">
+                                                <!--For now, we assume only numerical will be selected, string and other types will be considered later-->
                                                 <label for="operation">Operation</label>
                                                 <select class="form-control" id="operation">
                                                     <option>=</option>
@@ -449,20 +944,17 @@
                                     <div id="view-container">
                                         <p><b>View</b><font style="font-size:15px;" id="view-badge-selection"></font></p>
                                     </div>
-                                    <p><a href="javascript:void(0);" id="view-popover"  onclick="displayContent('view-content');" style="animation: true;text-decoration: none;"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; Add a view</p>
+                                    <p><a href="javascript:void(0);" id="view-popover"  onclick="displayContent('view-content');" style="animation: true; text-decoration: none;"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; Add a view</p>
                                     
                                     <!--Popover for View part-->
                                     <div  id="view-content" class="custom-content">
 
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <label for="view-select">View data ()</label>
+                                                <label for="view-select">View data </label>
                                                 <select class="form-control" id="view-select" title="Active when database is selected" onchange="enableAttr();">
                                                     <option value="Raw">Raw (list the chosen attributes as raw data)</option>
-                                                    <option value="Sum">Sum (the total value in a attribute)</option>
-                                                    <option value="Avg">Avg (the average value in a attribute)</option>
-                                                    <option value="Min">Min (the smallest value in a attribute)</option>
-                                                    <option value="Max">Max (the largest value in a attribute)</option>
+                                                    <option disabled>Other functions (to be added)</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-3">
@@ -492,45 +984,111 @@
                             </div>
                         </div>
                     
-
-                    <h4><b>Visualization</b></h4>
-                        <div class="row" id="visualization-container">
+                        <div class="alert alert-info">
+                            <strong>Note:</strong> It is recommended to query the data with <b>table visualization</b> first before choosing any other visualization<br />
+                            The default option is Table
+                        </div>
+                        
+                        <div >
                             
-                            <div class="col-sm-6" >   
-                                <p style="text-align: center; font-size: 20px;">Basic charts
-                                    <div style="text-align: center;">
-                                        <div>
-                                            <button class="btn btn-sm btn-default" id="table" ><img src="~/Images/table-icon.png" style=" height: 25px; width: 25px;  " /> Table</button>
-                                            <button class="btn btn-sm btn-default" id="pie-chart"><img src="~/Images/pie-chart-icon.png" style=" height: 25px; width: 25px;  " /> Pie Chart</button>
-                                            <button class="btn btn-sm btn-default" id="line-chart" ><img src="~/Images/line_chart_icon.jpg" style=" height: 25px; width: 25px;  " /> Line Chart</button>
+                            <b style="font-size: 18px;">Visualization <font style="font-size:15px;" id="chart-badge-selection"></font></b>
+                            
+                            <div class="btn btn-group" style="float: right; margin-top: -16px;">
+                                <button class="btn btn-info btn-md" title="Select data based on selected options"  onclick="query();"><b>Run query</b></button>
+                                <button class="btn btn-info btn-md" title="Save widget in database"  data-toggle="modal" data-target="#add-dashboard" data-placement="auto"><b>Save widget</b></button>
+                            </div>                            
+                        </div>
+                        
+                       
+                        <div class="row" id="visualization-container" style="margin: 5px; padding-top: 5px;" >                           
+                            <div class="col-sm-4">       
+                                <h4>Basic charts   </h4>                        
+                                    <div >
+                              
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-default" id="table" onclick="changeChartType('Table')"><img src="~/Images/table-icon.png" style=" height: 25px; width: 25px;  " /> Table</button>
+                                            <button class="btn btn-sm btn-default" id="area-chart" onclick="changeChartType('Area')"><img src="~/Images/area-chart-icon.png" style=" height: 25px; width: 25px;  " /> Area Chart</button>
+                                            <button class="btn btn-sm btn-default" id="line-chart" onclick="changeChartType('Line')"><img src="~/Images/line_chart_icon.jpg" style=" height: 25px; width: 25px;  " /> Line Chart</button>
+
                                         </div>
-                                        <br />
-                                        <div>
-                                            <button class="btn btn-sm btn-default" id="2d-pie-chart"><img src="~/Images/pie-chart-icon.png" style=" height: 25px; width: 25px;  " /> 2D Pie chart</button>                                       
-                                            <button class="btn btn-sm btn-default" id="area-chart"><img src="~/Images/area-chart-icon.png" style=" height: 25px; width: 25px;  " /> Area Chart</button>
-                                            <button class="btn btn-sm btn-default" id="column-chart"><img src="~/Images/column-chart-icon.png" style=" height: 25px; width: 25px;  " /> Column Chart</button>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-default" id="column-chart" onclick="changeChartType('Column')"><img src="~/Images/column-chart-icon.png" style=" height: 25px; width: 25px;  " /> Column Chart</button>
+                                            <button class="btn btn-sm btn-default" id="pie-chart" onclick="changeChartType('Pie')"><img src="~/Images/pie-chart-icon.png" style=" height: 25px; width: 25px;  " /> Pie Chart</button>
                                         </div>
-                                        
-                                    </div>    
-                                </p>                                                    
+                                    </div>                                 
                             </div>
-                            <div class="col-sm-6">
-                                <p style="text-align: center;  font-size: 20px;">
-                                   Stack charts
-                                    <div style="text-align: center;">
-                                        <div>
-                                            <button class="btn btn-sm btn-default" id="stacked-bar-chart"><img src="~/Images/stack-bar-chart.png" style=" height: 25px; width: 25px;  " /> Stacked Bar</button>
-                                            <button class="btn btn-sm btn-default" id="stacked-column-chart"><img src="~/Images/stacked-column-chart.jpg" style=" height: 25px; width: 25px;  " /> Stacked Column</button>
-                                            <button class="btn btn-sm btn-default" id="stacked-area-chart"><img src="~/Images/stacked-area-chart.png" style=" height: 25px; width: 25px;  " /> Stacked Area</button>
+                            <div class="col-sm-8" id="chart-detail">
+                                <h4>Chart Details <span class="glyphicon glyphicon-question-sign" href="#" data-placement="top" data-toggle="tooltip" title="This options is used for charts except tables. As suggested, display table first for data, then configure different type of charts appropiately"></span></h4>
+                                <label for="chart-title">Chart Title</label>
+                                <input type="text" class="form-control" id="chart-title" />
+
+                                <div style="position: relative;" id="chart-configuration">
+                                    <div class="row" style="margin: 5px;">
+                                        <h4>Chart Configuration <span class="glyphicon glyphicon-question-sign" href="#" data-placement="top" data-toggle="tooltip" title="LEFT OPTIONS: for Area, Line and Column Charts.RIGHT OPTIONS: for Pie Chart "></span></h4>
+                                        <div class="col-sm-6">
+                                            <lable for="x-axis"><b>X-Axis</b></lable>
+                                            <select class="form-control" id="x-axis" disabled>
+                                                <option selected disabled>-- Select an option --</option>
+                                            </select>
+                                            <label for="y-axis">Y-Axis</label>
+                                            <select class="form-control" id="y-axis" disabled>
+                                                <option selected disabled>-- Select an option --</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6" style="border-left: 1px solid #eee;">
+                                            <lable for="pie-value-name"><b>Dimension</b></lable>
+                                            <select class="form-control" id="pie-value-name" disabled>
+                                                <option selected disabled>-- Select an option --</option>
+                                            </select>
+                                            <label for="pie-value">Measure</label>
+                                            <select class="form-control" id="pie-value" disabled>
+                                                <option selected disabled>-- Select an option --</option>
+                                            </select>
                                         </div>
                                     </div>
-                                </p>                   
+                                </div>
+                                <button class="btn btn-md btn-success" style="margin-top: 10px;  margin-left: 18px;" onclick="configureChart()" >Configure</button>
                             </div>
                         </div>
-                     <h4 style="text-align: center;"><button class="btn btn-info btn-lg" onclick="query();">Run query</button></h4>
+
+                        <div id="chart-visualization" style="position: relative; margin-top:10px;">
+                           
+                        </div>
                     </div>
                 </div>
             </div>
+
+        <div id="add-dashboard" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Save Widget</h2>
+                    </div>
+                    <div class="modal-body" style="height: 230px;">
+                        <div class="form-dashboard">
+                            <form role="form" action="/System/AddWidget" name="widgetForm" method="post" onsubmit="checkWidgetInfo()">
+                                <div class="form-group" style="display:none;">
+                                  
+                                    @Html.TextBoxFor(m => m.WidgetName, new { @class = "form-control" , id ="widget-title"})                               
+                                    @Html.TextBoxFor(m => m.WidgetQuery, new { @class = "form-control", id = "widget-query" })
+                                    @Html.TextBoxFor(m => m.WidgetType, new { @class = "form-control", id = "widget-type" })
+                                  </div>
+                                <div>
+                                    
+                                    @Html.LabelFor(m => m.DashboardId)
+                                    @Html.DropDownListFor(m => m.DashboardId, new SelectList(" "), new { @class = "form-control", id = "dashboard-list" })
+                                    <br />
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-lg btn-info" style="float: right;">Create</button>
+                                </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div style="clear:both;"></div> 
+        </div>
         </div>
 
     <footer>

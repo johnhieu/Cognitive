@@ -3,8 +3,17 @@
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
-}
 
+   
+      
+
+}
+<script>
+    function check()
+    {
+        console.log($("#role").val());
+    }
+</script>
 @Styles.Render("~/bundles/register")
 <div id="register-section" class="table-responsive">
     <div id="container">
@@ -14,49 +23,54 @@
             </div>
             <div class="panel-body">
                 <p>@ViewBag.Error</p>
-                <form action="/RegularUser/Register" name="registerForm" role="form" method="post">
+                <form action="/RegularUser/Register" name="registerForm" role="form" method="post" onsubmit="check()">
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     <div class="form-group">
-                        @Html.LabelFor(m => m.FullName)
-                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.FullName)
+                        @Html.LabelFor(model => model.FullName)
+                        @Html.TextBoxFor(model => model.FullName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FullName)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Occupation)
-                        @Html.TextBoxFor(m => m.Occupation, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Occupation)
+                        @Html.LabelFor(model => model.Occupation)
+                        @Html.TextBoxFor(model => model.Occupation, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Occupation)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Age)
-                        @Html.TextBoxFor(m => m.Age, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Age)
+                        @Html.LabelFor(model => model.selectedValue)
+                        @Html.DropDownListFor(model => model.selectedValue, Model.ListRole, new { @class = "form-control", id = "role" })
+                        @Html.ValidationMessageFor(model => model.selectedValue)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Email)
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email)
+                        @Html.LabelFor(model => model.Age)
+                        @Html.TextBoxFor(model => model.Age, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Age)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email)
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Email)
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(m => m.PhoneNumber)
-                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.PhoneNumber)
+                        @Html.LabelFor(model => model.PhoneNumber)
+                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.UserName)
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.UserName)
+                        @Html.LabelFor(model => model.UserName)
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserName)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Password)
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password)
+                        @Html.LabelFor(model => model.Password)
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.ConfirmPassword)
-                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                        @Html.LabelFor(model => model.ConfirmPassword)
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
                     </div>
                     <input class="btn btn-info" type="submit" value="Register">
                 </form>

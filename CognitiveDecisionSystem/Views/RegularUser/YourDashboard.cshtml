@@ -1,4 +1,6 @@
-﻿@{
+﻿@model CognitiveDecisionSystem.Models.FormDashboard
+
+@{
     Layout = null;
 }
 
@@ -38,7 +40,9 @@
                         <li id="user" class="list-group-item">
                             <h3>Welcome back,</h3>
                             <img id="user-image" src="~/Images/default_user_img.png" alt="Profile image" width="60" height="60" /><br /><br />
-                            <p>@User.Identity.Name</p>
+                            <p style="font-size: 20px;">@User.Identity.Name</p>
+                            <p style="font-size: 15px;">@ViewBag.Role</p>
+                            <p style="font-size: 15px;">@ViewBag.Rank</p>
                         </li>
                         <li class="list-group-item" id="profile" onclick="location.href='/System/Induction_Page_Update'">
                             <span class="glyphicon glyphicon glyphicon-th-list"></span>
@@ -68,7 +72,15 @@
                         <div id="widgets-container" class="well well-sm" style="background-color: white;">
                             <a href="#" data-toggle="modal" data-target="#modal-dashboard" data-placement="auto" title="Add new dashboard"><img src="~/Images/widgetized.svg" class="modal-content" id="create-widget-icon" height="100" width="150"></a>
                             <!--Add new dashborad to this div element with id dashboard-placement -->
-                            <div id="dashboard-placement"></div>
+                            <div id="dashboard-placement">
+                                @{
+                                    for (int i = 0; i < ViewBag.Dashboards.Length; i++ )
+                                    {
+                                        <a href="/System/DisplayWidgets?id=@ViewBag.Dashboards[i].DashboardId">@ViewBag.Dashboards[i].DashboardName</a>
+                                    }
+                                }
+
+                            </div>
                             <div id="modal-dashboard" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -77,14 +89,21 @@
                                         </div>
                                         <div class="modal-body" style="height: 230px;">
                                             <div class="form-dashborad">
-                                                <form role="form" action="#">
+                                                <form role="form" action="/System/AddDashboard" name="createDashboardForm" method="post">
                                                     <div class="form-group">
-                                                        <label for="dashboard-name">Enter a name </label>
-                                                        <input type="text" class="form-control" id="dashboard-name" />
+                                                        @Html.LabelFor(m => m.DashboardName)
+                                                        @Html.TextBoxFor(m => m.DashboardName, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.DashboardName)
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="dashboard-description">Description for this dashboard</label>
-                                                        <input type="text" class="form-control" id="dashboard-description" />
+                                                        @Html.LabelFor(m => m.DashboardDesc)
+                                                        @Html.TextBoxFor(m => m.DashboardDesc, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.DashboardDesc)
+                                                    </div>
+                                                    <div class="form-group" style="display: none;">
+                                                        
+                                                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", Value = @User.Identity.Name })
+                                                       
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-lg btn-info" style="float: right;">Create</button>

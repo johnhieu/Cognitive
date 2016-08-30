@@ -65,6 +65,12 @@ namespace CognitiveDecisionSystem
                     "~/Scripts/core/js/src/wz_jsgraphics.js"
                 ));
 
+
+            // Highcharts script
+            bundles.Add(new ScriptBundle("~/bundles/highchart").Include(
+                    "~/Scripts/js/highcharts.js"
+                ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
 

@@ -14,9 +14,6 @@ namespace CognitiveDecisionSystem.Models
         public int WidgetID { get; set; }
         public String WidgetName { get; set; }
         public String HTMLId { get; set; }
-        public int TopX { get; set; }
-        public int TopY { get; set; }
-        public int WWidth { get; set; }
-        public int WHeight { get; set; }
+        
     }
 }

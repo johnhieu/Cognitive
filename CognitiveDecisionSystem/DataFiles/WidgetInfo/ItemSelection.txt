@@ -1,4 +1,4 @@
-﻿ <div class="panel panel-default lobipanel col-lg-2" id="Item selection" data-sortable="true">
+﻿ <div class="panel panel-default lobipanel col-lg-4" id="Item selection" data-sortable="true">
                 <div class="panel-heading">
                     <div class="panel-title">
                         <h6>Item Selection</h6>

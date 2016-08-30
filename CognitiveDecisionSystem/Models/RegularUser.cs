@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
-
+using System.Web.Mvc;
 
 namespace CognitiveDecisionSystem.Models
 {
@@ -24,10 +24,12 @@ namespace CognitiveDecisionSystem.Models
         public String RegisteredDate { get; set; }
         public String LastAccess { get; set; }
         public int PhoneNumber { get; set; }
+        public String FirstTimeRecommendedWidget { get; set; }
 
         public virtual ICollection<Session> Sessions { get; set; }
         public virtual Role Role { get; set; }
         public virtual Rank Rank { get; set; }
+        public virtual ICollection<Dashboard> Dashboards { get; set; }
     }
 
     public class Login
@@ -64,7 +66,14 @@ namespace CognitiveDecisionSystem.Models
         [Required]
         [Display(Name="Age")]
         public int Age { get; set; }
-       
+
+        public List<SelectListItem> ListRole { get; set; }
+
+
+        [Required]
+        [Display(Name="Role")]
+        public string selectedValue {get; set;}
+
         [Required]
         [DataType(DataType.PhoneNumber)]
         [Display(Name="Phone number")]
@@ -78,6 +87,10 @@ namespace CognitiveDecisionSystem.Models
         [DataType(DataType.DateTime)]
         public DateTime LastAccess { get; set; }
 
+        //[Required]
+       // [Display(Name = "Role")]
+       // [DataType(DataType.Text)]
+        //public string Role { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -87,7 +100,7 @@ namespace CognitiveDecisionSystem.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 

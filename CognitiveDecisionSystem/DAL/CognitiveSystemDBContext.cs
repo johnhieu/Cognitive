@@ -20,6 +20,7 @@ namespace CognitiveDecisionSystem.DAL
         public DbSet<Widget> Widgets { get; set; }
         public DbSet<StandAloneElement> StandAloneElements { get; set; }
         public DbSet<Rank> Ranks { get; set; }
+        public DbSet<Dashboard> Dashboards { get; set; }
 
 
         public CognitiveSystemDBContext(): base("server=localhost;user=root;database=uehi;port=3306;password=lovingyou;")

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using CognitiveDecisionSystem.Models
+@model CognitiveDecisionSystem.Models.RegularUser
+
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1">
     <title>@ViewBag.Title</title>
@@ -37,7 +40,8 @@
                             <li id="topNav" class="dropdown">
                                 <a href="#" id="dropdownUser"  class="dropdown-toggle" data-toggle="dropdown">@User.Identity.Name <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a rel="external" href="#">My Profile</a></li>
+                                    <li ><a href="#">Rank: @Model.Rank.RankName</a></li>
+                                    <li><a href="#">Role: @Model.Role.RoleType</a></li>
                                     <li><a rel="external" href="/RegularUser/YourDashboard">Your Dashboard</a></li>
                                     <li>
                                         <a rel="external" href="/RegularUser/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>

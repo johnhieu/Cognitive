@@ -1,8 +1,4 @@
-﻿        @media (min-width: 1000px) {
-             #create-widget-session{
-                 height: 1500px;
-            }
-        }
+﻿
         #body {
             background-color: #eee;
 
@@ -14,7 +10,8 @@
         }
 
         #content-menu {
-            height: 700px;
+            float:left;
+            height: 100%;
             padding: 0px;
            
             
