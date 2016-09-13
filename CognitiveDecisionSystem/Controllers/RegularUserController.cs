@@ -1,13 +1,14 @@
 ﻿using CognitiveDecisionSystem.Models;
 using CognitiveDecisionSystem.DAL;
 using System;
+using System.Text;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
 using System.Collections.Generic;
-using System.IO;
 using System.ComponentModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -17,6 +18,8 @@ using System.Data.Entity;
 using MySql.Data.MySqlClient;
 using System.Web.Routing;
 
+
+
 namespace CognitiveDecisionSystem.Controllers
 {
     public class RegularUserController : Controller
@@ -24,28 +27,13 @@ namespace CognitiveDecisionSystem.Controllers
         private CognitiveSystemDBContext db = new CognitiveSystemDBContext();
         
        
-        //
-        // GET: /RegularUser/
-
         public ActionResult Index()
         {
             return View(db.Users.ToList());
            
         }
 
-        //
-        // GET: /RegularUser/Details/5
 
-        public ActionResult Details(int id = 0)
-        {
-            
-            RegularUser user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
 
         //
         // GET: /RegularUser/Login
@@ -66,8 +54,9 @@ namespace CognitiveDecisionSystem.Controllers
         public ActionResult Login(Login model)
         {
             
-            int length = db.Widgets.Count();
+            int length = 9;
             int[] widgetCount = new int[length+1];
+            string[] widgetClicked = new string[length + 1];
             if (ModelState.IsValid && WebSecurity.Login(model.Username, model.Password))
             {
                 // Change the last access attribute
@@ -107,6 +96,7 @@ namespace CognitiveDecisionSystem.Controllers
                    
                     Array.Clear(widgetCount, 0, length+1);
                  
+                    // Generate xls file for the first time user
                     DataTable dt = new DataTable();
                     dt.Columns.Add("Ranks", typeof(Int32));
                     dt.Columns.Add("RoleID", typeof(Int32));
@@ -144,7 +134,75 @@ namespace CognitiveDecisionSystem.Controllers
 
                     
                 }
+               /* else
+                {
+                    int count = 1;
+                   
 
+                    // Only get the default widgets
+                    var widgets = db.Widgets.Take(9);
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("id", typeof(Int32));
+                    foreach(var widget in widgets)
+                    {
+                        dt.Columns.Add("W" + widget.WidgetID, typeof(string));
+                    }
+                    var sessions = db.Sessions.OrderByDescending(s => s.SessionID).Take(100);
+
+                    // Attributes' name for data
+                    var csv = new StringBuilder();
+                    var line = string.Format("id,W1,W2,W3,W4,W5,W6,W7,W8,W9");
+                    csv.AppendLine(line);
+                    foreach(var session in sessions)
+                    {
+                        // Initialize the array and get the records from each session
+                        var records = db.Records.Where(rec => rec.Session.SessionID == session.SessionID);
+                        for (int i = 1; i < length+1; i++)
+                        {
+                            widgetClicked[i] = " ";
+                        }
+
+                        // Loops through the records
+                        foreach (var r in records)
+                        {
+                            
+                                if (r.Widget != null && r.Clicked && !widgetClicked[(r.Widget.WidgetID)].Equals("t"))
+                                {
+
+                                    widgetClicked[(r.Widget.WidgetID)] = "t";
+                                }
+                           
+                           
+                        }
+                        
+                        /* Add custom row into dt variable using row
+                        DataRow row = dt.NewRow();
+                        row[0] = count;
+                        for(int i = 1; i< length+1; i++)
+                        {
+                            row[i] = widgetClicked[i];
+                        }
+                        dt.Rows.Add(row);
+                        count++;
+                        Array.Clear(widgetClicked, 0, length + 1); // Remember to end comment here
+
+                        // Add custom using StringBuilder and file path   
+                        var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}", count, widgetClicked[1], widgetClicked[2], widgetClicked[3], widgetClicked[4], widgetClicked[5], widgetClicked[6], widgetClicked[7], widgetClicked[8], widgetClicked[9]);
+
+                        csv.AppendLine(newLine);
+
+                        
+                        count++;
+                    }
+                  
+                    //WriteExcelWithNPOI(dt, "xls", "associationRule.csv");
+                    StreamWriter sw = new StreamWriter(@"D:\functions\train.csv");
+                    sw.Write(csv.ToString());
+                    sw.Close();
+
+                    
+                }*/
+                
                 // Create a Session record
                 DateTime localDate = DateTime.Now;
                 Session newSession = new Session();
@@ -158,7 +216,7 @@ namespace CognitiveDecisionSystem.Controllers
 
                 ViewBag.RnR = "";
 
-                return RedirectToAction("Induction_Page_Update", "System");
+                return RedirectToAction("YourDashboard", "RegularUser");
 
                
             }
@@ -166,6 +224,22 @@ namespace CognitiveDecisionSystem.Controllers
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
+        }
+
+        // GET: /RegularUser/LogOut
+        public ActionResult LogOut()
+        {
+            WebSecurity.Logout();
+            int id = WebSecurity.CurrentUserId;
+
+            var lastestSession = db.Sessions.OrderByDescending(s => s.SessionID).FirstOrDefault(s => s.RegularUser.Username == WebSecurity.CurrentUserName);
+
+            lastestSession.EndTime = DateTime.Now.ToShortTimeString();
+            db.Entry(lastestSession).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Login", "RegularUser");
         }
 
         [AllowAnonymous]
@@ -254,121 +328,14 @@ namespace CognitiveDecisionSystem.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public String GetLastWidgetOrder(String username)
-        {
-            RegularUser user = db.Users.Find(WebSecurity.GetUserId(username));
-            return user.FirstTimeRecommendedWidget;
-        }
-
-        [HttpGet]
-        public String StoreCurrentDashboard(String username, String widgetID)
-        {
-            RegularUser user = db.Users.Find(WebSecurity.GetUserId(username));
-            user.FirstTimeRecommendedWidget = widgetID;
-            db.Entry(user).State = EntityState.Modified;
-            db.SaveChanges();
-            return "Success";   
-        }
-
-        [HttpGet]
-        public String CheckFirstTimeUser(String username)
-        {
-            String popularWidget = "";
-             int sessionCount = db.Sessions.Count(s => s.RegularUser.Username == username);
-             RegularUser user = db.Users.Find(WebSecurity.GetUserId(username));
-             if(sessionCount == 1)
-             {
-                 MLApp.MLApp matlab = new MLApp.MLApp();
-
-                 matlab.Execute(@"cd D:\functions");
-                    
-                 object result = null;
-
-                 matlab.Feval("DemoDecisionTree_2", 1, out result, Double.Parse(user.Rank.RankID.ToString()), Double.Parse(user.Role.RoleId.ToString()), Double.Parse((DateTime.Now.Month - DateTime.Parse(user.RegisteredDate).Month).ToString()));
-
-                 object[] res = result as object[];
-
-
-                 String temp = Convert.ToString(res[0]);
-                 popularWidget = temp.Substring(1);
-                 user.FirstTimeRecommendedWidget = "1 2 3 4 5 6 7 8 9";
-                 
-                 db.Entry(user).State = EntityState.Modified;
-                 db.SaveChanges();
-             }
-                 // Not the first time user, use the second suggestion including the first widget recommedation
-             else
-             {
-                 string widgetOrder = user.FirstTimeRecommendedWidget;
-                 int length = 9;
-                 int[] widgetCount = new int[length + 1];
-                 int highestTemp = 0;
-                 int count = 0;
-                 bool notEmpty = false;
-                 
-                 // Check if the last session is empty or not
-                 var sessions = db.Sessions.OrderByDescending(s => s.SessionID).Where(u => u.RegularUser.ID == user.ID);
-                 foreach (var s in sessions)
-                 {
-                    
-                    if (count == 1)
-                    {
-                        var session = s;
-                        var records = db.Records.Where(rec => rec.Session.SessionID == session.SessionID);
-                        foreach (var r in records)
-                        {
-                            if (r.Widget != null)
-                            {
-                                if(!notEmpty)
-                                {
-                                    notEmpty = true;
-                                }
-                                widgetCount[(r.Widget.WidgetID)]++;
-                            }
-
-                        }
-                       
-                     }
-
-                     count++;
-                 }
-                 
-                 // If empty, we just need to populate the old data already stored in the database
-                 if(!notEmpty)
-                 {
-                     popularWidget = widgetOrder;
-                 }
-                 else
-                 {
-                     for (int i = 1; i < length + 1; i++)
-                     {
-                         if (widgetCount[i] > widgetCount[highestTemp])
-                         {
-                             highestTemp = i;
-                         }
-                     }
-
-                     popularWidget = highestTemp.ToString();
-
-                     String[] splits = widgetOrder.Split(null);
-                     for (int i = 0; i < splits.Length; i++ )
-                     {
-                         if(highestTemp.ToString().Equals(splits[i]))
-                         {
-                             continue;
-                         }
-                         else
-                         {
-                             popularWidget += " " + splits[i];
-                         }
-                     }
  
-                 }                 
-             }
-             
-             return popularWidget;
-        }
+
+ 
+
+
+
+
+
 
         public bool WriteExcelWithNPOI(DataTable dt, String extension, String name)
         {
@@ -407,7 +374,7 @@ namespace CognitiveDecisionSystem.Controllers
                 IRow row = sheet1.CreateRow(i + 1);
                 for (int j = 0; j < dt.Columns.Count; j++)
                 {
-                    if (j < 2)
+                    if (j < 1)
                     {
                         ICell cell = row.CreateCell(j);
                         String columnName = dt.Columns[j].ToString();
@@ -423,116 +390,15 @@ namespace CognitiveDecisionSystem.Controllers
                 }
             }
 
-            using (FileStream stream = new FileStream(@"D:\functions\"+name, FileMode.Create, FileAccess.Write))
+           
+
+            using (FileStream stream = new FileStream(@"D:\functions\" + name, FileMode.Create, FileAccess.Write))
             {
+                
                 workbook.Write(stream);
                 stream.Close();
                 return true;
             }
-        }
-
-        // GET: /RegularUser/LogOut
-        public ActionResult LogOut()
-        {
-            WebSecurity.Logout();
-            int id = WebSecurity.CurrentUserId;
-
-            var lastestSession = db.Sessions.OrderByDescending(s => s.SessionID).FirstOrDefault(s => s.RegularUser.Username == WebSecurity.CurrentUserName);
-      
-            lastestSession.EndTime = DateTime.Now.ToShortTimeString();
-            db.Entry(lastestSession).State = EntityState.Modified;
-            db.SaveChanges();
-
-
-            return RedirectToAction("Login", "RegularUser");
-        }
-
-
-        [HttpPost]
-        public void RecordLog(string data)
-        {
-            string[] tokens = data.Split('&');
-          
-            var lastestSession = db.Sessions.OrderByDescending(s => s.SessionID).FirstOrDefault(s => s.RegularUser.Username == WebSecurity.CurrentUserName);
-            // Look for sessionID
-            int sessionID = lastestSession.SessionID;
-            
-            //List of Widgets
-            List<Widget> widgets = db.Widgets.ToList();
-
-            //Look for timestamp
-            string[] timeSplit = tokens[1].Split('=');
-            double timeStamp = double.Parse(timeSplit[1]);
-
-            // Screen width and height
-            string[] screenHeightSplit = tokens[3].Split('=');
-            int screenHeight = Int32.Parse(screenHeightSplit[1]);
-
-            string[] screenWidthSplit = tokens[2].Split('=');
-            int screenWidth = Int32.Parse(screenWidthSplit[1]);
-
-            // FPS
-            int fps = 24;
-
-            // X and Y Coordinate
-            string[] xcoord = tokens[4].Split('=');
-            string[] x = xcoord[1].Split(',');
-
-            string[] ycoord = tokens[5].Split('=');
-            string[] y = ycoord[1].Split(',');
-
-            // X and Y Clicked
-            string[] xcoordclicks= tokens[6].Split('=');
-            string[] xclick = xcoordclicks[1].Split(',');
-
-            string[] ycoordclicks = tokens[7].Split('=');
-            string[] yclick = ycoordclicks[1].Split(',');
-
-            bool clicked = true;
-
-            //Hovered element
-            string[] elements = tokens[8].Split('=');
-            string[] elementsID = elements[1].Split(',');
-            
-            //Create a instance to hold a record
-            Record repeatedRecord = new Record();
-            int recordID = db.Records.Count();
-            repeatedRecord.RecordID = recordID + 1;
-            repeatedRecord.ScreenLength = screenHeight;
-            repeatedRecord.ScreenWidth = screenWidth;
-            repeatedRecord.Session = lastestSession;
-            repeatedRecord.TimeStamp = timeStamp;
-            repeatedRecord.FPS = fps;
-            
-         
-            for(int i=0; i < x.Length; i++)
-            {
-                
-                if(x[i] == xclick[i] && y[i] == yclick[i])
-                {
-                    clicked = true;
-                }
-                else
-                {
-                    clicked = false;
-                }
-
-                for (int j = 0; j < widgets.Count(); j++ )
-                {
-                    if (elementsID[i].Contains(widgets[j].HTMLId))
-                    {
-                        repeatedRecord.Widget = widgets[j];
-                    }
-                }
-                repeatedRecord.CoordX = Int32.Parse(x[i]);
-                repeatedRecord.CoordY = Int32.Parse(y[i]);
-                
-                repeatedRecord.Clicked = clicked;
-               
-                db.Records.Add(repeatedRecord);
-                db.SaveChanges();
-            }
-
         }
 
         [HttpPost]
@@ -552,6 +418,7 @@ namespace CognitiveDecisionSystem.Controllers
                 ViewBag.Rank = "Rank: " + user.Rank.RankName;
                 ViewBag.Role = "Role: " + user.Role.RoleType;
                 var dashboards = db.Dashboards.Where(d => d.RegularUser.ID == id);
+                ViewBag.NewlyCreatedWidget = db.Widgets.OrderByDescending(w => w.WidgetID).Where(w => w.Dashboard.RegularUser.ID == id).FirstOrDefault();
                 ViewBag.Dashboards = new Dashboard[dashboards.Count()];
                 int count = 0;
                 foreach(var d in dashboards)
@@ -591,74 +458,12 @@ namespace CognitiveDecisionSystem.Controllers
         //
         // POST: /User/Create
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(RegularUser user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            return View(user);
-        }
+       
 
-        //
-        // GET: /User/Edit/5
 
-        public ActionResult Edit(int id = 0)
-        {
-            RegularUser user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
 
-        //
-        // POST: /User/Edit/5
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(RegularUser user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(user);
-        }
-
-        //
-        // GET: /User/Delete/5
-
-        public ActionResult Delete(int id = 0)
-        {
-            RegularUser user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        //
-        // POST: /User/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            RegularUser user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+       
 
         protected override void Dispose(bool disposing)
         {

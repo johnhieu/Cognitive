@@ -292,10 +292,9 @@
           data += "&action="    + "append";
           data += "&remote="    + smtOpt.storageServer;
         // send request
-       
-         
+  
        $.ajax({
-        url: '/RegularUser/RecordLog',
+        url: '/Functions/RecordLog',
         data: { data: data },
         success: function(result){},
         type: 'POST'

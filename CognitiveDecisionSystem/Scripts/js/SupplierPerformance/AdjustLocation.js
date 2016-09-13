@@ -95,7 +95,7 @@ function firstTimeUserOrders()
     var tokens;
     
         $.ajax({
-            url: "../RegularUser/CheckFirstTimeUser/?username=" + window.username,
+            url: "../Functions/CheckFirstTimeUser/?username=" + window.username,
             async: false,
             success: function (result) {
                
@@ -121,7 +121,7 @@ function firstTimeUserOrders()
                           
 
                             $.ajax({
-                                url: "../RegularUser/StoreCurrentDashboard/?username=" + window.username + "&widgetID=" + widget,
+                                url: "../Functions/StoreCurrentDashboard/?username=" + window.username + "&widgetID=" + widget,
                                 async: false,
                                 success: function (result) {
                                 }
@@ -144,14 +144,14 @@ function firstTimeUserOrders()
                         condition = true;
 
                         $.ajax({
-                            url: "../RegularUser/GetLastWidgetOrder/?username=" + window.username,
+                            url: "../Functions/GetLastWidgetOrder/?username=" + window.username,
                             async: false,
                             success: function (result) {
                                 previousOrder = result;
                               
                             }
                         });                  
-
+                        
                         for (var i = 0; i < tokens.length; i++) {   
                             customWidgets.push(defaultWidgets[parseInt(tokens[i]) - 1]);
                             
@@ -211,7 +211,7 @@ $(document).ready(function () {
         if(!undo & !firstTime)
         {
             $.ajax({
-                url: "../RegularUser/StoreCurrentDashboard/?username=" + window.username + "&widgetID=" + improvedOrder,
+                url: "../Functions/StoreCurrentDashboard/?username=" + window.username + "&widgetID=" + improvedOrder,
                 async: false,
                 success: function (result) {
                 }

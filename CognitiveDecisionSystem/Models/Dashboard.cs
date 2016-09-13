@@ -23,7 +23,8 @@ namespace CognitiveDecisionSystem.Models
         public String DashboardName { get; set; }
 
             
-        [Display(Name = "Dashboard Descrition")]
+        [Display(Name = "Dashboard Description")]
+        [Required]
         public String DashboardDesc { get; set; }
 
         [Required]

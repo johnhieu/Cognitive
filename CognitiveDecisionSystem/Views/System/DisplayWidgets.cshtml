@@ -1,0 +1,311 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    @Scripts.Render("~/bundles/bootstrap-jquery")
+    @Styles.Render("~/bundles/bootstrap")
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="../Scripts/js/lobipanel/lobipanel.min.js"></script>
+    <link href="../Content/CSS/lobipanel/lobipanel.min.css" rel="stylesheet" />
+
+    <script>
+        function convertToJavaScriptObject(data) {
+            return JSON.parse(JSON.stringify(data));
+
+        }
+    </script>
+    <title>DisplayWidgets</title>
+</head>
+<body>
+    <div>
+        <a href="@Url.Action("YourDashboard", "RegularUser")" style="font-weight: bold; font-size: 20px;  text-decoration: underline;"><span class="glyphicon glyphicon-arrow-left"></span> Go Back</a>
+    </div>
+   
+    @{
+        for (int i = 0; i < ViewBag.Widgets.Length; i++)
+        {
+            <div class="panel panel-default lobipanel col-lg-4" id="@ViewBag.Widgets[i].HTMLId" data-sortable="true">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>@ViewBag.Widgets[i].WidgetName</h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                </div>
+            </div>
+            
+        }
+    }
+    <div>
+    </div>
+    <script>
+
+        @foreach(var widget in ViewBag.Widgets)
+                 {
+
+
+                      <text>
+
+        var trimText = "@widget.WidgetQuery";
+        trimText = trimText.replace("&amp;", "&");
+        
+    var index = trimText.indexOf("&");
+    var uriQuery = trimText.substring(0, index + 1);
+    var firstEqual = uriQuery.indexOf("=");
+    var secondAnd = uriQuery.indexOf("&");
+
+    var tokens = uriQuery.substring(firstEqual + 1, secondAnd).split(",");
+    var nameQuery = tokens[0];
+    var dataQuery = tokens[1];
+    switch ("@widget.WidgetType") {
+        case "Table":
+            $("#@widget.HTMLId").append(" <table class=\"display\" id=\"tableChart\" style=\"display: none;\" cellspacing=\"0\"  >  <thead id=\"column-name\"> </thead>  </table>           ");
+
+            // Check to see if they are raw view
+            var data = [];
+
+           
+                for (var i = 0 ; i < tokens.length; i++) {
+                    
+                       
+                        data.push({ "data": tokens[i] });
+                        $("#column-name").append("<th>" + tokens[i] + "</th>");
+
+                    }
+               
+           
+
+
+            $('#tableChart').DataTable({
+                "responsive": true,
+                "paging": true,
+                "ordering": true,
+                "processing": true,
+                "ajax": {
+                    "url": trimText,
+                    "dataSrc": "value"
+                },
+                "columns": data
+            });
+
+            // Got bug: Unable to get property 'style' of undefined or null reference
+            $("#tableChart").show();
+            break;
+        case "Pie":
+           
+            var options = {
+                chart: {
+                    renderTo: "@widget.HTMLId",
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                //tooltip: {
+                //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                // },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                title: {
+                    text: "@widget.WidgetName"
+                },
+                series: [{
+                    name: dataQuery,
+                    data: []
+
+                }]
+            };
+            $.ajax({
+                url: trimText,
+                async: false,
+                success: function (result) {
+                    var data = convertToJavaScriptObject(result);
+
+                    for (var i = 0 ; i < result.value.length; i++) {
+                        options.series[0].data.push({ name: data.value[i][nameQuery], y: parseInt(data.value[i][dataQuery]) });
+
+                    }
+
+                    var chart = new Highcharts.Chart(options);
+
+                }
+            });
+            
+            break;
+        case "Line":
+            console.log("@widget.WidgetType");
+            var options = {
+                chart: {
+                    renderTo: "@widget.HTMLId",
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'line'
+                },
+                //tooltip: {
+                //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                // },
+                title: {
+                    text: "@widget.WidgetName",
+
+                },
+
+                xAxis: {
+                    title: {
+                        text: nameQuery
+                    },
+                    categories: []
+                },
+                yAxis: {
+                    title: {
+                        text: dataQuery,
+
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: nameQuery,
+                    data: []
+                }]
+
+            };
+            $.ajax({
+                url: trimText,
+                async: false,
+                success: function (result) {
+                    var data = convertToJavaScriptObject(result);
+
+                    for (var i = 0 ; i < result.value.length; i++) {
+                        options.xAxis.categories.push(data.value[i][nameQuery]);
+                        options.series[0].data.push(parseInt(data.value[i][dataQuery]));
+
+                    }
+
+                    var chart = new Highcharts.Chart(options);
+
+                }
+            });
+           
+            break;
+        case "Column":
+
+            var options = {
+                chart: {
+                    renderTo: "@widget.HTMLId",
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'column'
+                },
+                //tooltip: {
+                //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                // },
+                title: {
+                    text: "@widget.WidgetName",
+
+                },
+
+                xAxis: {
+                    title: {
+                        text: nameQuery
+                    },
+                    categories: []
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: dataQuery,
+
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: nameQuery,
+                    data: []
+                }]
+
+            };
+
+            $.ajax({
+                url: trimText,
+                async: false,
+                success: function (result) {
+                    var data = convertToJavaScriptObject(result);
+
+                    for (var i = 0 ; i < result.value.length; i++) {
+                        options.xAxis.categories.push(data.value[i][nameQuery]);
+                        options.series[0].data.push(parseInt(data.value[i][dataQuery]));
+
+                    }
+
+                    var chart = new Highcharts.Chart(options);
+
+                }
+            });
+            break;
+    }
+
+    </text>
+
+
+                 }
+
+
+
+    </script>
+
+</body>
+</html>

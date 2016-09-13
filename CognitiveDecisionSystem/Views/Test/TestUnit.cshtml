@@ -1,0 +1,78 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+    <script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.js"></script>
+    <title>TestUnit</title>
+    <script>
+
+        function convertToJavaScriptObject(data) {
+            return JSON.parse(JSON.stringify(data));
+
+        }
+
+        QUnit.test("Test select a database", function (assert) {
+              var done = assert.async();
+              var count = 0;
+              $.getJSON("http://localhost:50931/Service/GetTables(Database='finance')", function (data) {
+                  var obj = convertToJavaScriptObject(data);
+                  count = obj.value.length;
+                  assert.equal(count, 10, "Get the number of tables in the database, it should be 10");
+                  done();
+              });
+        });
+
+        QUnit.test("Test select a table", function (assert) {
+            var done = assert.async();
+            var count = 0;
+            $.getJSON("http://localhost:50931/Service/GetAttributes(Database='finance',Table='accounts')", function (data) {
+                var obj = convertToJavaScriptObject(data);
+                count = obj.value.length;
+                console.log(count);
+                assert.equal(count, 4, "Get the number of attributes in the database. In accounts there are 4 attributes so we expect the result to have the result of 4 ");
+                done();
+            });
+        });
+       
+        QUnit.test("Get the suggested widget for the first time user", function (assert) {
+            var done = assert.async();
+            $.ajax({
+                url: "../RegularUser/CheckFirstTimeUser/?username=unit_test",
+                async: false,
+                success: function (result) {
+                    var tokens = result.split(" ");
+                    assert.equal(tokens.length, 1, "Expect to have only one suggested widget for the first time user");
+                    done();
+                }
+            });
+        });
+      
+        
+
+            QUnit.test("Send a query to the API server", function (assert) {
+                var done = assert.async();
+                var count = 0;
+                $.getJSON("http://localhost:50931/Service/products?$select=ProductId,SupplierID,Stocklevel&$filter=Stocklevel le 100", function (data) {
+                    var obj = convertToJavaScriptObject(data);
+                    count = obj.value.length;
+                    console.log(count);
+                    assert.notEqual(count, 0, "If the result returns nothing, this test will have an error.");
+                    done();
+                });
+            });
+        QUnit.start();
+
+
+    </script>
+</head>
+<body>
+    <div id="qunit"></div>
+</body>
+</html>

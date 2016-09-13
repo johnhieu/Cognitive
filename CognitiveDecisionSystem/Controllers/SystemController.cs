@@ -84,16 +84,20 @@ namespace CognitiveDecisionSystem.Controllers
         [HttpPost]
         public ActionResult AddDashboard(FormDashboard form)
         {
-            Dashboard newDashboard = new Dashboard();
-            
-            newDashboard.DashboardName = form.DashboardName;
-            newDashboard.DashboardDesc = form.DashboardDesc;
-            newDashboard.RegularUser = db.Users.Find(WebSecurity.GetUserId(form.Username));
+       
+          
+                Dashboard newDashboard = new Dashboard();
 
-            db.Dashboards.Add(newDashboard);
-            db.SaveChanges();
+                newDashboard.DashboardName = form.DashboardName;
+                newDashboard.DashboardDesc = form.DashboardDesc;
+                newDashboard.RegularUser = db.Users.Find(WebSecurity.GetUserId(form.Username));
 
-           return RedirectToAction("YourDashboard", "RegularUser");
+                db.Dashboards.Add(newDashboard);
+                db.SaveChanges();
+
+                return RedirectToAction("YourDashboard", "RegularUser");
+          
+
         }
 
         [HttpGet]
@@ -105,7 +109,7 @@ namespace CognitiveDecisionSystem.Controllers
 
             foreach(var d in dashboards)
             {
-                list += d.DashboardName + ","+d.DashboardId;
+                list += d.DashboardName + ","+d.DashboardId+";";
             }
             return list;
         }

@@ -22,7 +22,7 @@
   
 </head>
 <body>
-
+   
     <form id="form1" >
         <div id="wrapper" class="o-wrapper">
             <nav class="navbar navbar-default">
@@ -31,34 +31,21 @@
                         <ul class="navbar-brand navbar-left">
 
                             <li> <span id="selectAsset" class="active"><i class="ion-chevron-right"></i>&nbsp;&nbsp;&nbsp;Select Asset</span></li>
+                            
                         </ul>
                         <ul class="nav navbar-nav navbar-brand navbar-center">
-                            <li><span id="itemHeaderID"></span></li>
+
                         </ul>
 
-                        <ul class="nav navbar-nav navbar-right">
-                            <li id="topNav" class="dropdown">
-                                <a href="#" id="dropdownUser"  class="dropdown-toggle" data-toggle="dropdown">@User.Identity.Name <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li ><a href="#">Rank: @Model.Rank.RankName</a></li>
-                                    <li><a href="#">Role: @Model.Role.RoleType</a></li>
-                                    <li><a rel="external" href="/RegularUser/YourDashboard">Your Dashboard</a></li>
-                                    <li>
-                                        <a rel="external" href="/RegularUser/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
-                                    </li>
-                                </ul>
-                            </li>
-               
-                            <li class="active">  <a href="@Url.Action("Induction_Page_Update", "System")"><i class="ion-android-home"></i> RI Induction</a></li>
-                            <li><a rel="external" href="@Url.Action("SupplierPerformance", "System")"><i class=" shipping icon"></i> Suppliers</a></li>
-                        </ul>
+                       
 
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
             <div id="body">
                 <div class="container-fluid">
-                    <section class="content-wrapper main-content clear-fix">
+                    <a href="@Url.Action("YourDashboard", "RegularUser")" style="font-weight: bold; font-size: 20px;  text-decoration: underline;"><span class="glyphicon glyphicon-arrow-left"></span> Go Back</a>
+                    <section class="content-wrapper main-content clear-fix" style="margin-top: 20px;">
                         @RenderBody()
                     </section>
                 </div>

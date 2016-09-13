@@ -9,10 +9,7 @@
 
 }
 <script>
-    function check()
-    {
-        console.log($("#role").val());
-    }
+
 </script>
 @Styles.Render("~/bundles/register")
 <div id="register-section" class="table-responsive">
@@ -23,7 +20,7 @@
             </div>
             <div class="panel-body">
                 <p>@ViewBag.Error</p>
-                <form action="/RegularUser/Register" name="registerForm" role="form" method="post" onsubmit="check()">
+                <form action="/RegularUser/Register" name="registerForm" role="form" method="post" >
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     <div class="form-group">
