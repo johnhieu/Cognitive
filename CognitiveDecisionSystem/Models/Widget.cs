@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CognitiveDecisionSystem.Models
 {
+    // Sub-class of ScreenElement: Widget class that represents the Widget table in the database
     public class Widget: ScreenElement
     {
         public String WidgetType { get; set; }
@@ -17,6 +18,8 @@ namespace CognitiveDecisionSystem.Models
         public virtual Dashboard Dashboard { get; set; }
     }
 
+    // WidgetDashboard class represents a model to be used in the CreateWidget interface
+    // to send the information of a created widget to a custom dashboard
     public class WidgetDashboard
     {
         [Required]

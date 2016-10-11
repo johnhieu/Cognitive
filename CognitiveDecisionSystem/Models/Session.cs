@@ -5,6 +5,7 @@ using System.Web;
 
 namespace CognitiveDecisionSystem.Models
 {
+    // Session class for session table in the database
     public class Session
     {
         public int SessionID { get; set; }

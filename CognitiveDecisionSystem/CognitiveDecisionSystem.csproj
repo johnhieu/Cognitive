@@ -328,8 +328,8 @@
       <DependentUpon>CognitiveSystemODate.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\FunctionsController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegularUserController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -339,7 +339,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\AssociationRuleFormat.cs" />
     <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Record.cs" />
@@ -357,10 +356,12 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CognitiveSystemODate.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\bootstrap-multiselect.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\create-widget.css" />
     <Content Include="Content\CSS\boostrap\bootstrap-theme.css" />
     <Content Include="Content\CSS\boostrap\bootstrap-theme.min.css" />
     <Content Include="Content\CSS\boostrap\bootstrap.css" />
@@ -536,8 +537,10 @@
     <Content Include="Images\widget-icon.png" />
     <Content Include="Images\widget.svg" />
     <Content Include="Images\widgetized.svg" />
+    <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\create-widget.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
@@ -621,9 +624,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -632,16 +632,10 @@
     </Content>
     <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
     <Content Include="Views\Shared\_BootstrapLoginPartial.cshtml" />
-    <Content Include="Views\System\Index.cshtml" />
     <Content Include="Views\Shared\_Site1.cshtml" />
     <Content Include="Views\System\SupplierPerformance.cshtml" />
     <Content Include="Views\System\Induction_Page_Update.cshtml" />
     <Content Include="Views\System\DecisionSummary_Page_Update.cshtml" />
-    <Content Include="Views\RegularUser\Index.cshtml" />
-    <Content Include="Views\RegularUser\Details.cshtml" />
-    <Content Include="Views\RegularUser\Create.cshtml" />
-    <Content Include="Views\RegularUser\Edit.cshtml" />
-    <Content Include="Views\RegularUser\Delete.cshtml" />
     <Content Include="Views\RegularUser\Login.cshtml" />
     <Content Include="Views\RegularUser\Register.cshtml" />
     <Content Include="Views\RegularUser\YourDashboard.cshtml" />
@@ -649,10 +643,13 @@
     <Content Include="Views\System\Error.cshtml" />
     <Content Include="Views\System\DisplayWidgets.cshtml" />
     <Content Include="Views\Test\TestUnit.cshtml" />
+    <Content Include="Views\RegularUser\AdminLogin.cshtml" />
+    <Content Include="Views\Admin\UserInformation.cshtml" />
+    <Content Include="Views\Admin\SessionInformation.cshtml" />
+    <Content Include="Views\Admin\DashboardInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Functions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

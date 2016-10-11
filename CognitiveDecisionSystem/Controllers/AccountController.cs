@@ -8,7 +8,7 @@ using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
-
+// This class is generated automatically when creating the project solution so skip this one.
 namespace CognitiveDecisionSystem.Controllers
 {
     public class AccountController : Controller

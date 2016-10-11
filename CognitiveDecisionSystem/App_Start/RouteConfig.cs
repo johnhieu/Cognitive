@@ -13,6 +13,7 @@ namespace CognitiveDecisionSystem
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Specify Route for controller class
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

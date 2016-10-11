@@ -20,6 +20,11 @@
             return JSON.parse(JSON.stringify(data));
 
         }
+        // Activiate the lobi panel
+        $('.panel').lobiPanel({
+            sortable: true,
+            unpin: false
+        });
     </script>
     <title>DisplayWidgets</title>
 </head>
@@ -27,7 +32,7 @@
     <div>
         <a href="@Url.Action("YourDashboard", "RegularUser")" style="font-weight: bold; font-size: 20px;  text-decoration: underline;"><span class="glyphicon glyphicon-arrow-left"></span> Go Back</a>
     </div>
-   
+   <!--Using Razor to loop through each widgets in the dashboard end display widgets to the screen-->
     @{
         for (int i = 0; i < ViewBag.Widgets.Length; i++)
         {
@@ -46,13 +51,13 @@
     <div>
     </div>
     <script>
-
+        // These scripts are not fully functional, we only develop part of the solutions and end up not having enough time to implement this part
         @foreach(var widget in ViewBag.Widgets)
                  {
 
 
                       <text>
-
+       // Seperate query into substring that contains different part of the query
         var trimText = "@widget.WidgetQuery";
         trimText = trimText.replace("&amp;", "&");
         
@@ -64,6 +69,7 @@
     var tokens = uriQuery.substring(firstEqual + 1, secondAnd).split(",");
     var nameQuery = tokens[0];
     var dataQuery = tokens[1];
+        // Decide the visualization of the widget
     switch ("@widget.WidgetType") {
         case "Table":
             $("#@widget.HTMLId").append(" <table class=\"display\" id=\"tableChart\" style=\"display: none;\" cellspacing=\"0\"  >  <thead id=\"column-name\"> </thead>  </table>           ");

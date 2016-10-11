@@ -57,6 +57,7 @@ CREATE TABLE Dashboard(
 	DashboardId INT NOT NULL AUTO_INCREMENT,
 	DashboardName NVARCHAR(256) NOT NULL,
 	DashboardDesc TEXT NULL,
+	CreatedDate NVARCHAR (256) NULL,
 	RegularUser_ID INT NOT NULL,
 	PRIMARY KEY (DashboardId),
 	FOREIGN KEY (RegularUser_ID) REFERENCES RegularUser(ID)	
@@ -69,6 +70,8 @@ CREATE TABLE Widget (
     HTMLId     NVARCHAR (256) NULL,
 	WidgetType NVARCHAR(256)  NULL,
 	WidgetQuery TEXT NULL,
+	WidgetXAxis NVARCHAR(256) NULL,
+	WidgetYAxis NVARCHAR(256) NULL,
 	Dashboard_DashboardId INT NULL,
     PRIMARY KEY (WidgetID),
 	FOREIGN KEY (Dashboard_DashboardId) REFERENCES Dashboard(DashboardId)

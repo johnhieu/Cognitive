@@ -10,887 +10,21 @@
     <meta name="viewport" content="width=device-width" />
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css " />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css " />
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
     @Styles.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/bootstrap-jquery")
-   
+    @Styles.Render("~/bundles/create-widget")
     @Styles.Render("~/bundles/homepage")
     @Styles.Render("~/bundles/dashboard")
-
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script>
-
-        // Array of database or tables have been requested from the server
-
-        // Temporary arrays to hold values from the request and will be displayed on the screen
-
-        var tables = [];
-        var attrs = [];
-        var attrsType = [];
-        var values = [];
-        var dashboards = [];
-        var dashboardids = [];
-        // Chosen arrays of selected tables and attributes
-        var chosenTables = [];
-        var chosenConditions = [];
-        var chosenViews = [];
-        var chosenDatabase = "";
-        var finalQuery = "";
-
-        // Configuration for charts
-        var dimension = "";
-        var measure = "";
-        var title = "";
-        var xaxis ="";
-        var yaxis = "";
-
-        // Chart type
-        var chartType = "";
-        var stacking = false;
-        // This is only for temporary solution, should not be here, later will check tables or attributes
-        // if they are not empty then show the confirm
-        var firstTime = true;
-        var configureClicked = false;
-        var tableAdded = false;
-        
-
-
-        (function () {
-            $.ajax({
-                url: "../System/GetDashboard/?username="+"@User.Identity.Name",
-                async: true,
-                success: function (result) {
-                    var tokens = result.split(";");
-                    for(var i=0; i< tokens.length-1; i++)
-                    {
-                        var seperate = tokens[i].split(",");
-                        dashboards.push(seperate[0]);
-                        dashboardids.push(seperate[1]);
-                        
-                        $("#dashboard-list").append("<option>"+seperate[0]+"</option>");
-                    }
-                }
-            });
-           
-        })();
-
-    function displayContent(id)
-    {
-        if (chosenTables.length != 0)
-        {
-            $("#" + id).css("display", "block");
-        }
-        if(chosenDatabase != "")
-        {
-            $("#table-content").css("display", "block");
-        }
-       
-    }
-
-    function closeContent(id) {
-        $("#" + id).css("display", "none");
-    }
-
-    function enableAttr() {
-        var value = $("#view-select").val();
-        console.log(value);
-        if (value != "raw") {
-            $("#grouping-other-view").prop("disabled", false);
-        }
-        else
-        {
-            $("#grouping-other-view").prop("disabled", true);
-        }
-    }
-
-    function reset()
-    {
-       
-        // Reset all the things when a user chose another database. Consider we only works with one table only
-        condition = confirm("Changing database will remove any current selection. Do you want to proceed?");
-        if(condition)
-        {
-            tables = []
-            attrs = [];
-            attrsType = [];
-
-            chosenDatabase = "";
-            chosenTables = [];
-            chosenConditions = [];
-            chosenViews = [];
-
-            chartType = "";
-            stacking = false;
-            configureClicked = false;
-
-            // Delete all the badge, option
-            $("#table-badge-selection").empty();
-            $("#table-select").empty();
-            $("#attribute-select").empty();
-            $("#attribute-other-view").empty();
-            $("#condition-badge-selection").empty();
-            $("#view-badge-selection").empty();
-            $("#chart-badge-selection").empty();
-            $("#pie-value-name").empty();
-            $("#pie-value").empty();
-            $("#x-axis").empty();
-            $("#y-axis").empty();
-
-            $("#data").val('');
-            // Got bug: Unable to get property 'style' of undefined or null reference
-            $("#chart-visualization").empty();
-            
-
-            // Close all contents
-            closeContent("table-content");
-            closeContent("condition-content");
-            closeContent("view-content");
-
-
-            $("#table-select").append("<option selected disabled>-- Select an option --</option>");
-            $("#attribute-select").append("<option selected disabled>-- Select an option --</option>");
-            $("#attribute-other-view").append("<option selected disabled>-- Select an option --</option>");
-            $("#pie-value-name").append("<option selected disabled>-- Select an option -- </option>");
-            $("#pie-value").append("<option selected disabled>-- Select an option --</option>");
-            $("#x-axis").append("<option selected disabled>-- Select an option --</option>");
-            $("#y-axis").append("<option selected disabled>-- Select an option --</option>");
-
-            $("#attribute-select").prop("disabled", true);
-            $("#pie-value-name").prop("disabled", true);
-            $("#pie-value").prop("disabled", true);
-            $("#x-axis").prop("disabled", true);
-            $("#y-axis").prop("disabled", true);
-        }
-        return condition;
-    }
-
-    function convertToJavaScriptObject(data)
-    {
-        return JSON.parse(JSON.stringify(data));
-
-    }
-
-    function selectDatabase()
-    {
-        /*We will use the chosenDatabase varible to send an ajax request to the server to retreive a list of
-          tables in that database. For now we will unlock the table selection input
-         */
-        if (!firstTime) {
-            var condition = reset();
-          
-        }
-        else {
-            condition = true;
-            firstTime = false;
-        }
-
-        chosenDatabase = $("#database-select option:selected").val();
-
-        if (condition)
-        {
-            $.getJSON("http://localhost:50931/Service/GetTables(Database='"+chosenDatabase+"')", function (data) {
-                var obj = convertToJavaScriptObject(data);
-                for (var i = 0; i < obj.value.length; i++) {
-                   
-                    tables.push(obj.value[i]);
-                    $("#table-select").append("<option>" + obj.value[i] + "</option>");
-                }
-            });
-        }
-
-        // Open the table content automatically
-        displayContent("table-content");
-        $("#table-select").prop("disabled", false);
-    }
-
-    function selectTable()
-    {
-
-        var chosenTable = $("#table-select option:selected").text();
-        var alreadyChosen = false;
-        for (var i = 0; i < chosenTables.length; i++)
-        {
-
-            if(chosenTable == chosenTables[i])
-            {
-                alreadyChosen = true;
-            }
-        }
-
-        /*Same thing with select a database. We will end an ajax request to hold a list of attributes*/
-        if (!alreadyChosen && chosenTable != "-- Select an option --") {
-            $.getJSON("http://localhost:50931/Service/GetAttributes(Database='" + chosenDatabase + "',Table='" + chosenTable + "')", function (data) {
-                var obj = convertToJavaScriptObject(data);
-                for (var i = 0; i < obj.value.length; i++) {
-                    var tokens = obj.value[i].split(" ");
-                    attrs.push(tokens[0]);
-                    switch(tokens[1])
-                    {
-                        case "int":
-                            tokens[1] = "Number";
-                            break;
-                        case "varchar":
-                            tokens[1] = "Word";
-                            break;
-                        case "date":
-                            tokens[1] = "Date";
-                            break;
-                    }
-                    attrsType.push(tokens[1]);
-                    $("#attribute-select").append("<option value=\""+tokens[0]+"\">" + tokens[0] + " ("+tokens[1]+ ")</option>");
-                    $("#attribute-other-view").append("<option value=\"" + tokens[0] + "\">" + tokens[0] + " (" + tokens[1] + ")</option>");
-                   
-                }
-            });
-
-            $("#table-badge-selection").append("&nbsp<span class=\"badge\">" + chosenTable + " </span> ");
-            // Add a badge to inform the user that this table has been selected
-            chosenTables.push(chosenTable);
-            $("#attribute-select").prop("disabled", false);
-
-            // Open view and condition content automatically
-            displayContent("view-content");
-            displayContent("condition-content");
-        }
-    }
-
-    function selectCondition()
-    {
-        var chosenAttribute = $("#attribute-select option:selected").val();
-        var chosenOperation = $("#operation option:selected").text();
-        var value = $("#data").val();
-
-        var condition = new Object();
-        condition.attr = chosenAttribute;
-        condition.opertion = chosenOperation;
-        condition.value = value;
-        var finalCondition = chosenAttribute + " " + chosenOperation + " " + value;
-
-        // No repeated condition
-        var alreadyChosen = false;
-        for (var i = 0; i < chosenConditions.length; i++) {
-
-            if (finalCondition == chosenConditions[i]) {
-                alreadyChosen = true;
-            }
-        }
-
-        if(!alreadyChosen && chosenAttribute != "-- Select an option --") {
-
-            chosenConditions.push(finalCondition);
-            $("#condition-badge-selection").append("&nbsp<span class=\"badge\">" + finalCondition + "</span>");
-        }
-
-    }
-
-    function selectView()
-    {
-        // Get the view and store in the array in the form example: Raw (name)
-        var chosenAttribute = $("#attribute-other-view option:selected").text();
-        var chosenView = $("#view-select option:selected").val();
-        var tokens = chosenAttribute.split(" ");
-        var alreadyChosen = false;
-        for (var i = 0; i < chosenViews.length; i++) {
-
-            if (chosenView + " (" + tokens[0] + ")" == chosenViews[i]) {
-                alreadyChosen = true;
-            }
-        }
-
-        if (!alreadyChosen && chosenAttribute != "-- Select an option --") {
-            
-            
-            if (chosenViews.length != 0)
-            {
-               
-                chosenViews.push(chosenView + " (" + tokens[0] + ")");
-                $("#pie-value-name").append("<option value=\""+tokens[0]+"\">" + chosenAttribute + "</option>");
-                $("#pie-value").append("<option  value=\"" + tokens[0] + "\">" + chosenAttribute + "</option>");
-                $("#x-axis").append("<option  value=\"" + tokens[0] + "\">" + chosenAttribute + "</option>");
-                $("#y-axis").append("<option  value=\"" + tokens[0] + "\">" + chosenAttribute + "</option>");
-            }
-            else
-            {
-                // Append view attribute to the chart details
-                $("#pie-value-name").empty();
-                $("#pie-value").empty();
-                $("#pie-value-name").append("<option selected disabled>-- Select an option --</option>");
-                $("#pie-value").append("<option selected disabled>-- Select an option --</option>");
-
-                $("#x-axis").empty();
-                $("#y-axis").empty();
-                $("#x-axis").append("<option selected disabled>-- Select an option --</option>");
-                $("#y-axis").append("<option selected disabled>-- Select an option --</option>");
-
-
-
-                $("#pie-value-name").append("<option value=\"" + tokens[0] + "\">" + chosenAttribute + "</option>");
-                $("#pie-value").append("<option value=\"" + tokens[0] + "\">" + chosenAttribute + "</option>");
-                $("#x-axis").append("<option value=\"" + tokens[0] + "\">" + chosenAttribute + "</option>");
-                $("#y-axis").append("<option value=\"" + tokens[0] + "\">" + chosenAttribute + "</option>");
-
-                var tokens = chosenAttribute.split(" ");
-                chosenViews.push(chosenView + " (" + tokens[0] + ")");
-            }
-            $("#view-badge-selection").append("&nbsp<span class=\"badge\">" + chosenView + " (" + tokens[0] + ")</span>");
-        }
-    }
-
-    function changeChartType(type)
-    {
-        chartType = type;
-        $("#chart-badge-selection").empty();
-        $("#chart-badge-selection").append("<span class=\"badge\">" + chartType + " chart</span>");
-        switch (type) {
-            case "Table":
-                query();
-                break;
-            case "Pie":
-                $("#pie-value-name").prop("disabled", false);
-                $("#pie-value").prop("disabled", false);
-                $("#x-axis").prop("disabled", true);
-                $("#y-axis").prop("disabled", true);
-                break;
-            case "Area":
-            case "Line":
-            case "Column":
-                $("#pie-value-name").prop("disabled", true);
-                $("#pie-value").prop("disabled", true);
-                $("#x-axis").prop("disabled", false);
-                $("#y-axis").prop("disabled", false);
-                break;
-            default:
-                $("#pie-value-name").prop("disabled", true);
-                $("#pie-value").prop("disabled", true);
-                $("#x-axis").prop("disabled", true);
-                $("#y-axis").prop("disabled", true);
-                break;
-        }
-    }
-
-    function query()
-    {
-        $("#chart-visualization").empty();
-        if (chosenViews.length == 0) {
-            alert("Please choose at least 1 view");
-        }
-        else if(chartType == "Pie" && (dimension == "" || measure == ""))
-        {
-            alert("Please select options for chart in Chart Details.");
-        }
-        else if(chosenTables != 0)
-        {
-            var uriQuery = "http://localhost:50931/Service/" + chosenTables[0];
-            var selectClause = "$select=";
-            var filterClause = "$filter=";
-            // Define the select part of the query
-            for(var i =0 ; i< chosenViews.length; i++)
-            {
-                switch(chosenViews[i].substring(0,3))
-                {
-                    case "Raw":
-
-                        selectClause += seperateBrackets(chosenViews[i]) + ",";
-                        break;
-                }
-            }
-
-            selectClause = selectClause.substring(0, selectClause.lastIndexOf(","));
-
-            // Define the filter part of the query
-            for(var i=0; i< chosenConditions.length; i++)
-            {
-                var tokens = chosenConditions[i].split(" ");
-                switch(tokens[1])
-                {
-                    case "=":
-                        filterClause += tokens[0] + " eq " + tokens[2] + " and ";
-                        break;
-                    case ">":
-                        filterClause += tokens[0] + " gt " + tokens[2] + " and ";
-                        break;
-                    case ">=":
-                        filterClause += tokens[0] + " ge " + tokens[2] + " and ";
-                        break;
-                    case "<=":
-                        filterClause += tokens[0] + " le " + tokens[2] + " and ";
-                        break;
-                    case "<":
-                        filterClause += tokens[0] + " lt " + tokens[2] + " and ";
-                        break;
-                }
-            }
-
-            filterClause = filterClause.substring(0, filterClause.lastIndexOf("and"));
-
-            // check if one of the clause is empty
-            if (selectClause == " ")
-            {
-                uriQuery += "?" + filterClause;
-            }
-            else if(filterClause == " ")
-            {
-                uriQuery += "?" + selectClause;
-            }
-            else if(selectClause == "" & filterClause == "" )
-            {
-
-            }
-            else
-            {
-                uriQuery += ("?"+selectClause + "&"+filterClause);
-            }
-
-            finalQuery = uriQuery;
-          
-            
-            switch(chartType){
-                case "":
-                case "Table":
-                    // Only if user does not choose chart type, default option is just create a table
-                    if (chartType == "")
-                    {
-                        $("#chart-badge-selection").append("<span class=\"badge\">Table chart</span>")
-                    }
-                    $("#chart-visualization").append(" <table class=\"display\" id=\"tableChart\" style=\"display: none;\" cellspacing=\"0\"  >  <thead id=\"column-name\"> </thead>  </table>           ");
-    
-                    // Check to see if they are raw view
-                    var data = [];
-                   
-                    if (chosenViews.length == 0)
-                    {
-                        
-                        for(var i =0; i< attrs.length; i++)
-                        {
-                            
-                            data.push({ "data": attrs[i] });
-                            $("#column-name").append("<th>" + attrs[i] + "</th>");
-                           
-                        }
-                    }
-                    else {
-                        for (var i = 0 ; i < chosenViews.length; i++)
-                        {                                 
-                            if(chosenViews[i].search("Raw") != -1)
-                            {
-                                var chosen = seperateBrackets(chosenViews[i]);
-                                data.push({ "data": chosen });
-                                $("#column-name").append("<th>" + chosen + "</th>");
-                               
-                            }
-                        }
-                    }
-                  
-                   
-                    $('#tableChart').DataTable({
-                        "responsive": true,
-                        "paging" : true,
-                        "ordering": true,
-                        "processing": true,
-                        "ajax": {
-                            "url": uriQuery,
-                            "dataSrc": "value"
-                        },
-                        "columns": data
-                    });
-                        
-                    // Got bug: Unable to get property 'style' of undefined or null reference
-                    $("#tableChart").show();
-                    
-                    break;
-
-                case "Pie":
-                    if (dimension == "" & measure == "") {
-
-                        dimension = attrs[0];
-                        measure = attrs[1];
-                    }
-                    var options = {
-                        chart: {
-                            renderTo: "chart-visualization",
-                            plotBackgroundColor: null,
-                            plotBorderWidth: null,
-                            plotShadow: false,
-                            type: 'pie'
-                        },
-                        //tooltip: {
-                        //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                        // },
-                        plotOptions: {
-                            pie: {
-                                allowPointSelect: true,
-                                cursor: 'pointer',
-                                dataLabels: {
-                                    enabled: true,
-                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                    style: {
-                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                    }
-                                }
-                            }
-                        },
-                        title: {
-                            text: title
-                        },
-                        series: [{
-                            name: measure,
-                            data: []
-                            
-                        }]
-                    };
-
-                    $.getJSON(uriQuery,  function(result) {
-                        var data = convertToJavaScriptObject(result);
-                        
-                        for (var i = 0 ; i < result.value.length; i++)
-                        {                        
-                            options.series[0].data.push({ name: data.value[i][dimension], y: parseInt(data.value[i][measure]) });
-                        }
-                     
-                        var chart = new Highcharts.Chart(options);
-                    });
-
-
-                   
-                    break;
-                case 'Area':
-                    var options = {
-                        chart: {
-                            renderTo: "chart-visualization",
-                            type: 'area'
-                        },
-
-                        //tooltip: {
-                        //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                        // },
-                        legend: {
-                            layout: 'vertical',
-                            align: 'right',
-                            verticalAlign: 'top',
-                            floating: true,
-                            borderWidth: 1,
-                            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-                        },
-                            xAxis:{
-                                title: {
-                                    text: xaxis
-                                },
-                                categories: []
-                            },
-                            yAxis: {
-                                title: {
-                                    text: yaxis
-                                }
-                            },
-                            title: {
-                                text: title
-                            },
-                            series: [{
-                                name: yaxis,
-                                data: []
-
-                            }]
-                        };
-                    $.getJSON(uriQuery, function (result) {
-                        var data = convertToJavaScriptObject(result);
-
-                        for (var i = 0 ; i < result.value.length; i++) {
-                            options.xAxis.categories.push(data.value[i][xaxis]);
-                            options.series[0].data.push(parseInt(data.value[i][yaxis]));
-                        }
-
-                        var chart = new Highcharts.Chart(options);
-                    });
-                    break;
-                case 'Column':
-                    var options = {
-                        chart: {
-                            renderTo: "chart-visualization",
-                            plotBackgroundColor: null,
-                            plotBorderWidth: null,
-                            plotShadow: false,
-                            type: 'column'
-                        },
-                        //tooltip: {
-                        //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                        // },
-                        title: {
-                            text: title,
-
-                        },
-                       
-
-                        xAxis: {
-                            title: {
-                                text: xaxis
-                            },
-                           
-                            categories: []
-                        },
-                        yAxis: {
-                            min: 0,
-                            title: {
-                                text: yaxis,
-                               
-                            },
-                            labels: {
-                                overflow: 'justify'
-                            }
-
-                        },
-                        plotOptions: {
-                            bar: {
-                                dataLabels: {
-                                    enabled: true
-                                }
-                            }
-                        },
-                        legend: {
-                            layout: 'vertical',
-                            align: 'right',
-                            verticalAlign: 'top',
-                           
-                            floating: true,
-                            borderWidth: 1,
-                            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-                            shadow: true
-
-                        },
-                        credits: {
-                            enabled: false
-                        },
-                        series: [{
-                            name: yaxis,
-                            data: []
-                        }]
-
-                    };
-
-                    $.getJSON(uriQuery, function (result) {
-                        var data = convertToJavaScriptObject(result);
-
-                        for (var i = 0 ; i < result.value.length; i++) {
-                            options.xAxis.categories.push(data.value[i][xaxis]);
-                            options.series[0].data.push(parseInt(data.value[i][yaxis]));
-                        }
-
-                        var chart = new Highcharts.Chart(options);
-                    });
-                    break;
-                case 'Line':
-                    var options = {
-                        chart: {
-                            renderTo: "chart-visualization",
-                            plotBackgroundColor: null,
-                            plotBorderWidth: null,
-                            plotShadow: false,
-                            type: 'line'
-                        },
-                        //tooltip: {
-                        //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                        // },
-                        title: {
-                            text: title,
-                          
-                        },
-                       
-                        xAxis: {
-                            title: {
-                                text: xaxis
-                            },
-                            categories: []
-                        },
-                        yAxis: {
-                            title: {
-                                text: yaxis
-                            },
-                            plotLines: [{
-                                value: 0,
-                                width: 1,
-                                color: '#808080'
-                            }]
-                        },
-                       
-                        legend: {
-                            layout: 'vertical',
-                            align: 'right',
-                            verticalAlign: 'middle',
-                            borderWidth: 0
-                        },
-                        series: [{
-                            name: yaxis,
-                            data: []
-                        }]
-
-                    };
-
-                    $.getJSON(uriQuery, function (result) {
-                        var data = convertToJavaScriptObject(result);
-
-                        for (var i = 0 ; i < result.value.length; i++) {
-                            options.xAxis.categories.push(data.value[i][xaxis]);
-                            options.series[0].data.push(parseInt(data.value[i][yaxis]) );
-                        }
-
-                        var chart = new Highcharts.Chart(options);
-                    });
-                    break;
-                default:
-                    break;
-            }
-                
-            
-
-           
-        }
-      
-    }
-
-    function removeAttribute(arrayName, id)
-    {
-        switch(arrayName)
-        {
-            case "table":
-                var temp = [];
-                for(var i = 0; i< chosenTables.length; i++)
-                {
-                    if (chosenTables[i] != id) {
-                        temp[i] = chosenTables[i];
-                        chosenTables[i].shift();
-                    }
-                    else {
-                        chosenTables.shift();
-                    }
-                }
-                chosenTables = temp;
-                $("#table-badge-selection").remove("#" + id);
-                
-                break;
-        }
-
-    }
-    
-    // Seperate the view and the attribute column to be used in the function
-    function seperateBrackets(data)
-    {
-        var first = data.indexOf("(");
-        var last = data.indexOf(")");
-        return data.substring(first + 1, last);
-        
-    }
-
-    
-    function configureChart() {
-            title = $("#chart-title").val();
-            if (title == "") {
-                title = "Fill in Chart Title to display";
-            }
-            switch (chartType) {
-                case "Pie":
-                    if ($("#pie-value-name option:selected").val() != "-- Select an option --" & $("#pie-value option:selected").val() != "-- Select an option --") 
-                        { 
-                            dimension = $("#pie-value-name option:selected").val();
-                            measure = $("#pie-value option:selected").val();
-                            $("#configure-notice").html("Successfully configure")
-                            query();
-                            configureClicked = true;
-                            setTimeout(function () { $("#configure-notice").empty(); }, 5000);
-                    }
-                    else {
-                        alert("Requires both field to be selected");
-                    }
-              
-                    break;
-                case 'Area':
-                case "Line":
-                case 'Column':
-                    if ($("#x-axis option:selected").text() != "-- Select an option --" & $("#y-axis option:selected").text() != "-- Select an option --") {
-                        xaxis = $("#x-axis option:selected").val();
-                        yaxis = $("#y-axis option:selected").val();
-                        $("#configure-notice").html("Successfully configure")
-                        query();
-                        configureClicked = true;
-                        setTimeout(function () { $("#configure-notice").empty(); }, 5000);
-                    } else {
-                        alert("Requires both field to be selected");
-                    }
-               
-                    break;
-                default:
-                    $("#configure-notice").html("To use this configuration, a chart beside table must be chosen.");
-                    setTimeout(function () { $("#configure-notice").empty(); }, 5000);
-                    break;
-            }
-        
-    }
-
-    function checkWidgetInfo()
-    {
-        // Since the chart type and the view are the foundation for a chart ( at least for a table), this should stop anyone who tries to add empty widgets
-        if(chartType == "Table")
-        {
-            $("#widget-query").val(finalQuery);
-
-            $("#widget-title").val(title);
-            $("#widget-type").val(chartType);
-            var text = $("#dashboard-list option:selected").text();
-
-            $("#dashboard-list option:selected").val(dashboardids[dashboards.indexOf(text)]);
-        }
-        else if (chartType.length != 0  && chosenViews.length != 0 && configureClicked) {
-            $("#widget-query").val(finalQuery);
-
-            $("#widget-title").val(title);
-            $("#widget-type").val(chartType);
-            var text = $("#dashboard-list option:selected").text();
-
-            $("#dashboard-list option:selected").val(dashboardids[dashboards.indexOf(text)]);
-        }
-        else
-        {
-            alert("Ah hah. You did not configure chart. JUST DO IT.")
-            return false;
-        }
-        return true;
-    }
-
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
- 
-    </script>
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"><style>
-        #create-widget-session
-        {
-            height: 1800px;
-        }
-        .popover
-        {
-            min-width: 980px;
-        }
-        #visualization-container button{
-            font-size: 15px;
-        }
-        .custom-content{
-            display: none;
-            padding: 10px;
-            box-shadow:1px 1px 1px 1px #C0C0C0;
-            border-radius: 5px;
-            background-color: white;
-            border: 1px solid #C0C0C0;
-            margin: 10px;
-
-        }
-        #chart-detail{
-             box-shadow:2px 2px 2px 2px #808080;
-             padding-bottom: 5px;
-        }
-  
-    </style>
+    @Scripts.Render("~/bundles/bootstrap-jquery")
+    <!--This script needs to be declared last since it will need bootstrap and jquery declaration first in order to run this script-->
+    @Scripts.Render("~/bundles/create-widget-script")
     <title>Create widget</title>
 </head>
 <body>
+    <!--Top navigation-->
     <nav class="navbar navbar-default" style="background-color:#779ECB; margin-bottom: 0px; ">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -903,11 +37,14 @@
             </ul>
         </div>
     </nav>
-    <div id="body" style="position: relative;   ">
+    <!--End top navigation-->
+   <!--Body content-->
+    <div id="body" style="position: relative;">
         <!--if((System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)-->
 
         <div class="container-fluid " style=" position: relative;  " >
             <div class="row" id="main-content">
+                <!--Navigation menu-->
                 <div class="col-sm-2" id="content-menu" >
                     <ul class="list-group">
                         <li id="user" class="list-group-item">
@@ -916,10 +53,6 @@
                             <p style="font-size: 20px;">@User.Identity.Name</p>
                             <p style="font-size: 15px;">@ViewBag.Role</p>
                             <p style="font-size: 15px;">@ViewBag.Rank</p>
-                        </li>
-                        <li class="list-group-item" id="profile" onclick="location.href='/System/Induction_Page_Update'">
-                            <span class="glyphicon glyphicon glyphicon-th-list"></span>
-                            <p>Workspace</p>
                         </li>
                         <li class="list-group-item" id="summary-dashboard" onclick=" location.href='/RegularUser/YourDashboard'">
                             <span class="glyphicon glyphicon-dashboard"></span>
@@ -935,12 +68,13 @@
                         </li>   
                     </ul>
                 </div>
-                <div class="col-sm-10" id="create-widget-session" style="background-color: white;  ">
+                <!--End navigation menu-->
+                <div class="col-sm-10" id="create-widget-session">
                     <p style="color: #5DADE2; font-size: 40px; " id="title"><img src="~/Images/widget-icon.png" style="width: 15%; height: 15%;" /> Create Widget</p>
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="database-select">Select a database  </label>
-                                <select id="database-select" class="form-control" onchange="selectDatabase();">
+                                <select id="database-select" class="form-control" onfocus="this.oldvalue = this.value;" onchange="selectDatabase(this); ">
                                     <option disabled selected>-- Select an option -- </option>
                                     <option value="finance">Finance</option>
                                     <option value="engineer">Engineer</option>
@@ -951,40 +85,53 @@
                                  
                         </div>
                         <br />
+                        <!--Filter Container-->
                         <div class="row" id="condition-container">
                             <div class="col-sm-12">
                                 <h4><b>Filter By</b></h4>
                                 <div class="well well-lg">
                                     <!--Select tables-->
-                                    <div id="table-selection">
+                                    <div id="table-selection" style="margin-bottom: 25px;">
                                         <p><b>Tables</b> <font style="font-size: 15px;" id="table-badge-selection"></font></p>
-                                        <p><a href="javascript:void(0);" id="table-popover" style="animation: true;text-decoration: none;" onclick="displayContent('table-content');"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; Add a table</p>   
+                                        <p><a href="javascript:void(0);" id="table-popover" style="animation: true;text-decoration: none;" onclick="displayContent('table-content');"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; View/Hide the Table panel</p>   
                                         <!--Popover for Table part-->
                                         <div  id="table-content" class="custom-content">
 
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <label for="table-select">Select a table</label>
-                                                    <select id="table-select" class="form-control" disabled title="Activate when database is selected" >
+                                                    <select onchange="selectTable();" id="table-select" class="form-control" disabled title="Activate when database is selected" >
                                                         <option disabled selected>-- Select an option --</option>
                                                     </select>
+                                                   
                                                 </div>
+                                               
                                                 <div class="col-sm-9">
-                                                    <button type="button" class="close btn-default" onclick="closeContent('table-content')" style="font-size: 30px; float: right;">&times;</button>
-                                                    <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;" onclick="selectTable();">Add</button>
+                                                   
+                                                    <div class="dropdown" style="margin-top:25px;">
+
+                                                        <img src="~/Images/plus.svg" class="dropdown-toggle" data-toggle="dropdown" style="border: 1px solid black; opacity: 0.3; height: 4%; width: 4%;"> <font style="font-size: 15px; color: grey;">&nbsp;Link relevant tables of the chosen table</font>
+
+                                                        <ul class="dropdown-menu" id="link-referenced-tables">
+                                                           
+                                                        </ul>
+                                                    </div>        
                                                 </div>
                                             </div>
 
                                         </div>
+                                        <!--End popover for Table part-->
 
 
                                     </div>
                                     <!--Conditions containe: data will be added later once user has selected a condition-->
                                     <div id="condition-container">
-                                        <p><b>Conditions</b><font id="condition-badge-selection" style="font-size: 15px;"></font></p>
+                                        <p style="display: inline-block;"><b>Conditions </b><font id="condition-badge-selection" style="font-size: 15px;"></font></p>    
                                     </div>
-
-                                    <p><a href="javascript:void(0);" id="condition-popover" onclick="displayContent('condition-content');"  style="animation: true;text-decoration: none;"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; Add a condition</p>
+                                    <p>
+                                        <a href="javascript:void(0);" id="condition-popover" onclick="displayContent('condition-content');"  ><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; View/Hide the Conditions panel  
+                                    </p>
+                                   
                                     <!--Popover for conditions part-->
                                     <div style="display: none;" id="condition-content" class="custom-content">
 
@@ -992,37 +139,54 @@
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <label for="attribute-select">Select a column</label>
-                                                <select class="form-control" id="attribute-select" disabled>
+                                                <select onchange="getData(); checkColumnType();"class="form-control" id="attribute-select" disabled>
                                                     <option selected disabled>-- Select an option --</option>
                                                 </select>
+                                                <!--Show data beforehand for user to know what kind of condition they will select-->
+                                                <div id="pre-data">
+                                                    <button id="preview" class="btn btn-warning" data-toggle="collapse" href="#pre-data-table" style="width: 228px;"><span data-toggle="tooltip" title="Choose an attribute in the condition.Press this button to view/hide the data" style="font-size: 16px;">Preview column data <span style="float: right;" class="glyphicon glyphicon-chevron-down" ></span></span></button>
+                                                </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <!--For now, we assume only numerical will be selected, string and other types will be considered later-->
                                                 <label for="operation">Operation</label>
                                                 <select class="form-control" id="operation">
-                                                    <option>=</option>
-                                                    <option>></option>
-                                                    <option>>=</option>
-                                                    <option><</option>
-                                                    <option><=</option>
+                                                    <option >=</option>
+                                                    <option >></option>
+                                                    <option >=</option>
+                                                    <option ><</option>
+                                                    <option ><=</option>
                                                 </select>
+                                              
+
                                             </div>
                                             <div class="col-sm-3">
-                                                <label for="data">Data</label>
+                                                <label for="data">Enter the Value</label>
                                                 <input type="text" class="form-control" id="data" />
                                             </div>
-                                            <div class="col-sm-3">
-                                                <button type="button" class="close btn-default" onclick="closeContent('condition-content')" style="font-size: 30px; float: right;">&times;</button>
+                                            <div class="col-sm-3">               
                                                 <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;" onclick="selectCondition();" >Add</button>
                                             </div>
                                         </div>
-
+                                       
                                     </div>
+                                    <!--End popover for condition part-->
+                                   
+                                    <!--Data content div to show the preview of data-->
+                                    <div id="pre-data-content" style="display: inline-table; ">
+                                        <div id="pre-data-table" class="collapse" style="padding: 10px;">
+                                            <h4>Please select a column in Conditions content</h4>
+                                        </div>
+                                    </div>
+                                    <!--End data content div to show the preview of data-->
+
+                                    <!--View section-->
                                     <div id="view-container">
                                         <p><b>Display</b><font style="font-size:15px;" id="view-badge-selection"></font></p>
                                     </div>
-                                    <p><a href="javascript:void(0);" id="view-popover"  onclick="displayContent('view-content');" style="animation: true; text-decoration: none;"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; Choose how to display data</p>
-                                    
+                                    <p><a href="javascript:void(0);" id="view-popover"  onclick="displayContent('view-content');"><img src="~/Images/plus.svg" style="border: 1px solid black; opacity: 0.3; height: 2.5%; width: 2.5%;"></a>&nbsp; View/Hide the Display panel</p>
+                                    <!--End view section-->
+
                                     <!--Popover for View part-->
                                     <div  id="view-content" class="custom-content">
 
@@ -1047,25 +211,28 @@
                                                 </select>
 
                                             </div>
-                                            <div class="col-sm-3">   
-                                                <button type="button" class="close btn-default" onclick="closeContent('view-content')" style="font-size: 30px; float: right;">&times;</button>                         
+                                            <div class="col-sm-3">                          
                                                 <button class="btn btn-md btn-info" style="margin-top: 25px; color: white;  width: 100px;" onclick="selectView();">Add</button>
                                             </div>
                                             
                                         </div>
 
                                     </div>
-
+                                    <!--End Popover for View part-->
 
                                 </div>
                             </div>
                         </div>
-                    
+                        <!--End filter container-->    
+
+                        <!--Alert text for users-->
                         <div class="alert alert-info">
                             <strong>Note:</strong> It is recommended to query the data with <b>table visualization</b> first before choosing any other visualization<br />
                             By clicking the visualization type, data will be translated to chart or tables.
                         </div>
+                         <!--End alert text-->
                         
+                        <!--Visualization text and Save Widget on the right side-->
                         <div >
                             
                             <b style="font-size: 18px;">Visualization <font style="font-size:15px;" id="chart-badge-selection"></font></b>
@@ -1074,25 +241,30 @@
                                 <button class="btn btn-info btn-md" title="Save widget in database"  data-toggle="modal" data-target="#add-dashboard" data-placement="auto"><b>Save widget</b></button>
                             </div>                            
                         </div>
+                        <!--End visualization text-->
                         
-                       
-                        <div class="row" id="visualization-container" style="margin: 5px; padding-top: 5px;" >                           
+                       <!--Visualization part-->
+                        <div class="row" id="visualization-container" style="margin: 5px; padding-top: 5px;" >     
+                            <!--Chart selection-->                      
                             <div class="col-sm-4">       
-                                <h4>Basic charts   </h4>                        
-                                    <div >
-                              
-                                        <div class="btn-group">
-                                            <button class="btn btn-sm btn-default" id="table" onclick="changeChartType('Table')"><img src="~/Images/table-icon.png" style=" height: 25px; width: 25px;  " /> Table</button>
-                                            <button class="btn btn-sm btn-default" id="area-chart" onclick="changeChartType('Area')"><img src="~/Images/area-chart-icon.png" style=" height: 25px; width: 25px;  " /> Area Chart</button>
-                                            <button class="btn btn-sm btn-default" id="line-chart" onclick="changeChartType('Line')"><img src="~/Images/line_chart_icon.jpg" style=" height: 25px; width: 25px;  " /> Line Chart</button>
-
-                                        </div>
-                                        <div class="btn-group">
-                                            <button class="btn btn-sm btn-default" id="column-chart" onclick="changeChartType('Column')"><img src="~/Images/column-chart-icon.png" style=" height: 25px; width: 25px;  " /> Column Chart</button>
-                                            <button class="btn btn-sm btn-default" id="pie-chart" onclick="changeChartType('Pie')"><img src="~/Images/pie-chart-icon.png" style=" height: 25px; width: 25px;  " /> Pie Chart</button>
-                                        </div>
-                                    </div>                                 
+                                <h4>Basic charts  <span class="glyphicon glyphicon-question-sign" href="#"  data-toggle="tooltip" title="To enable Pie, Column, Area and Line Chart, at least 2 columns must be chosen in Display section"></span> </h4>                        
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" style="width: 100px;" data-toggle="dropdown">
+                                        Options
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" style="background-color: #eee; padding: 0px;">
+                                        <li id="table" style="background-color: white;"><a href="javascript: changeChartType('Table');"><img src="~/Images/table-icon.png" style=" height: 25px; width: 25px;  " /> Table</a></li>
+                                        <li id="pie-chart" class="disabled" ><a href="javascript: changeChartType('Pie');"><img src="~/Images/pie-chart-icon.png" style=" height: 25px; width: 25px;  " /> Pie Chart</a></li>
+                                        <li id="column-chart" class="disabled"><a href="javascript: changeChartType('Column');"><img src="~/Images/column-chart-icon.png" style=" height: 25px; width: 25px;  " /> Column Chart</a></li>
+                                        <li id="area-chart" class="disabled" ><a href="javascript: changeChartType('Area');"><img src="~/Images/area-chart-icon.png" style=" height: 25px; width: 25px;  " /> Area Chart</a></li>
+                                        <li id="line-chart" class="disabled" ><a href="javascript: changeChartType('Line');"><img src="~/Images/line_chart_icon.jpg" style=" height: 25px; width: 25px;  " /> Line Chart</a></li>
+                                    </ul>
+                                </div>                               
                             </div>
+                            <!--End chart selection-->
+
+                            <!--Chart details panel-->
                             <div class="col-sm-8" id="chart-detail">
                                 <h4>Chart Details <span class="glyphicon glyphicon-question-sign" href="#" data-placement="top" data-toggle="tooltip" title="This options is used for charts except tables. As suggested, display table first for data, then configure different type of charts appropiately"></span></h4>
                                 <label for="chart-title">Chart Title</label>
@@ -1102,17 +274,17 @@
                                     <div class="row" style="margin: 5px;">
                                         <h4>Chart Configuration <span class="glyphicon glyphicon-question-sign" href="#" data-placement="top" data-toggle="tooltip" title="LEFT OPTIONS: for Area, Line and Column Charts.RIGHT OPTIONS: for Pie Chart "></span></h4>
                                         <div class="col-sm-6">
-                                            <lable for="x-axis"><b>X-Axis</b></lable>
-                                            <select class="form-control" id="x-axis" disabled>
+                                            <label for="x-axis"><b>X-Axis</b><span class="glyphicon glyphicon-question-sign" href="#" data-placement="top" data-toggle="tooltip" title="Choose columns for the x-axis. At most 2 columns can be chosen "></span><font id="xaxis-badge-selection" style="bottom: 5px;font-size: 10px;"></font></label>
+                                            <select onchange="addXAxis();" class="form-control" id="x-axis" disabled>
                                                 <option selected disabled>-- Select an option --</option>
                                             </select>
-                                            <label for="y-axis">Y-Axis</label>
-                                            <select class="form-control" id="y-axis" disabled>
+                                            <label for="y-axis">Y-Axis<span class="glyphicon glyphicon-question-sign" href="#" data-placement="top" data-toggle="tooltip" title="Choose columns for the y-axis. You can choose many columns. If 2 x-axis have been chosen, for now only choose 1 y-axis for this case"></span><font id="yaxis-badge-selection" style="font-size: 15px;"></font></label>
+                                            <select onchange="addYAxis();"  class="form-control" id="y-axis" disabled>
                                                 <option selected disabled>-- Select an option --</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-6" style="border-left: 1px solid #eee;">
-                                            <lable for="pie-value-name"><b>Dimension</b></lable>
+                                            <label for="pie-value-name"><b>Dimension</b></label>
                                             <select class="form-control" id="pie-value-name" disabled>
                                                 <option selected disabled>-- Select an option --</option>
                                             </select>
@@ -1132,15 +304,19 @@
                                 </p>
                                
                             </div>
+                            <!--End chart details panel-->
                         </div>
+                        <!--End visualization part-->
 
+                        <!--Chart visualization area-->
                         <div id="chart-visualization" style="position: relative; margin-top:10px;">
                            
                         </div>
+                        <!--End chart visualization area-->
                     </div>
                 </div>
             </div>
-
+        <!--Save widget modal-->
         <div id="add-dashboard" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -1170,9 +346,11 @@
                 </div>
             </div>
         </div>
-         <div style="clear:both;"></div> 
+         
         </div>
+        <!--End save widget modal-->
         </div>
+    <!--End body content-->
 
     <footer>
         <div class="content-wrapper" id="footer">

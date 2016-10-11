@@ -3,7 +3,7 @@
 @{
     Layout = null;
     var nothing = "Nothing";
-   
+
     var totalWidget = 0;
     for (int i = 0; i < ViewBag.Dashboards.Length; i++)
     {
@@ -21,13 +21,12 @@
     @Scripts.Render("~/bundles/bootstrap-jquery")
     @Styles.Render("~/bundles/homepage")
     @Styles.Render("~/bundles/dashboard")
-   
+
     <title>Your Dashboard</title>
     <script>
-        function check()
-        {
-            if($("#dashboard-name").val().length == 0 || $("#dashboard-desc").val().length == 0)
-            {
+        // Check if user enters empty custom dashboard information
+        function check() {
+            if ($("#dashboard-name").val().length == 0 || $("#dashboard-desc").val().length == 0) {
                 $("#error").html("You must not let the inputs empty");
                 return false;
             }
@@ -37,6 +36,7 @@
     </script>
 </head>
 <body>
+    <!--Top navigation-->
     <nav class="navbar navbar-default" style="background-color:#779ECB;">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -52,8 +52,10 @@
     <div id="body">
         <!--if((System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)-->
 
+        <!--Content wrapper-->
         <div class="container-fluid " style="margin-top: -21px;">
             <div class="row" id="main-content">
+                <!--Left navigation bar-->
                 <div class="col-sm-2" id="content-menu">
                     <ul class="list-group">
                         <li id="user" class="list-group-item">
@@ -62,10 +64,6 @@
                             <p style="font-size: 20px;">@User.Identity.Name</p>
                             <p style="font-size: 15px;">@ViewBag.Role</p>
                             <p style="font-size: 15px;">@ViewBag.Rank</p>
-                        </li>
-                        <li class="list-group-item" id="profile" onclick="location.href='/System/Induction_Page_Update'">
-                            <span class="glyphicon glyphicon glyphicon-th-list"></span>
-                            <p>Workspace</p>
                         </li>
                         <li class="list-group-item" id="summary-dashboard" style="background-color: #337ab7; color: white;">
                             <span class="glyphicon glyphicon-dashboard"></span>
@@ -81,147 +79,175 @@
                         </li>
                     </ul>
                 </div>
+                <!--End left navigation bar-->
+
+                <!--Content next to left navigation bar-->
                 <div class="col-sm-10" id="content-dashboard" style="height: 800px;">
                     <div id="title-dashboard">
 
                         <p style="color: #5DADE2; font-size: 40px; " id="title"><img src="~/Images/Dashborad icon.png" style="width: 15%; height: 15%;" /> Your dashboard</p>
                         <div id="summary-dashboard">
-                            <div >
+                            <div>
                                 <div class="row">
+                                    <!--Dashboard details summary-->
                                     <div class="col-sm-6">
                                         <p>Number of dashboards <span class="badge">@ViewBag.Dashboards.Length</span></p>
-                                        <p>Newly created dashborad <span class="badge">@{ if (ViewBag.Dashboards.Length != 0)
-                                                                                          {
-                                                                                              @ViewBag.Dashboards[ViewBag.Dashboards.Length - 1].DashboardName
-                                                                                          }
-                                                                                          else
-                                                                                          {
-                                                                                              @nothing
-                                                                                          }
-                                                                    }</span> </p>
-                                        <p>Total widgets on dashboards <span class="badge">@totalWidget</span> </p>
-                                        <p>Newly created widget <span class="badge">@{
-                                            if(ViewBag.NewlyCreatedWidget == null)
+                                        <p>
+                                            Newly created dashborad <span class="badge">
+                                                @{
+                                                // Check if the information is empty or not
+                                                if (ViewBag.Dashboards.Length != 0)
+                                                {
+                                                    @ViewBag.Dashboards[ViewBag.Dashboards.Length - 1].DashboardName
+                                                }
+                                                else
+                                                {
+                                                    @nothing
+                                                }
+                                            }
+                                        </span>
+                                    </p>
+                                    <p>Total widgets on dashboards <span class="badge">@totalWidget</span> </p>
+                                    <p>
+                                        Newly created widget <span class="badge">
+                                            @{
+                                            // Check if empty information
+                                            if (ViewBag.NewlyCreatedWidget == null)
                                             {
                                                 @nothing
                                             }
                                             else
                                             {
-                                                @Html.Raw(@ViewBag.NewlyCreatedWidget.WidgetName+" ("+ViewBag.NewlyCreatedWidget.Dashboard.DashboardName+")");
+                                                @Html.Raw(@ViewBag.NewlyCreatedWidget.WidgetName + " (" + ViewBag.NewlyCreatedWidget.Dashboard.DashboardName + ")");
                                             }
-                                                                                         }</span>  </p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        
-                                        <a style="float: right;" href="#" data-toggle="modal" data-target="#modal-dashboard" data-placement="auto" title="Add new dashboard"><img src="~/Images/widgetized.svg" class="modal-content" id="create-widget-icon" style="height: 100px; width: 100px;"></a>
-                                        <span class="glyphicon glyphicon-hand-right" style="float: right; padding-top: 30px; font-size: 30px;">&nbsp;</span>
-                                    </div>
-                                </div>
-                            </div>
-     
-                        </div>
-
-                        <div id="widgets-container" class="well well-sm" style="background-color: white; overflow: auto;  max-height: 400px; box-shadow: 7px 7px #eee; ">
-                           
-                            <!--Add new dashborad to this div element with id dashboard-placement -->
-                            <div id="dashboard-placement" class="container" style="display: inline-block; width: 100%; padding-top: 15px; ">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <a href="@Url.Action("SupplierPerformance", "System")" style="display: inline-block; text-decoration: none;">
-                                            <div class="panel panel-default" style="width: 200px; height: 160px; overflow-y:auto;">
-                                                <div class="panel-heading">
-                                                    <span class="glyphicon glyphicon-dashboard"></span> <b style="font-size: 19px;">Supplier Performance</b>
-
-                                                </div>
-                                                <div class="panel-body">
-                                                    <p style="color: black;"><b>Description:</b> Default dashboard for every user</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <a href="@Url.Action("Induction_Page_Update", "System")" style="display: inline-block; text-decoration: none;">
-                                            <div class="panel panel-default" style="width: 200px; height: 160px; overflow-y:auto;">
-                                                <div class="panel-heading">
-                                                    <span class="glyphicon glyphicon-dashboard"></span> <b style="font-size: 19px;">Induction Page</b>
-
-                                                </div>
-                                                <div class="panel-body">
-                                                    <p style="color: black;"><b>Description:</b> Default page for every user</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    @{
-                                        for (int i = 0; i < ViewBag.Dashboards.Length; i++)
-                                        {
-                                            <div class="col-sm-3">
-                                                <a href="/System/DisplayWidgets?id=@ViewBag.Dashboards[i].DashboardId" style="display: inline-block; text-decoration: none;">
-                                                    <div class="panel panel-default" style="width: 200px; height: 160px; overflow-y:auto;">
-                                                        <div class="panel-heading">
-                                                           <span class="glyphicon glyphicon-dashboard"></span> <b style="font-size: 19px;">@ViewBag.Dashboards[i].DashboardName (@ViewBag.Dashboards[i].Widgets.Count)</b>
-                                                           
-                                                        </div>
-                                                        <div class="panel-body">
-                                                            <p style="color: black;"><b>Description:</b> @ViewBag.Dashboards[i].DashboardDesc</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
                                         }
-                                    }
-                                </div>
+                                    </span>
+                                </p>
                             </div>
-                            <div id="modal-dashboard" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h2>Add new dashborad</h2>
+                             <!--End dashboard details summary-->
+
+                             <!--Add new dashboard icon-->
+                            <div class="col-sm-6">
+
+                                <a style="float: right;" href="#" data-toggle="modal" data-target="#modal-dashboard" data-placement="auto" title="Add new dashboard"><img src="~/Images/widgetized.svg" class="modal-content" id="create-widget-icon" style="height: 100px; width: 100px;"></a>
+                                <p style="float: right;padding-top: 35px; font-weight: bold; font-size: 25px;"> Add new dashboard &nbsp;<span class="glyphicon glyphicon-hand-right">&nbsp;</span></p>
+                            </div>
+                            <!--End add new dashboard icon-->
+                        </div>
+                    </div>
+                </div>
+                
+                <!--Container that organize dashboards in a well-->
+                <div id="widgets-container" class="well well-sm" style="background-color: white; overflow: auto;  max-height: 400px; box-shadow: 7px 7px #eee; ">
+
+                    <!--Add new dashborad to this div element with id dashboard-placement -->
+                    <div id="dashboard-placement" class="container" style="display: inline-block; width: 100%; padding-top: 15px; ">
+                        <div class="row">
+                            <!--Supplier Performance dashboard-->
+                            <div class="col-sm-3">
+                                <a href="@Url.Action("SupplierPerformance", "System")" style="display: inline-block; text-decoration: none;">
+                                    <div class="panel panel-default" style="width: 200px; height: 160px; overflow-y:auto;">
+                                        <div class="panel-heading">
+                                            <span class="glyphicon glyphicon-dashboard"></span> <b style="font-size: 19px;">Supplier Performance</b>
                                         </div>
-                                        <div class="modal-body" style="height: 250px;">
-                                             <p id="error" style="color: red; font-weight: bold;"></p>
-                                            <div class="form-dashborad">
-                                                <form role="form" action="/System/AddDashboard" name="createDashboardForm" method="post" onsubmit="return check()">
-                                                    @Html.AntiForgeryToken()
-                                                    @Html.ValidationSummary(true)
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(m => m.DashboardName)
-                                                        @Html.TextBoxFor(m => m.DashboardName, new { @class = "form-control", id="dashboard-name" })
-                                                        @Html.ValidationMessageFor(m => m.DashboardName)
-                                                    </div>
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(m => m.DashboardDesc)
-                                                        @Html.TextBoxFor(m => m.DashboardDesc, new { @class = "form-control", id="dashboard-desc" })
-                                                        @Html.ValidationMessageFor(m => m.DashboardDesc)
-                                                    </div>
-                                                    <div class="form-group" style="display: none;">
-                                                        
-                                                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", Value = @User.Identity.Name })
-                                                       
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-lg btn-info" style="float: right;">Create</button>
-                                                    </div>
-                                                </form>
+                                        <div class="panel-body">
+                                            <p style="color: black;"><b>Description:</b> Default dashboard for every user</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!--End supplier Performance dashboard-->
+
+                            <!--Induction Page dashboard-->
+                            <div class="col-sm-3">
+                                <a href="@Url.Action("Induction_Page_Update", "System")" style="display: inline-block; text-decoration: none;">
+                                    <div class="panel panel-default" style="width: 200px; height: 160px; overflow-y:auto;">
+                                        <div class="panel-heading">
+                                            <span class="glyphicon glyphicon-dashboard"></span> <b style="font-size: 19px;">Induction Page</b>
+                                        </div>
+                                        <div class="panel-body">
+                                            <p style="color: black;"><b>Description:</b> Default page for every user</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!--End induction Page dashboard-->
+                            @{
+                                // Display the dashboard information in the panel
+                                for (int i = 0; i < ViewBag.Dashboards.Length; i++)
+                                {
+                                    <div class="col-sm-3">
+                                        <a href="/System/DisplayWidgets?id=@ViewBag.Dashboards[i].DashboardId" style="display: inline-block; text-decoration: none;">
+                                            <div class="panel panel-default" style="width: 200px; height: 160px; overflow-y:auto;">
+                                                <div class="panel-heading">
+                                                    <span class="glyphicon glyphicon-dashboard"></span> <b style="font-size: 19px;">@ViewBag.Dashboards[i].DashboardName (@ViewBag.Dashboards[i].Widgets.Count)</b>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <p style="color: black;"><b>Description:</b> @ViewBag.Dashboards[i].DashboardDesc</p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <!--The modal to add the new dashboard-->
+                    <div id="modal-dashboard" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2>Add new dashborad</h2>
+                                </div>
+                                <div class="modal-body" style="height: 250px;">
+                                    <p id="error" style="color: red; font-weight: bold;"></p>
+                                    <div class="form-dashborad">
+                                        <!--Form to add a new dashboard-->
+                                        <form role="form" action="/System/AddDashboard" name="createDashboardForm" method="post" onsubmit="return check()">
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true)
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.DashboardName)
+                                                @Html.TextBoxFor(m => m.DashboardName, new { @class = "form-control", id = "dashboard-name" })
+                                                @Html.ValidationMessageFor(m => m.DashboardName)
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.DashboardDesc)
+                                                @Html.TextBoxFor(m => m.DashboardDesc, new { @class = "form-control", id = "dashboard-desc" })
+                                                @Html.ValidationMessageFor(m => m.DashboardDesc)
+                                            </div>
+                                            <div class="form-group" style="display: none;">
+
+                                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control", Value = @User.Identity.Name })
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-lg btn-info" style="float: right;">Create</button>
+                                            </div>
+                                        </form>
+                                        <!--End form to add a new dashboard-->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--The modal to add the new dashboard-->
+                </div>
+                <!--End container that organize dashboards in a well-->
             </div>
         </div>
+        <!--Content next to left navigation bar-->
     </div>
-    </div>
+</div>
+<!--End content wrapper-->
+</div>
 
-    <footer>
-        <div class="content-wrapper" id="footer">
-            <div id="bottomMid">
-                <a class="bottomNav" href="@Url.Action("About", "System")">About us</a> |
-                <a class="bottomNav" href="@Url.Action("Contact", "System")">Contact us</a>
-            </div>
+<footer>
+    <div class="content-wrapper" id="footer">
+        <div id="bottomMid">
+            <a class="bottomNav" href="@Url.Action("About", "System")">About us</a> |
+            <a class="bottomNav" href="@Url.Action("Contact", "System")">Contact us</a>
         </div>
-    </footer>
+    </div>
+</footer>
 </body>
 </html>

@@ -5,6 +5,7 @@ using System.Web;
 
 namespace CognitiveDecisionSystem.Models
 {
+    // Record class for record table in the database
     public class Record
     {
         public int RecordID { get; set; }

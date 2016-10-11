@@ -5,6 +5,7 @@ using System.Web;
 
 namespace CognitiveDecisionSystem.Models
 {
+    // Rank class for rank table in the database
     public class Rank
     {
         public int RankID { get; set; }

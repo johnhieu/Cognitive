@@ -20,6 +20,8 @@ using System.Web.Routing;
 
 namespace CognitiveDecisionSystem.Controllers
 {
+    // Controller classes that contain functions that to be called from the client
+   
     public class FunctionsController : Controller
     {
         private CognitiveSystemDBContext db = new CognitiveSystemDBContext();
@@ -50,8 +52,11 @@ namespace CognitiveDecisionSystem.Controllers
             String popularWidget = "";
             int sessionCount = db.Sessions.Count(s => s.RegularUser.Username == username);
             RegularUser user = db.Users.Find(WebSecurity.GetUserId(username));
+            // Check the session if there is only 1 session then this is the new user
             if (sessionCount == 1)
             {
+                // Call the matlab function: DemoDecistionTree_2 to use the excel file generated when they login to get the suggestion for the 
+                // first time user
                 MLApp.MLApp matlab = new MLApp.MLApp();
 
                 matlab.Execute(@"cd D:\functions");
@@ -73,7 +78,9 @@ namespace CognitiveDecisionSystem.Controllers
             // Not the first time user, use the second suggestion including the first widget recommedation
             else
             {
+
                 string widgetOrder = user.FirstTimeRecommendedWidget;
+               
                 int length = 9;
                 int[] widgetCount = new int[length + 1];
                 int highestTemp = 0;
@@ -84,7 +91,7 @@ namespace CognitiveDecisionSystem.Controllers
                 var sessions = db.Sessions.OrderByDescending(s => s.SessionID).Where(u => u.RegularUser.ID == user.ID);
                 foreach (var s in sessions)
                 {
-
+                    // Only check the last session by using condition count to check the second session in the list sessions variable
                     if (count == 1)
                     {
                         var session = s;
@@ -114,6 +121,7 @@ namespace CognitiveDecisionSystem.Controllers
                 }
                 else
                 {
+                    // Get the recommended widget based on the most used widget in the last session
                     for (int i = 1; i < length + 1; i++)
                     {
                         if (widgetCount[i] > widgetCount[highestTemp])
@@ -121,21 +129,113 @@ namespace CognitiveDecisionSystem.Controllers
                             highestTemp = i;
                         }
                     }
-
                     popularWidget = highestTemp.ToString();
 
-                    String[] splits = widgetOrder.Split(null);
-                    for (int i = 0; i < splits.Length; i++)
+                    string firstW = "W"+ popularWidget;
+                    string secondW = "W" + user.FirstTimeRecommendedWidget.Substring(0, 1);
+                    
+                    // If the first widget and the second widget is different, generate the recommendation using Matlab function GenerateAssociationRules
+                    if (firstW != secondW)
                     {
-                        if (highestTemp.ToString().Equals(splits[i]))
+                        // Association Rule Generation
+
+                        MLApp.MLApp matlab = new MLApp.MLApp();
+
+                        matlab.Execute(@"cd D:\functions");
+
+                        object result = null;
+
+                        matlab.Feval("GenerateAssociationRules", 1, out result, "associationRuleFile.csv");
+
+                        object[] res = result as object[];
+
+
+
+                        // Convert result from matlab function to be used in the system
+
+                        string str = Convert.ToString(res[0]);
+                        string recommendedW = "Empty";
+                        string[] stringSeparators = new string[] { "==>", "\n" };
+                        string[] arrListStr = str.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries); // tokens = "Best in found:" or LHS or RHS of a rule
+                       
+                        int chk = 0;
+                        for (int i = 1; i < arrListStr.Length; i = i + 2) // check the odd tokens (LHS) to find the firstW
                         {
-                            continue;
+                            if (arrListStr[i].ToString().Contains(firstW) == true)
+                            {
+                                chk = i + 1;
+                                break;
+                            }
+                        }
+                        if (chk == 0) // there is no firstW in the LHS
+                        {
+                            for (int i = 1; i < arrListStr.Length; i = i + 2) // check the odd tokens (LHS) to find the secondW
+                            {
+                                if (arrListStr[i].ToString().Contains(secondW) == true)
+                                {
+                                    chk = i + 1;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (chk == 0) // there is not firstW and secondW in LHS - no rules for recommending
+                        {
+                            // adding the default widget here
+                            recommendedW = "Empty";
                         }
                         else
                         {
-                            popularWidget += " " + splits[i];
+                            string[] subArrListStr = arrListStr[chk].Trim().Split(' ');
+
+                            recommendedW = subArrListStr[0].Substring(1, subArrListStr[0].Length - 3);
+                        }
+
+                        // Check if the third widget is not empty and also not the same either the first or the second widget
+                        if(recommendedW != "Empty" && recommendedW != popularWidget && recommendedW != user.FirstTimeRecommendedWidget.Substring(0,1))
+                        {
+                            popularWidget += " " + user.FirstTimeRecommendedWidget.Substring(0, 1) +" " + recommendedW;
+                        }
+                        else
+                        {
+                            popularWidget += " " + user.FirstTimeRecommendedWidget.Substring(0, 1);
+                        }
+
+                        // Add the result after converting data from Matlab function
+                        String[] splits = widgetOrder.Split(null);
+                        for (int i = 0; i < splits.Length; i++)
+                        {
+                            if (highestTemp.ToString().Equals(splits[i]) || recommendedW.Equals(splits[i]) || user.FirstTimeRecommendedWidget.Substring(0, 1).Equals(splits[i]))
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                popularWidget += " " + splits[i];
+                            }
                         }
                     }
+
+                    // If first widget is the same with the secondW then we dont need to produce any rules
+                    else
+                    {
+                        String[] splits = widgetOrder.Split(null);
+                        for (int i = 0; i < splits.Length; i++)
+                        {
+                            if (highestTemp.ToString().Equals(splits[i]))
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                popularWidget += " " + splits[i];
+                            }
+                        }
+                    }
+
+
+
+                   
 
                 }
             }
@@ -143,6 +243,7 @@ namespace CognitiveDecisionSystem.Controllers
             return popularWidget;
         }
 
+        // Functions that are used to record the mouse movement called from the website using AJAX
         [HttpPost]
         public void RecordLog(string data)
         {
@@ -199,7 +300,7 @@ namespace CognitiveDecisionSystem.Controllers
             repeatedRecord.TimeStamp = timeStamp;
             repeatedRecord.FPS = fps;
 
-
+            
             for (int i = 0; i < x.Length; i++)
             {
 
@@ -224,6 +325,7 @@ namespace CognitiveDecisionSystem.Controllers
 
                 repeatedRecord.Clicked = clicked;
 
+                // Save the record
                 db.Records.Add(repeatedRecord);
                 db.SaveChanges();
             }

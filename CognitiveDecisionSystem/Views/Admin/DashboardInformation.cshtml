@@ -1,0 +1,228 @@
+﻿@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css " />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css " />
+    @Styles.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap-jquery")
+    @Styles.Render("~/bundles/homepage")
+    @Styles.Render("~/bundles/dashboard")
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <title>Dashboard information</title>
+    <!--Specify the table length, if the length of the x-axis is shorter, thne provide the table with the side scroll bar for admin-->
+    <script>
+        $(document).ready(function () {
+            $("table.display").DataTable({
+                "autoWidth": true,
+                scrollX: 530,
+                scrollCollapse: true,
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <!--Top navigation-->
+    <nav class="navbar navbar-default" style="background-color:#779ECB;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Action("Index", "System")">Logo </a>
+            </div>
+            <ul class="nav navbar-nav" id="nav">
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("Login", "User")">Home </a></li>
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("About", "System")">About us</a></li>
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("Contact", "System")">Contact us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--End top navigation-->
+
+    <!--The body content-->
+    <div id="body">
+       
+        <!--Wrap around container-->
+        <div class="container-fluid " style="margin-top: -21px;">
+            <div class="row" id="main-content">
+                <!--The left-hand side navigation bar-->
+                <div class="col-sm-2" id="content-menu">
+                    <ul class="list-group">
+                        <li id="user" class="list-group-item">
+                            <h3>Hi admin,</h3>
+                            <img id="user-image" src="~/Images/default_user_img.png" alt="Profile image" width="60" height="60" /><br /><br />
+                        </li>
+                        <li class="list-group-item" id="user-information" onclick=" location.href = '/Admin/UserInformation'">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <p>User's Information</p>
+                        </li>
+                        <li class="list-group-item" id="dashboard-information" style="background-color: #337ab7; color: white;"  >
+                            <span class="glyphicon glyphicon-dashboard"></span>
+                            <p>Dashboard's Information</p>
+                        </li>
+                        <li class="list-group-item" id="session-information" onclick=" location.href='/Admin/SessionInformation'">
+                            <span class="glyphicon glyphicon-file"></span>
+                            <p>Session Log</p>
+                        </li>
+
+                        <li class="list-group-item" id="logout" onclick=" location.href='/RegularUser/AdminLogin'">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                            <p>Log out</p>
+                        </li>
+                    </ul>
+                </div> 
+                <!--End of left-hand side navigation bar-->
+
+                <!--The right hand-side content -->
+                <div class="col-sm-10" id="user-information" style="background-color: white;">
+                    <h1><span class="glyphicon glyphicon-user"></span> Dashboard Information</h1>
+
+                    <div class="row" style="margin: 10px;padding-bottom: 20px; border-bottom: 1px solid rgba(155, 145, 145, 0.93);">
+                        <!--Table contains dashboard information-->
+                        <div class="col-sm-6" id="role-table" style="border-right: 1px solid rgba(155, 145, 145, 0.93);">
+                            <h3><b><u>Dashboard Data</u></b></h3>
+                            <table class="display" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Dashboard ID</th>
+                                        <th>Dashboard Name</th>
+                                        <th>Dashboard Description</th>
+                                        <th>User ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--Loop through each data in the ViewBag.Dashboards and write out rows of data-->
+                                    @{
+                                        for (var i = 0; i < ViewBag.Dashboards.Length; i++)
+                                        {
+                                            <tr>
+                                                <td>@ViewBag.Dashboards[i].DashboardId</td>
+                                                <td>@ViewBag.Dashboards[i].DashboardName</td>
+                                                <td>@ViewBag.Dashboards[i].DashboardDesc</td>
+                                                <td>@ViewBag.Dashboards[i].RegularUser.ID</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--End div table contains dashboard information-->
+
+                        <!--Table contains widget information-->
+                        <div class="col-sm-6" id="rank-table">
+                            <h3><b><u>Widget Data</u></b></h3>
+                            <table class="display" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Widget ID</th>
+                                        <th>Widget Name</th>
+                                        <th>HTML ID</th>
+                                        <th>Widget Type</th>
+                                        <th>Widget Query</th>
+                                        <th>Dashboard ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--Loop through each data in the ViewBag.Widgets and write out rows of data-->
+                                    @{
+                                        for (var i = 0; i < ViewBag.Widgets.Length; i++)
+                                        {
+                                             var dashboardID = "";
+                                            if (ViewBag.Widgets[i].Dashboard == null)
+                                            {
+                                                dashboardID = "None";
+                                            }
+                                            else
+                                            {
+                                                dashboardID = ViewBag.Widgets[i].Dashboard.DashboardId.ToString();
+                                            }
+                                            <tr>
+                                                <td>@ViewBag.Widgets[i].WidgetID</td>
+                                                <td>@ViewBag.Widgets[i].WidgetName</td>
+                                                <td>@ViewBag.Widgets[i].HTMLId</td>
+                                                <td>@ViewBag.Widgets[i].WidgetType</td>
+                                                <td>@ViewBag.Widgets[i].WidgetQuery</td>
+                                                <td>@dashboardID</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!--End div table contains widget information-->
+                    </div>
+
+                    <div class="row" style="margin: 10px;">
+                        <!--Table contains user information-->
+                        <div class="col-sm-12" id="user-table">
+                            <h3><b><u>User Data</u></b></h3>
+                            <table class="display" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th>Full Name</th>
+                                        <th>Occupation</th>
+                                        <th>Email</th>
+                                        <th>Age</th>
+                                        <th>Registered Date</th>
+                                        <th>Last Access</th>
+                                        <th>Phone Number</th>
+                                        <th>First time recommended widget</th>
+                                        <th>Role ID</th>
+                                        <th>Rank ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--Loop through each data in the ViewBag.Users and write out rows of data-->
+                                    @{
+                                        for (var i = 0; i < ViewBag.Users.Length; i++)
+                                        {
+                                            <tr>
+                                                <td>@ViewBag.Users[i].ID</td>
+                                                <td>@ViewBag.Users[i].Username</td>
+                                                <td>@ViewBag.Users[i].FullName</td>
+                                                <td>@ViewBag.Users[i].Occupation</td>
+                                                <td>@ViewBag.Users[i].Email</td>
+                                                <td>@ViewBag.Users[i].Age</td>
+                                                <td>@ViewBag.Users[i].RegisteredDate</td>
+                                                <td>@ViewBag.Users[i].LastAccess</td>
+                                                <td>@ViewBag.Users[i].PhoneNumber</td>
+                                                <td>@ViewBag.Users[i].FirstTimeRecommendedWidget</td>
+                                                <td>@ViewBag.Users[i].Role.RoleId</td>
+                                                <td>@ViewBag.Users[i].Rank.RankID</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--End div table contains user information-->
+                    </div>
+                </div>
+                <!--End the right hand-side content -->
+            </div>
+        </div>
+        <!--End wrap around container-->
+    </div>
+    <!--End body content-->
+
+    <!--The footer-->
+    <footer>
+        <div class="content-wrapper" id="footer">
+            <div id="bottomMid">
+                <a class="bottomNav" href="@Url.Action("About", "System")">About us</a> |
+                <a class="bottomNav" href="@Url.Action("Contact", "System")">Contact us</a>
+            </div>
+        </div>
+    </footer>
+    <!--End footer-->
+</body>
+</html>

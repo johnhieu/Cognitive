@@ -26,15 +26,6 @@ namespace CognitiveDecisionSystem.Controllers
     {
         private CognitiveSystemDBContext db = new CognitiveSystemDBContext();
         
-       
-        public ActionResult Index()
-        {
-            return View(db.Users.ToList());
-           
-        }
-
-
-
         //
         // GET: /RegularUser/Login
         [AllowAnonymous]
@@ -44,7 +35,26 @@ namespace CognitiveDecisionSystem.Controllers
             return View();
         }
 
-        
+        // GET: /RegularUser/AdminLogin
+        public ActionResult AdminLogin()
+        {
+            return View();
+        }
+
+        // POST: /RegularUser/AdminLogin
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdminLogin(AdminLogin model)
+        {
+            // Since we does not have much time, we temporarily make this kind of authentication
+            if(model.AdminUsername == "Admin_GroupB" && model.Password == "CognitiveDecisionSystem")
+            {
+                return RedirectToAction("UserInformation", "Admin");
+            }
+            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            return View(model);
+
+        }
 
         //
         // POST: /RegularUser/Login
@@ -53,7 +63,7 @@ namespace CognitiveDecisionSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(Login model)
         {
-            
+            // Length = 9 to get the first 9 widgets which are default widgets
             int length = 9;
             int[] widgetCount = new int[length+1];
             string[] widgetClicked = new string[length + 1];
@@ -86,7 +96,6 @@ namespace CognitiveDecisionSystem.Controllers
                 db.SaveChanges();
 
                 // Check first time user
-
                 int sessionCount = db.Sessions.Count(s => s.RegularUser.ID == user.ID);
 
                 if(sessionCount == 0)
@@ -134,23 +143,16 @@ namespace CognitiveDecisionSystem.Controllers
 
                     
                 }
-               /* else
+                // This commented out code are for generating the arff file but not successfull, look into it later
+                else
                 {
                     int count = 1;
-                   
 
-                    // Only get the default widgets
-                    var widgets = db.Widgets.Take(9);
-                    DataTable dt = new DataTable();
-                    dt.Columns.Add("id", typeof(Int32));
-                    foreach(var widget in widgets)
-                    {
-                        dt.Columns.Add("W" + widget.WidgetID, typeof(string));
-                    }
-                    var sessions = db.Sessions.OrderByDescending(s => s.SessionID).Take(100);
+                    var sessions = db.Sessions.OrderByDescending(s => s.SessionID).Take(1000);
 
                     // Attributes' name for data
                     var csv = new StringBuilder();
+                   
                     var line = string.Format("id,W1,W2,W3,W4,W5,W6,W7,W8,W9");
                     csv.AppendLine(line);
                     foreach(var session in sessions)
@@ -171,23 +173,12 @@ namespace CognitiveDecisionSystem.Controllers
 
                                     widgetClicked[(r.Widget.WidgetID)] = "t";
                                 }
-                           
-                           
+                              
                         }
+               
                         
-                        /* Add custom row into dt variable using row
-                        DataRow row = dt.NewRow();
-                        row[0] = count;
-                        for(int i = 1; i< length+1; i++)
-                        {
-                            row[i] = widgetClicked[i];
-                        }
-                        dt.Rows.Add(row);
-                        count++;
-                        Array.Clear(widgetClicked, 0, length + 1); // Remember to end comment here
-
                         // Add custom using StringBuilder and file path   
-                        var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}", count, widgetClicked[1], widgetClicked[2], widgetClicked[3], widgetClicked[4], widgetClicked[5], widgetClicked[6], widgetClicked[7], widgetClicked[8], widgetClicked[9]);
+                        var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}", "T"+count, widgetClicked[1], widgetClicked[2], widgetClicked[3], widgetClicked[4], widgetClicked[5], widgetClicked[6], widgetClicked[7], widgetClicked[8], widgetClicked[9]);
 
                         csv.AppendLine(newLine);
 
@@ -195,13 +186,11 @@ namespace CognitiveDecisionSystem.Controllers
                         count++;
                     }
                   
-                    //WriteExcelWithNPOI(dt, "xls", "associationRule.csv");
-                    StreamWriter sw = new StreamWriter(@"D:\functions\train.csv");
+                   
+                    StreamWriter sw = new StreamWriter(@"D:\functions\associationRuleFile.csv");
                     sw.Write(csv.ToString());
-                    sw.Close();
-
-                    
-                }*/
+                    sw.Close();      
+                }
                 
                 // Create a Session record
                 DateTime localDate = DateTime.Now;
@@ -214,7 +203,7 @@ namespace CognitiveDecisionSystem.Controllers
                 db.Sessions.Add(newSession);
                 db.SaveChanges();
 
-                ViewBag.RnR = "";
+      
 
                 return RedirectToAction("YourDashboard", "RegularUser");
 
@@ -234,6 +223,7 @@ namespace CognitiveDecisionSystem.Controllers
 
             var lastestSession = db.Sessions.OrderByDescending(s => s.SessionID).FirstOrDefault(s => s.RegularUser.Username == WebSecurity.CurrentUserName);
 
+            // Save the session end time
             lastestSession.EndTime = DateTime.Now.ToShortTimeString();
             db.Entry(lastestSession).State = EntityState.Modified;
             db.SaveChanges();
@@ -243,6 +233,7 @@ namespace CognitiveDecisionSystem.Controllers
         }
 
         [AllowAnonymous]
+        // Return the view of the register and also send a list of roles for options to choose role in the register page
         public ActionResult Register()
         {
             Register model = new Register();
@@ -282,17 +273,7 @@ namespace CognitiveDecisionSystem.Controllers
                 // Attempt to register the user
                 try
                 {
-                   /* var membership = (SimpleMembershipProvider)Membership.Provider;
-                    membership.CreateUserAndAccount(model.UserName, model.Password, new Dictionary<string, object>
-                    { { "FullName", model.FullName },
-                        { "Occupation", model.Occupation },
-                        { "Age", model.Age },
-                        { "Email ", model.Email },
-                        { "RegisteredDate", DateTime.Now.ToString() },
-                        { "PhoneNumber", model.PhoneNumber },
-                        { "LastAccess", DateTime.Now.ToString() },
-                        { "Role_RoleId", '1'}
-                    });*/
+                   
                     RegularUser user = new RegularUser();
                     user.Age = model.Age;
                     user.FullName = model.FullName;
@@ -328,15 +309,7 @@ namespace CognitiveDecisionSystem.Controllers
             return View(model);
         }
 
- 
-
- 
-
-
-
-
-
-
+        // Helper functions to write out excel file with 2 extensions: xlsx, xls
         public bool WriteExcelWithNPOI(DataTable dt, String extension, String name)
         {
 
@@ -391,7 +364,7 @@ namespace CognitiveDecisionSystem.Controllers
             }
 
            
-
+            // Write out a file with the given name
             using (FileStream stream = new FileStream(@"D:\functions\" + name, FileMode.Create, FileAccess.Write))
             {
                 
@@ -401,6 +374,8 @@ namespace CognitiveDecisionSystem.Controllers
             }
         }
 
+        // POST: RegularUser/InitUsername
+        // Return the current user id
         [HttpPost]
         public int InitUsername()
         {
@@ -408,11 +383,14 @@ namespace CognitiveDecisionSystem.Controllers
 
         }
 
+        // GET: RegularUser/YourDashboard
+        // Homepage yourdashboard will be returned after logging in
         public ActionResult YourDashboard()
         {
-           
+            // Only for authenticated user
             if (User.Identity.IsAuthenticated)
             {
+                // Some information about the current user: rank and role, widgets and dashboards
                 int id = WebSecurity.GetUserId(User.Identity.Name);
                 RegularUser user = db.Users.Find(id);
                 ViewBag.Rank = "Rank: " + user.Rank.RankName;
@@ -431,8 +409,8 @@ namespace CognitiveDecisionSystem.Controllers
             return RedirectToAction("Error", "System");
         }
 
-      
-
+        // GET: RegularUser/CreateWidget
+        // Return CreateWdiget page
         public ActionResult CreateWidget()
         {
       
@@ -447,22 +425,6 @@ namespace CognitiveDecisionSystem.Controllers
             }
             return RedirectToAction("Error", "System");
         }
-        //
-        // GET: /User/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /User/Create
-
-
-       
-
-
-
        
 
         protected override void Dispose(bool disposing)

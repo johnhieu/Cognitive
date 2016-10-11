@@ -1,7 +1,7 @@
 ﻿    <div class="panel panel-default lobipanel col-lg-4" id="Number of Repairs" data-sortable="true">
             <div class="panel-heading">
                 <div class="panel-title">
-                    <h4>Number of Repairs per Year</h4>
+                    <h4>Number of Repairs per Year (Widget 4)</h4>
                 </div>
             </div>
             <div class="panel-body">

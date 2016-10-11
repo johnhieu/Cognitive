@@ -16,18 +16,10 @@ namespace CognitiveDecisionSystem.Controllers
         //
         // GET: /System/
         private CognitiveSystemDBContext db = new CognitiveSystemDBContext();
-        public ActionResult Index()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return View();
+       
 
-            }
-            return RedirectToAction("Error", "System");
-        }
-
-        // GET: /System/dashboard
-      
+        // GET: /System/Induction_Page_Update
+        // Return to the Induction Page 
         public ActionResult Induction_Page_Update()
         {
 
@@ -42,7 +34,7 @@ namespace CognitiveDecisionSystem.Controllers
         }
 
         // GET: /System/DecisionSummary_Page_Update
-
+        // Get the Decision Summary page 
         public ActionResult DecisionSummary_Page_Update(string SSCode)
         {
             
@@ -55,7 +47,9 @@ namespace CognitiveDecisionSystem.Controllers
             return RedirectToAction("Error", "System");
         }
 
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        // GET: /System/SupplierPerformance
+       // [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        // The default dashboard Supplier performance which the mouse tracking happens
         public ActionResult SupplierPerformance()
         {
             if (User.Identity.IsAuthenticated)
@@ -69,6 +63,8 @@ namespace CognitiveDecisionSystem.Controllers
             
         }
 
+        // GET: System/DisplayWidget?id=
+        // Display widgets in a dashboard specified by the id
         public ActionResult DisplayWidgets(int id)
         {
             var widgets = db.Widgets.Where(w => w.Dashboard.DashboardId == id);
@@ -81,6 +77,7 @@ namespace CognitiveDecisionSystem.Controllers
             return View();
         }
 
+        // Add custom dashboard 
         [HttpPost]
         public ActionResult AddDashboard(FormDashboard form)
         {
@@ -100,6 +97,7 @@ namespace CognitiveDecisionSystem.Controllers
 
         }
 
+        // Return a list of dashboard for a particular user
         [HttpGet]
         public String GetDashboard(String username)
         {
@@ -114,6 +112,7 @@ namespace CognitiveDecisionSystem.Controllers
             return list;
         }
 
+        // Add custom widget to the particular dashboard
         [HttpPost]
         public ActionResult AddWidget(WidgetDashboard widget)
         {
@@ -131,6 +130,8 @@ namespace CognitiveDecisionSystem.Controllers
 
             return RedirectToAction("YourDashboard", "RegularUser");
         }
+
+        // GET: System/Error
         public ActionResult Error()
         {
             return View();

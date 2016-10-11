@@ -8,9 +8,6 @@
       
 
 }
-<script>
-
-</script>
 @Styles.Render("~/bundles/register")
 <div id="register-section" class="table-responsive">
     <div id="container">
@@ -20,6 +17,7 @@
             </div>
             <div class="panel-body">
                 <p>@ViewBag.Error</p>
+                <!--Register form-->
                 <form action="/RegularUser/Register" name="registerForm" role="form" method="post" >
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
@@ -71,6 +69,7 @@
                     </div>
                     <input class="btn btn-info" type="submit" value="Register">
                 </form>
+                <!--End register form-->
             </div>
         </div>
     </div>

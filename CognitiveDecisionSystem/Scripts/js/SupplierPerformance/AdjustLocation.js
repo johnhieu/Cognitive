@@ -13,11 +13,15 @@ FP.init = function () {
 
 }
 
+// Initialize variables to be used in the process of initializing widgets
 var condition = false;
 var customWidgets = new Array();
 var defaultWidgets = ["ItemSelection.txt", "TimeAndCost.txt", "CostTrend.txt", "NumberOfRepairs.txt","WorkOrders.txt", "Demand_Supplier Locations.txt", "Top_5_Suppliers.txt", "Suppliers_and_Suppliers_Performance.txt", "Failure_Causes.txt"];
+
+// These variables are not for first time user
 var improvedOrder = "";
 var previousOrder = "";
+
 var firstTime = false;
 var undo = false;
 
@@ -32,7 +36,8 @@ function callAjax(array, row, index)
                 $(row).append(result);
                 
                 $('.panel').lobiPanel({
-                    sortable: true
+                    sortable: true,
+                    unpin: false
                 });
                 
                 //callAjax(array, row, index + 1)
@@ -46,7 +51,7 @@ function callAjax(array, row, index)
     }
 }
 
-
+// Reject the dashboard by clicking the Undo 
 function RejectDashboard()
 {
     $("#notice").empty();
@@ -57,7 +62,7 @@ function RejectDashboard()
     undo = true;
 
    
-
+    // Get the previous order of widgets
     var tokens = previousOrder.split(" ");
     
     customWidgets = [];
@@ -67,7 +72,7 @@ function RejectDashboard()
       
     }
     
-    
+    // Add widgets to each row
     for (var i = 0; i < 3; i++) {
         
         callAjax(customWidgets, "#firstRow", i);
@@ -119,7 +124,7 @@ function firstTimeUserOrders()
                             }
                             
                           
-
+                            // Store the current order to the database
                             $.ajax({
                                 url: "../Functions/StoreCurrentDashboard/?username=" + window.username + "&widgetID=" + widget,
                                 async: false,
@@ -138,8 +143,10 @@ function firstTimeUserOrders()
 
 
                     }
+                        
                         // There are possibilitiy that the most used widget in the next login is the first recommended widget
-                        // so this condition is to check if they are the same. If same, just need to push the result to the array once
+                        // so this condition is to check if they are the same. If same, just need to push the result to the array 
+                        // This is the second phase of the recommendation, recommend based on the last session's activities
                     else {
                         condition = true;
 
@@ -160,9 +167,11 @@ function firstTimeUserOrders()
                        
 
                         improvedOrder = result;
+                        // If the improved order is different from the order in the last session then we have a pop up message at the top to notify 
+                        // users
                         if(previousOrder != improvedOrder)
                         {
-                            $("#notice").append("<div class=\"alert alert-info\">Based on the last session, the system has generated a new order for you to work easily. You can reject the new dashboard and use the previous one by click <a href=\"#\" onclick=\"RejectDashboard()\"><b>Undo</b></a> . The new dashboard will be recorded once you left this page. </div>");
+                            $("#notice").append("<div class=\"well well-sm\">Based on the last session, the system has generated a new order for you to work easily. You can reject the new dashboard and use the previous one by click <button class=\"btn btn-primary btn-md\"  style=\"font-size: 18px;\"onclick=\"RejectDashboard()\">Undo</button> . The new dashboard will be recorded once you left this page. </div>");
                         }
                        
                     }
@@ -177,6 +186,7 @@ function firstTimeUserOrders()
 
 $(document).ready(function () {
     firstTimeUserOrders();
+    // After initializing, we will check the condition and callAjax to retreive the data from the server
     if (!condition) {
         
         for (var i = 0; i < 3; i++) {
@@ -208,6 +218,7 @@ $(document).ready(function () {
     }
 
     window.onbeforeunload = function () {
+        // Only for not first time user, when they go to another page, save the current order to the dashboard
         if(!undo & !firstTime)
         {
             $.ajax({
@@ -231,133 +242,4 @@ $(document).ready(function () {
 
    
 });
-
-/*$(document).ready(function ()
-{
-   
-    $.ajax({
-        url: "../DataFiles/WidgetInfo/ItemSelection.txt",
-        success: function (result) {
-            $("#firstRow").append(result);
-
-            $('.panel').lobiPanel({
-                sortable: true
-            });
-
-           
-        }
-    });
-
-    $.ajax({
-        url: "../DataFiles/WidgetInfo/TimeAndCost.txt",
-        success: function (result) {
-            $("#firstRow").append(result);
-
-            $('.panel').lobiPanel({
-                sortable: true
-            });
-
-
-        }
-    });
-
-    $.ajax({
-        url: "../DataFiles/WidgetInfo/CostTrend.txt",
-        success: function (result) {
-            $("#firstRow").append(result);
-            $('.panel').lobiPanel({
-                sortable: true
-            });
-
-           
-
-        }
-    });
-   
-    $.ajax({
-        url: "../DataFiles/WidgetInfo/NumberOfRepairs.txt",
-        success: function (result) {
-            $("#firstRow").append(result);
-
-            $('.panel').lobiPanel({
-                sortable: true
-            });
-
-
-        }
-    });
-
-    $.ajax({
-        url: "../DataFiles/WidgetInfo/WorkOrders.txt",
-        success: function (result) {
-            $("#secondRow").append(result);
-
-            $('.panel').lobiPanel({
-                sortable: true
-            });
-
-
-        }
-    });
-
-    $.ajax({
-        url: "../DataFiles/WidgetInfo/Demand_Supplier Locations.txt",
-        success: function (result) {
-            $("#secondRow").append(result);
-
-
-            $('.panel').lobiPanel({
-                sortable: true
-            });
-
-        }
-    });
-
-    $.ajax({
-        url: "../DataFiles/WidgetInfo/Top_5_Suppliers.txt",
-        success: function (result) {
-            $("#secondRow").append(result);
-
-
-            $('.panel').lobiPanel({
-                sortable: true
-            });
-
-
-        }
-    });
-
-    $.ajax({
-        url: "../DataFiles/WidgetInfo/Suppliers_and_Suppliers_Performance.txt",
-        success: function (result) {
-            $("#thirdRow").append(result);
-
-
-            $('.panel').lobiPanel({
-                sortable: true
-            });
-
-
-
-        }
-    });
-
-
-    $.ajax({
-        url: "../DataFiles/WidgetInfo/Failure_Causes.txt",
-        success: function (result) {
-            $("#thirdRow").append(result);
-
-            $('.panel').lobiPanel({
-                sortable: true
-            });
-
-        }
-    });
-
-
-    FP.init();
-}); */
-
-
 

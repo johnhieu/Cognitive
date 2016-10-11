@@ -1,0 +1,186 @@
+﻿
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css " />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css " />
+    @Styles.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap-jquery")
+    @Styles.Render("~/bundles/homepage")
+    @Styles.Render("~/bundles/dashboard")
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <title>Session information</title>
+    <script>
+        // Set paging type to display as full numbers type which include first, previous, next ,last
+        $(document).ready(function () {
+            $("table.display").DataTable({
+                "pagingType": "full_numbers"
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--Top navigation-->
+    <nav class="navbar navbar-default" style="background-color:#779ECB;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Action("Index", "System")">Logo </a>
+            </div>
+            <ul class="nav navbar-nav" id="nav">
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("Login", "User")">Home </a></li>
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("About", "System")">About us</a></li>
+                <li id="topNav"><a class="topNav" style="color: white;" href="@Url.Action("Contact", "System")">Contact us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--End top navigation-->
+    <div id="body">
+        <!--if((System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)-->
+
+        <!--Main body content wrapper-->
+        <div class="container-fluid " style="margin-top: -21px;">
+            <div class="row" id="main-content">
+                <!--Left naviation-->
+                <div class="col-sm-2" id="content-menu">
+                    <ul class="list-group">
+                        <li id="user" class="list-group-item">
+                            <h3>Hi admin,</h3>
+                            <img id="user-image" src="~/Images/default_user_img.png" alt="Profile image" width="60" height="60" /><br /><br />
+                        </li>
+                        <li class="list-group-item" id="user-information" onclick=" location.href='/Admin/UserInformation'">
+                            <span class="glyphicon glyphicon-dashboard"></span>
+                            <p>User's Information</p>
+                        </li>
+                        <li class="list-group-item" id="dashboard-information" onclick=" location.href = '/Admin/DashboardInformation'">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                            <p>Dashboard's Information</p>
+                        </li>
+                        <li class="list-group-item" id="session-information" style="background-color: #337ab7; color: white;"  >
+                            <span class="glyphicon glyphicon-file"></span>
+                            <p>Session Log</p>
+                        </li>
+                        <li class="list-group-item" id="logout" onclick=" location.href='/RegularUser/AdminLogin'">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                            <p>Log out</p>
+                        </li>
+                    </ul>
+                </div>
+                <!--End left naviation-->
+                <div class="col-sm-10" id="user-information" style="background-color: white;">
+                    <h1><span class="glyphicon glyphicon-file"></span> Session and Record Log Data</h1>
+                    <div class="row" style="margin: 10px;">
+                        <!--Table contains role information-->
+                        <div class="col-sm-12" id="role-table">
+                            <h3><b><u>Session Data</u></b></h3>
+                            <table class="display" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Session ID</th>
+                                        <th>Session Date</th>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
+                                        <th>User ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--Loop through each object in ViewBag.Sessions and create rows of data-->
+                                    @{
+                                        for (var i = 0; i < ViewBag.Sessions.Length; i++)
+                                        {
+                                            <tr>
+                                                <td>@ViewBag.Sessions[i].SessionID</td>
+                                                <td>@ViewBag.Sessions[i].SessionDate</td>
+                                                <td>@ViewBag.Sessions[i].StartTime</td>
+                                                <td>@ViewBag.Sessions[i].EndTime</td>
+                                                <td>@ViewBag.Sessions[i].RegularUser.ID</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--End div table contains role information-->
+                      
+                    </div>
+
+                    <div class="row" style="margin: 10px; border-top: 1px solid rgba(155, 145, 145, 0.93);">
+                        <!--Table contains user information-->
+                        <div class="col-sm-12" id="user-table">
+                            <h3><b><u>Record Data</u></b></h3>
+                            <table class="display" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Record ID</th>
+                                        <th>Screen Width</th>
+                                        <th>Screen Length</th>
+                                        <th>Coordinate X</th>
+                                        <th>Coordinate Y</th>
+                                        <th>Mouse Clicked</th>
+                                        <th>Timestamp</th>
+                                        <th>FPS</th>
+                                        <th>Session ID</th>
+                                        <th>Widget ID</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--Loop through each object in ViewBag.Records and create rows of data-->
+                                    @{
+
+                                        for (var i = 0; i < ViewBag.Records.Length; i++)
+                                        {
+                                            var widgetID = "";
+                                            if (ViewBag.Records[i].Widget == null)
+                                            {
+                                                widgetID = "None";
+                                            }
+                                            else
+                                            {
+                                                widgetID = ViewBag.Records[i].Widget.WidgetID.ToString();
+                                            }
+                                            <tr>
+                                                <td>@ViewBag.Records[i].RecordID</td>
+                                                <td>@ViewBag.Records[i].ScreenWidth</td>
+                                                <td>@ViewBag.Records[i].ScreenLength</td>
+                                                <td>@ViewBag.Records[i].CoordX</td>
+                                                <td>@ViewBag.Records[i].CoordY</td>
+                                                <td>@ViewBag.Records[i].Clicked</td>
+                                                <td>@ViewBag.Records[i].TimeStamp</td>
+                                                <td>@ViewBag.Records[i].FPS</td>
+                                                <td>@ViewBag.Records[i].Session.SessionID</td>
+                                                <td>@widgetID</td>
+
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--End div table contains user information-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--End main body content wrapper-->
+    </div>
+    <!--Footer-->
+    <footer>
+        <div class="content-wrapper" id="footer">
+            <div id="bottomMid">
+                <a class="bottomNav" href="@Url.Action("About", "System")">About us</a> |
+                <a class="bottomNav" href="@Url.Action("Contact", "System")">Contact us</a>
+            </div>
+        </div>
+    </footer>
+    <!--End footer-->
+</body>
+</html>

@@ -5,6 +5,7 @@ using System.Web;
 
 namespace CognitiveDecisionSystem.Models
 {
+    // Role class for role table in the database
     public class Role
     {
         public int RoleId { get; set; }

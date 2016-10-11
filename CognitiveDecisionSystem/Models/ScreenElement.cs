@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CognitiveDecisionSystem.Models
 {
+    // Abstract for 2 classes: Widget and StandAloneElement
     public abstract class ScreenElement
     {
         [Key]

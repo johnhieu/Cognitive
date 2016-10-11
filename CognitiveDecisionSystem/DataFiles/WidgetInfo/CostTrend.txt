@@ -1,7 +1,7 @@
 ﻿<div class="panel panel-default lobipanel col-lg-4" id="Cost Trend" data-sortable="true">
             <div class="panel-heading">
                 <div class="panel-title">
-                    <h4>Repairable Cost Trend</h4>
+                    <h4>Repairable Cost Trend (Widget 3)</h4>
                 </div>
             </div>
             <div class="panel-body">

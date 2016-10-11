@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace CognitiveDecisionSystem.Models
 {
-    
+    // RegularUser class for regular user table in the database
     public class RegularUser
     {
         [Key]
@@ -32,6 +32,7 @@ namespace CognitiveDecisionSystem.Models
         public virtual ICollection<Dashboard> Dashboards { get; set; }
     }
 
+    // Login class for the login page to submit the information to the controller through a model
     public class Login
     {
         [Required]
@@ -45,6 +46,20 @@ namespace CognitiveDecisionSystem.Models
         
     }
 
+    // Login class that is only for admin to login
+    public class AdminLogin
+    {
+        [Required]
+        [Display(Name = "Admin Name")]
+        public String AdminUsername { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public String Password { get; set; }
+    }
+
+    // Register class for the register page to submit the information to the controller through a model
     public class Register
     {
         [Required]

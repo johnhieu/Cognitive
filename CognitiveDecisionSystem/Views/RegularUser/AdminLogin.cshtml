@@ -1,6 +1,6 @@
-﻿@model CognitiveDecisionSystem.Models.Login
+﻿@model CognitiveDecisionSystem.Models.AdminLogin
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "AdminLogin";
     Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
 }
 
@@ -13,14 +13,14 @@
             </div>
             <div class="panel-body">
                 <p>@ViewBag.Error</p>
-                <!--User's login form-->
-                <form action="/RegularUser/Login" name="loginForm" role="form" method="post">
+                <!--Admin Form-->
+                <form action="/RegularUser/AdminLogin" name="loginForm" role="form" method="post">
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Username)
-                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Username)
+                        @Html.LabelFor(m => m.AdminUsername)
+                        @Html.TextBoxFor(m => m.AdminUsername, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.AdminUsername)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Password)
@@ -29,7 +29,7 @@
                     </div>
                     <input class="btn btn-info" type="submit" value="Log-in">
                 </form>
-                <!--End user's login form-->
+                <!--End admin form-->
             </div>
         </div>
     </div>
@@ -41,7 +41,4 @@
         </div>
     </div>
 </div>
-
-
-
 

@@ -10,6 +10,8 @@ using System.Text;
 
 namespace CognitiveDecisionSystem.DAL
 {
+    // Context class that will represents as a connection to the database and retreive data by using this class
+    // Since using Mysql database, we have to configure this context class a bit different than the default configuration
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class CognitiveSystemDBContext: DbContext
     {
@@ -22,7 +24,7 @@ namespace CognitiveDecisionSystem.DAL
         public DbSet<Rank> Ranks { get; set; }
         public DbSet<Dashboard> Dashboards { get; set; }
 
-
+        // Initialize the connection string
         public CognitiveSystemDBContext(): base("server=localhost;user=root;database=uehi;port=3306;password=lovingyou;")
         {
             Database.SetInitializer<CognitiveSystemDBContext>(new CreateDatabaseIfNotExists<CognitiveSystemDBContext>());
@@ -31,6 +33,8 @@ namespace CognitiveDecisionSystem.DAL
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Since there is a specialization in ScreenElement entity so we have to configure Widget and StandAloneElement to have attributes
+            // from ScreenElement class
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Entity<Widget>().Map(m =>
                 {

@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 namespace CognitiveDecisionSystem.Models
 {
+    // Dashboard class for the Dashboard entity in the database
     public class Dashboard
     {
         public int DashboardId { get; set; }
@@ -16,6 +17,8 @@ namespace CognitiveDecisionSystem.Models
         public virtual ICollection<Widget> Widgets { get; set; }
     }
 
+    // This class is to be used in the YourDashboard page to 
+    // submit information to create a new dashboard for users
     public class FormDashboard
     {
         [Required]

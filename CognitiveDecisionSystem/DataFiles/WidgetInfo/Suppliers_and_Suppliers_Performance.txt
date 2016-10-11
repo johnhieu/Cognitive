@@ -1,7 +1,7 @@
 ﻿                        <div class="panel panel-default lobipanel col-lg-4" id="Suppliers and Suppliers Performance" data-sortable="true">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <h4>Suppliers and Suppliers Performance</h4>
+                                    <h4>Suppliers and Suppliers Performance (Widget 8)</h4>
                                 </div>
                             </div>
                             <div class="panel-body">

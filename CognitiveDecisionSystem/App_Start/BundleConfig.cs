@@ -29,23 +29,6 @@ namespace CognitiveDecisionSystem
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-jquery").Include(
                         "~/Scripts/bootstrap.js"));
 
-            //Homepage stylesheet
-            bundles.Add(new StyleBundle("~/bundles/homepage").Include(
-                        "~/Content/homepage.css"));
-            //Index SystemController Stylesheet
-            bundles.Add(new StyleBundle("~/bundles/login").Include(
-                        "~/Content/login.css"));
-            //Register stylesheet
-            bundles.Add(new StyleBundle("~/bundles/register").Include(
-                        "~/Content/register.css"));
-            //Login Partial stylesheet
-            bundles.Add(new StyleBundle("~/bundles/partial").Include(
-                       "~/Content/partial.css"));
-
-            //Dashboard stylesheet
-            bundles.Add(new StyleBundle("~/bundles/dashboard").Include(
-                        "~/Content/dashboard-outline.css"));
-
             // Mouse movement record script
             bundles.Add(new ScriptBundle("~/bundles/mouse-record").Include(
                     "~/Scripts/Mouse tracking/json2.js",
@@ -70,6 +53,34 @@ namespace CognitiveDecisionSystem
             bundles.Add(new ScriptBundle("~/bundles/highchart").Include(
                     "~/Scripts/js/highcharts.js"
                 ));
+
+            // CreateWidget View script
+            bundles.Add(new ScriptBundle("~/bundles/create-widget-script").Include(
+                    "~/Scripts/create-widget.js"
+                ));
+
+            //Homepage stylesheet
+            bundles.Add(new StyleBundle("~/bundles/homepage").Include(
+                        "~/Content/homepage.css"));
+            //Index SystemController Stylesheet
+            bundles.Add(new StyleBundle("~/bundles/login").Include(
+                        "~/Content/login.css"));
+            //Register stylesheet
+            bundles.Add(new StyleBundle("~/bundles/register").Include(
+                        "~/Content/register.css"));
+            //Login Partial stylesheet
+            bundles.Add(new StyleBundle("~/bundles/partial").Include(
+                       "~/Content/partial.css"));
+
+            //Dashboard stylesheet
+            bundles.Add(new StyleBundle("~/bundles/dashboard").Include(
+                        "~/Content/dashboard-outline.css"));
+
+            // Create widget stylesheet
+            bundles.Add(new StyleBundle("~/bundles/create-widget").Include(
+                        "~/Content/create-widget.css"));
+
+          
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
