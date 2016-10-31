@@ -15,13 +15,16 @@
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
     @Styles.Render("~/bundles/bootstrap")
+    @Styles.Render("~.bundles/multi-select-css")
     @Styles.Render("~/bundles/create-widget")
     @Styles.Render("~/bundles/homepage")
     @Styles.Render("~/bundles/dashboard")
     @Scripts.Render("~/bundles/bootstrap-jquery")
+    @Scripts.Render("~/bundles/multi-select-js")
     <!--This script needs to be declared last since it will need bootstrap and jquery declaration first in order to run this script-->
     @Scripts.Render("~/bundles/create-widget-script")
     <title>Create widget</title>
+
 </head>
 <body>
     <!--Top navigation-->

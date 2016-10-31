@@ -139,11 +139,11 @@ namespace CognitiveDecisionSystem.Controllers
                         Array.Clear(widgetCount, 0, length+1);
                         highestTemp = 0;
                     }
-                    WriteExcelWithNPOI(dt, "xls", "decisionTreeTest_dummy.xls");
+                    WriteExcelWithNPOI(dt, "xls", "decisionTreeTest.xls");
 
                     
                 }
-                // This commented out code are for generating the arff file but not successfull, look into it later
+              /* 
                 else
                 {
                     int count = 1;
@@ -191,7 +191,7 @@ namespace CognitiveDecisionSystem.Controllers
                     sw.Write(csv.ToString());
                     sw.Close();      
                 }
-                
+                */
                 // Create a Session record
                 DateTime localDate = DateTime.Now;
                 Session newSession = new Session();
@@ -347,19 +347,17 @@ namespace CognitiveDecisionSystem.Controllers
                 IRow row = sheet1.CreateRow(i + 1);
                 for (int j = 0; j < dt.Columns.Count; j++)
                 {
-                    if (j < 1)
-                    {
-                        ICell cell = row.CreateCell(j);
-                        String columnName = dt.Columns[j].ToString();
-                        cell.SetCellValue(Int32.Parse(dt.Rows[i][columnName].ToString()));
 
-                    }
-                    else
-                    {
                         ICell cell = row.CreateCell(j);
                         String columnName = dt.Columns[j].ToString();
-                        cell.SetCellValue(dt.Rows[i][columnName].ToString());
-                    }
+                        if(dt.Columns[j].DataType.Equals(typeof(Int32)))
+                        {
+                            cell.SetCellValue(Int32.Parse(dt.Rows[i][columnName].ToString()));
+                        }
+                        else
+                        {
+                            cell.SetCellValue(dt.Rows[i][columnName].ToString());
+                        }
                 }
             }
 

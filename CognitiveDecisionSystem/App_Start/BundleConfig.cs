@@ -29,6 +29,14 @@ namespace CognitiveDecisionSystem
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-jquery").Include(
                         "~/Scripts/bootstrap.js"));
 
+
+            // Bootstrap multi-select
+            bundles.Add(new StyleBundle("~/bundles/multi-select-css").Include(
+                "~/Content/boostrap-multiselect.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/multi-select-js").Include(
+                "~/Scripts/bootstrap-multiselect.js"));
+
             // Mouse movement record script
             bundles.Add(new ScriptBundle("~/bundles/mouse-record").Include(
                     "~/Scripts/Mouse tracking/json2.js",

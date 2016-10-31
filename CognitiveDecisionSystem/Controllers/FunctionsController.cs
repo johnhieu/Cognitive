@@ -63,7 +63,7 @@ namespace CognitiveDecisionSystem.Controllers
 
                 object result = null;
 
-                matlab.Feval("DemoDecisionTree_2", 1, out result, Double.Parse(user.Rank.RankID.ToString()), Double.Parse(user.Role.RoleId.ToString()), Double.Parse((DateTime.Now.Month - DateTime.Parse(user.RegisteredDate).Month).ToString()));
+                matlab.Feval("recommendWidget", 1, out result, Double.Parse(user.Rank.RankID.ToString()), Double.Parse(user.Role.RoleId.ToString()), Double.Parse((DateTime.Now.Month - DateTime.Parse(user.RegisteredDate).Month).ToString()));
 
                 object[] res = result as object[];
 
